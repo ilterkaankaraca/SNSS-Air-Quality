@@ -35,5 +35,25 @@ namespace Air_Quality
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            //TODO: assign values
+            this.Hide();
+            form2.Show();
+            this.Dispose();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            form2.Show();
+            this.Dispose();
+        }
     }
 }

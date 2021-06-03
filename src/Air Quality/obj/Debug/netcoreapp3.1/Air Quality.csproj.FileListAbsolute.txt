@@ -16,3 +16,21 @@ C:\repos\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.pd
 C:\repos\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.genruntimeconfig.cache
 C:\repos\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air_Quality.FormSettings.resources
 C:\repos\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air_Quality.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\bin\Debug\netcoreapp3.1\Air Quality.exe
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\bin\Debug\netcoreapp3.1\Air Quality.deps.json
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\bin\Debug\netcoreapp3.1\Air Quality.runtimeconfig.json
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\bin\Debug\netcoreapp3.1\Air Quality.runtimeconfig.dev.json
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\bin\Debug\netcoreapp3.1\Air Quality.dll
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\bin\Debug\netcoreapp3.1\Air Quality.pdb
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air_Quality.Form1.resources
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air_Quality.Form2.resources
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air_Quality.FormSettings.resources
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air_Quality.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.dll
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.pdb
+C:\Users\User\Documents\GitHub\SNSS-Air-Quality\src\Air Quality\obj\Debug\netcoreapp3.1\Air Quality.genruntimeconfig.cache

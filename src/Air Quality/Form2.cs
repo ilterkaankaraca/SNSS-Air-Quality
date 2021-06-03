@@ -20,7 +20,7 @@ namespace Air_Quality
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-           // form1.Show();
+            Application.Exit();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
