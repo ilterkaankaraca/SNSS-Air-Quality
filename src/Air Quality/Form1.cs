@@ -14,8 +14,7 @@ namespace Air_Quality
 {
     public partial class Form1 : Form
     {
-
-        IPAddress ipAddress = IPAddress.Parse("192.168.0.111");//   The servers hostname or IP address need //need to find a way to get it  
+        private IPAddress ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
         int PORT = 80;
         string responseData;
         public Form1()
@@ -36,7 +35,9 @@ namespace Air_Quality
                     Byte[] data = Encoding.ASCII.GetBytes("H");
                     NetworkStream stream = client.GetStream();
                     stream.Write(data, 0, data.Length);
-                    responseData = Encoding.ASCII.GetString(data, 0, stream.Read(data, 0, data.Length));
+                    Byte[] data1 = new Byte[1024];
+                    int hw = stream.Read(data1, 0, data1.Length);
+                    responseData = System.Text.Encoding.ASCII.GetString(data1, 0, hw);
                     statusLabel.Text = responseData;
                 }
                 catch (ArgumentNullException A)
