@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Air_Quality
@@ -15,8 +10,12 @@ namespace Air_Quality
     public partial class Form1 : Form
     {
         private IPAddress ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
-        int PORT = 80;
-        string responseData;
+        private int PORT = 80;
+        private string responseData;
+        private TcpClient tcpClient;
+        private NetworkStream stream;
+        private Byte[] data;
+        private int streamRead=-1;
         public Form1()
         {
             //TODO: Read the latest IP from the file.
@@ -28,17 +27,26 @@ namespace Air_Quality
             //TODO: Save the latest IP in a file.
             if (String.IsNullOrWhiteSpace(ipTextbox.Text)==false)
             {
+                string answer;
                 try
                 {
-                    ipAddress = IPAddress.Parse(ipTextbox.Text);
-                    TcpClient client = new TcpClient(ipTextbox.Text, PORT);
-                    Byte[] data = Encoding.ASCII.GetBytes("H");
-                    NetworkStream stream = client.GetStream();
-                    stream.Write(data, 0, data.Length);
-                    Byte[] data1 = new Byte[1024];
-                    int hw = stream.Read(data1, 0, data1.Length);
-                    responseData = System.Text.Encoding.ASCII.GetString(data1, 0, hw);
-                    statusLabel.Text = responseData;
+                   // ipAddress = IPAddress.Parse(ipTextbox.Text);
+                    ////create a new TCP client
+                    //tcpClient = new TcpClient(ipTextbox.Text, PORT);
+                    //data = Encoding.ASCII.GetBytes("connect");
+                    ////get an answer from server
+                    //stream = tcpClient.GetStream();
+                    //stream.Write(data, 0, data.Length);
+                    //data = new Byte[1024];
+                    //streamRead = stream.Read(data, 0, data.Length);
+                    //responseData = Encoding.ASCII.GetString(data, 0, streamRead);
+                    //statusLabel.Text = responseData;
+
+                    using (WebClient wc = new WebClient())
+                    {
+                        answer = wc.DownloadString("http://"+ ipTextbox.Text + "/?message=connect");
+                    }
+                    statusLabel.Text = answer;
                 }
                 catch (ArgumentNullException A)
                 {
@@ -48,10 +56,10 @@ namespace Air_Quality
                 {
                     Console.WriteLine("SocketException: {0}", A);
                 }
-
-            //Form2 form2 = new Form2(this);
-            //form2.Show();
-            //this.Hide();
+            this.Hide();
+            Form2 form2 = new Form2(this);
+            form2.Show();
+            
             }
             else 
             {

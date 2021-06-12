@@ -56,7 +56,7 @@ namespace Air_Quality
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(713, 415);
+            this.settingsButton.Location = new System.Drawing.Point(640, 404);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 0;
