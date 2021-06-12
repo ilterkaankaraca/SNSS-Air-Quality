@@ -1,7 +1,7 @@
 ﻿
 namespace Air_Quality
 {
-    partial class Form1
+    partial class ConnectionForm
     {
         /// <summary>
         ///  Required designer variable.

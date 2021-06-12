@@ -7,16 +7,17 @@ using System.Windows.Forms;
 
 namespace Air_Quality
 {
-    public partial class Form1 : Form
+    public partial class ConnectionForm : Form
     {
-        private IPAddress ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
+        private string ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
         private int PORT = 80;
         private string responseData;
         private TcpClient tcpClient;
         private NetworkStream stream;
         private Byte[] data;
         private int streamRead=-1;
-        public Form1()
+        
+        public ConnectionForm()
         {
             //TODO: Read the latest IP from the file.
             InitializeComponent();
@@ -25,26 +26,16 @@ namespace Air_Quality
         private void connectButton_Click(object sender, EventArgs e)
         {
             //TODO: Save the latest IP in a file.
+            Console.WriteLine(12);
             if (String.IsNullOrWhiteSpace(ipTextbox.Text)==false)
             {
                 string answer;
                 try
                 {
-                   // ipAddress = IPAddress.Parse(ipTextbox.Text);
-                    ////create a new TCP client
-                    //tcpClient = new TcpClient(ipTextbox.Text, PORT);
-                    //data = Encoding.ASCII.GetBytes("connect");
-                    ////get an answer from server
-                    //stream = tcpClient.GetStream();
-                    //stream.Write(data, 0, data.Length);
-                    //data = new Byte[1024];
-                    //streamRead = stream.Read(data, 0, data.Length);
-                    //responseData = Encoding.ASCII.GetString(data, 0, streamRead);
-                    //statusLabel.Text = responseData;
-
+                    ipAddress = ipTextbox.Text;
                     using (WebClient wc = new WebClient())
                     {
-                        answer = wc.DownloadString("http://"+ ipTextbox.Text + "/?message=connect");
+                        answer = wc.DownloadString("http://"+ ipAddress + "/connect");
                     }
                     statusLabel.Text = answer;
                 }
@@ -59,7 +50,6 @@ namespace Air_Quality
             this.Hide();
             Form2 form2 = new Form2(this);
             form2.Show();
-            
             }
             else 
             {
@@ -67,5 +57,7 @@ namespace Air_Quality
                 statusLabel.Text = "Please type an IP address";
             }
         }
+        public string IpAddress { get => ipAddress; set => ipAddress = value; }
     }
+    
 }
