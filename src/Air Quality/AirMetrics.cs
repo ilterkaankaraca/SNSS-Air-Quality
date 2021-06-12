@@ -8,14 +8,14 @@ namespace Air_Quality
 
     class AirMetrics
     {
-        private int temperature, humidity, co2, airQuality,pressure,particle;
+        private double temperature, humidity, co2, airQuality,pressure,particle;
 
-        public int Temperature { get; set; }
-        public int Humidity { get; set; }
-        public int Co2 { get; set; }
-        public int AirQuality { get; set; }
-        public int Pressure { get; set; }
-        public int Particle { get; set; }
+        public double Temperature { get; set; }
+        public double Humidity { get; set; }
+        public double Co2 { get; set; }
+        public double AirQuality { get; set; }
+        public double Pressure { get; set; }
+        public double Particle { get; set; }
 
     }
 }

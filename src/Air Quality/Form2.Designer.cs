@@ -29,6 +29,7 @@ namespace Air_Quality
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.settingsButton = new System.Windows.Forms.Button();
             this.temperatureLabel = new System.Windows.Forms.Label();
             this.humidityLabel = new System.Windows.Forms.Label();
@@ -36,11 +37,11 @@ namespace Air_Quality
             this.airQualityLabel = new System.Windows.Forms.Label();
             this.pressureLabel = new System.Windows.Forms.Label();
             this.particleLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.indoorTemperatureLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.inHumidityLabel = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.indoorCo2Label = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@ namespace Air_Quality
             this.outdoorLabel = new System.Windows.Forms.Label();
             this.indoorLabel2 = new System.Windows.Forms.Label();
             this.outdoorLabel2 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // settingsButton
@@ -118,14 +120,14 @@ namespace Air_Quality
             this.particleLabel.TabIndex = 6;
             this.particleLabel.Text = "Particle";
             // 
-            // label7
+            // indoorTemperatureLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(133, 132);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 15);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "label7";
+            this.indoorTemperatureLabel.AutoSize = true;
+            this.indoorTemperatureLabel.Location = new System.Drawing.Point(133, 132);
+            this.indoorTemperatureLabel.Name = "indoorTemperatureLabel";
+            this.indoorTemperatureLabel.Size = new System.Drawing.Size(38, 15);
+            this.indoorTemperatureLabel.TabIndex = 7;
+            this.indoorTemperatureLabel.Text = "label7";
             // 
             // label8
             // 
@@ -136,14 +138,14 @@ namespace Air_Quality
             this.label8.TabIndex = 8;
             this.label8.Text = "label8";
             // 
-            // label9
+            // inHumidityLabel
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(306, 132);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 15);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "label9";
+            this.inHumidityLabel.AutoSize = true;
+            this.inHumidityLabel.Location = new System.Drawing.Point(306, 132);
+            this.inHumidityLabel.Name = "inHumidityLabel";
+            this.inHumidityLabel.Size = new System.Drawing.Size(38, 15);
+            this.inHumidityLabel.TabIndex = 9;
+            this.inHumidityLabel.Text = "label9";
             // 
             // label10
             // 
@@ -154,14 +156,14 @@ namespace Air_Quality
             this.label10.TabIndex = 10;
             this.label10.Text = "label10";
             // 
-            // label11
+            // indoorCo2Label
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(507, 132);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 15);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "label11";
+            this.indoorCo2Label.AutoSize = true;
+            this.indoorCo2Label.Location = new System.Drawing.Point(507, 132);
+            this.indoorCo2Label.Name = "indoorCo2Label";
+            this.indoorCo2Label.Size = new System.Drawing.Size(44, 15);
+            this.indoorCo2Label.TabIndex = 11;
+            this.indoorCo2Label.Text = "label11";
             // 
             // label12
             // 
@@ -263,6 +265,10 @@ namespace Air_Quality
             this.outdoorLabel2.TabIndex = 22;
             this.outdoorLabel2.Text = "Outdoor";
             // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -279,11 +285,11 @@ namespace Air_Quality
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.indoorCo2Label);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.inHumidityLabel);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.indoorTemperatureLabel);
             this.Controls.Add(this.particleLabel);
             this.Controls.Add(this.pressureLabel);
             this.Controls.Add(this.airQualityLabel);
@@ -308,11 +314,11 @@ namespace Air_Quality
         private System.Windows.Forms.Label airQualityLabel;
         private System.Windows.Forms.Label pressureLabel;
         private System.Windows.Forms.Label particleLabel;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label indoorTemperatureLabel;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label inHumidityLabel;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label indoorCo2Label;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
@@ -324,5 +330,6 @@ namespace Air_Quality
         private System.Windows.Forms.Label outdoorLabel;
         private System.Windows.Forms.Label indoorLabel2;
         private System.Windows.Forms.Label outdoorLabel2;
+        private System.Windows.Forms.Timer timer;
     }
 }
