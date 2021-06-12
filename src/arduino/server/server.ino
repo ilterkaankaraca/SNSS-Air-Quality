@@ -1,7 +1,7 @@
 # include <WiFi.h>
 # include "ESPAsyncWebServer.h"
-char ssid[] = "Vodafone-262F_T";       //  your network SSID (name)
-char password[] = "Tarti.38";  
+char ssid[] = "";       //  your network SSID (name)
+char password[] = "";  
 
 
 AsyncWebServer server (80) ;
@@ -40,12 +40,7 @@ void initWebserver ( void ) {
   });
   server.begin ();
 }
-void acceptClient(AsyncWebServerRequest *request){
-  String message = String(request -> getParam ("message")->value());
-  //Serial.println ("Rx from client : " + request -> client () -> remoteIP().toString ());
-  //Serial.println ("Client connected: "+message);
-  request -> send (200 , " text / plain ", " data received ");
-}
+
 void WiFiStationConnected ( WiFiEvent_t event , WiFiEventInfo_t info ){
   Serial.print ( String ( info.sta_connected.mac [0] , HEX ) + ":");
   Serial.print ( String ( info.sta_connected.mac [1] , HEX ) + ":");
