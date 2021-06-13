@@ -38,17 +38,17 @@ namespace Air_Quality
             this.pressureLabel = new System.Windows.Forms.Label();
             this.particleLabel = new System.Windows.Forms.Label();
             this.indoorTemperatureLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.inHumidityLabel = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.outdoorTemperatureLevel = new System.Windows.Forms.Label();
+            this.indoorHumidityLabel = new System.Windows.Forms.Label();
+            this.outdoorHumidityLevel = new System.Windows.Forms.Label();
             this.indoorCo2Label = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.outdoorCo2Level = new System.Windows.Forms.Label();
+            this.indoorAirqualityLevel = new System.Windows.Forms.Label();
+            this.outdoorAirqualityLevel = new System.Windows.Forms.Label();
+            this.indoorPressureLevel = new System.Windows.Forms.Label();
+            this.outdoorPressureLevel = new System.Windows.Forms.Label();
+            this.indoorParticleLevel = new System.Windows.Forms.Label();
+            this.outdoorParticleLevel = new System.Windows.Forms.Label();
             this.indoorLabel = new System.Windows.Forms.Label();
             this.outdoorLabel = new System.Windows.Forms.Label();
             this.indoorLabel2 = new System.Windows.Forms.Label();
@@ -129,32 +129,32 @@ namespace Air_Quality
             this.indoorTemperatureLabel.TabIndex = 7;
             this.indoorTemperatureLabel.Text = "label7";
             // 
-            // label8
+            // outdoorTemperatureLevel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(133, 166);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(38, 15);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "label8";
+            this.outdoorTemperatureLevel.AutoSize = true;
+            this.outdoorTemperatureLevel.Location = new System.Drawing.Point(133, 166);
+            this.outdoorTemperatureLevel.Name = "outdoorTemperatureLevel";
+            this.outdoorTemperatureLevel.Size = new System.Drawing.Size(38, 15);
+            this.outdoorTemperatureLevel.TabIndex = 8;
+            this.outdoorTemperatureLevel.Text = "label8";
             // 
-            // inHumidityLabel
+            // indoorHumidityLabel
             // 
-            this.inHumidityLabel.AutoSize = true;
-            this.inHumidityLabel.Location = new System.Drawing.Point(306, 132);
-            this.inHumidityLabel.Name = "inHumidityLabel";
-            this.inHumidityLabel.Size = new System.Drawing.Size(38, 15);
-            this.inHumidityLabel.TabIndex = 9;
-            this.inHumidityLabel.Text = "label9";
+            this.indoorHumidityLabel.AutoSize = true;
+            this.indoorHumidityLabel.Location = new System.Drawing.Point(306, 132);
+            this.indoorHumidityLabel.Name = "indoorHumidityLabel";
+            this.indoorHumidityLabel.Size = new System.Drawing.Size(38, 15);
+            this.indoorHumidityLabel.TabIndex = 9;
+            this.indoorHumidityLabel.Text = "label9";
             // 
-            // label10
+            // outdoorHumidityLevel
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(306, 166);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 15);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "label10";
+            this.outdoorHumidityLevel.AutoSize = true;
+            this.outdoorHumidityLevel.Location = new System.Drawing.Point(306, 166);
+            this.outdoorHumidityLevel.Name = "outdoorHumidityLevel";
+            this.outdoorHumidityLevel.Size = new System.Drawing.Size(44, 15);
+            this.outdoorHumidityLevel.TabIndex = 10;
+            this.outdoorHumidityLevel.Text = "label10";
             // 
             // indoorCo2Label
             // 
@@ -165,68 +165,68 @@ namespace Air_Quality
             this.indoorCo2Label.TabIndex = 11;
             this.indoorCo2Label.Text = "label11";
             // 
-            // label12
+            // outdoorCo2Level
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(507, 166);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 15);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "label12";
+            this.outdoorCo2Level.AutoSize = true;
+            this.outdoorCo2Level.Location = new System.Drawing.Point(507, 166);
+            this.outdoorCo2Level.Name = "outdoorCo2Level";
+            this.outdoorCo2Level.Size = new System.Drawing.Size(44, 15);
+            this.outdoorCo2Level.TabIndex = 12;
+            this.outdoorCo2Level.Text = "label12";
             // 
-            // label13
+            // indoorAirqualityLevel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(133, 278);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 15);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "label13";
+            this.indoorAirqualityLevel.AutoSize = true;
+            this.indoorAirqualityLevel.Location = new System.Drawing.Point(133, 278);
+            this.indoorAirqualityLevel.Name = "indoorAirqualityLevel";
+            this.indoorAirqualityLevel.Size = new System.Drawing.Size(44, 15);
+            this.indoorAirqualityLevel.TabIndex = 13;
+            this.indoorAirqualityLevel.Text = "label13";
             // 
-            // label14
+            // outdoorAirqualityLevel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(133, 311);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(44, 15);
-            this.label14.TabIndex = 14;
-            this.label14.Text = "label14";
+            this.outdoorAirqualityLevel.AutoSize = true;
+            this.outdoorAirqualityLevel.Location = new System.Drawing.Point(133, 311);
+            this.outdoorAirqualityLevel.Name = "outdoorAirqualityLevel";
+            this.outdoorAirqualityLevel.Size = new System.Drawing.Size(44, 15);
+            this.outdoorAirqualityLevel.TabIndex = 14;
+            this.outdoorAirqualityLevel.Text = "label14";
             // 
-            // label15
+            // indoorPressureLevel
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(306, 278);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 15);
-            this.label15.TabIndex = 15;
-            this.label15.Text = "label15";
+            this.indoorPressureLevel.AutoSize = true;
+            this.indoorPressureLevel.Location = new System.Drawing.Point(306, 278);
+            this.indoorPressureLevel.Name = "indoorPressureLevel";
+            this.indoorPressureLevel.Size = new System.Drawing.Size(44, 15);
+            this.indoorPressureLevel.TabIndex = 15;
+            this.indoorPressureLevel.Text = "label15";
             // 
-            // label16
+            // outdoorPressureLevel
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(306, 311);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 15);
-            this.label16.TabIndex = 16;
-            this.label16.Text = "label16";
+            this.outdoorPressureLevel.AutoSize = true;
+            this.outdoorPressureLevel.Location = new System.Drawing.Point(306, 311);
+            this.outdoorPressureLevel.Name = "outdoorPressureLevel";
+            this.outdoorPressureLevel.Size = new System.Drawing.Size(44, 15);
+            this.outdoorPressureLevel.TabIndex = 16;
+            this.outdoorPressureLevel.Text = "label16";
             // 
-            // label17
+            // indoorParticleLevel
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(507, 278);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 15);
-            this.label17.TabIndex = 17;
-            this.label17.Text = "label17";
+            this.indoorParticleLevel.AutoSize = true;
+            this.indoorParticleLevel.Location = new System.Drawing.Point(507, 278);
+            this.indoorParticleLevel.Name = "indoorParticleLevel";
+            this.indoorParticleLevel.Size = new System.Drawing.Size(44, 15);
+            this.indoorParticleLevel.TabIndex = 17;
+            this.indoorParticleLevel.Text = "label17";
             // 
-            // label18
+            // outdoorParticleLevel
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(507, 311);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(44, 15);
-            this.label18.TabIndex = 18;
-            this.label18.Text = "label18";
+            this.outdoorParticleLevel.AutoSize = true;
+            this.outdoorParticleLevel.Location = new System.Drawing.Point(507, 311);
+            this.outdoorParticleLevel.Name = "outdoorParticleLevel";
+            this.outdoorParticleLevel.Size = new System.Drawing.Size(44, 15);
+            this.outdoorParticleLevel.TabIndex = 18;
+            this.outdoorParticleLevel.Text = "label18";
             // 
             // indoorLabel
             // 
@@ -267,7 +267,8 @@ namespace Air_Quality
             // 
             // timer
             // 
-            this.timer.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Form2
             // 
@@ -278,17 +279,17 @@ namespace Air_Quality
             this.Controls.Add(this.indoorLabel2);
             this.Controls.Add(this.outdoorLabel);
             this.Controls.Add(this.indoorLabel);
-            this.Controls.Add(this.label18);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.outdoorParticleLevel);
+            this.Controls.Add(this.indoorParticleLevel);
+            this.Controls.Add(this.outdoorPressureLevel);
+            this.Controls.Add(this.indoorPressureLevel);
+            this.Controls.Add(this.outdoorAirqualityLevel);
+            this.Controls.Add(this.indoorAirqualityLevel);
+            this.Controls.Add(this.outdoorCo2Level);
             this.Controls.Add(this.indoorCo2Label);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.inHumidityLabel);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.outdoorHumidityLevel);
+            this.Controls.Add(this.indoorHumidityLabel);
+            this.Controls.Add(this.outdoorTemperatureLevel);
             this.Controls.Add(this.indoorTemperatureLabel);
             this.Controls.Add(this.particleLabel);
             this.Controls.Add(this.pressureLabel);
@@ -298,7 +299,7 @@ namespace Air_Quality
             this.Controls.Add(this.temperatureLabel);
             this.Controls.Add(this.settingsButton);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Overview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -315,17 +316,17 @@ namespace Air_Quality
         private System.Windows.Forms.Label pressureLabel;
         private System.Windows.Forms.Label particleLabel;
         private System.Windows.Forms.Label indoorTemperatureLabel;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label inHumidityLabel;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label outdoorTemperatureLevel;
+        private System.Windows.Forms.Label indoorHumidityLabel;
+        private System.Windows.Forms.Label outdoorHumidityLevel;
         private System.Windows.Forms.Label indoorCo2Label;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label outdoorCo2Level;
+        private System.Windows.Forms.Label indoorAirqualityLevel;
+        private System.Windows.Forms.Label outdoorAirqualityLevel;
+        private System.Windows.Forms.Label indoorPressureLevel;
+        private System.Windows.Forms.Label outdoorPressureLevel;
+        private System.Windows.Forms.Label indoorParticleLevel;
+        private System.Windows.Forms.Label outdoorParticleLevel;
         private System.Windows.Forms.Label indoorLabel;
         private System.Windows.Forms.Label outdoorLabel;
         private System.Windows.Forms.Label indoorLabel2;

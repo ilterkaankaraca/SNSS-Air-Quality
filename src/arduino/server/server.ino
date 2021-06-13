@@ -5,7 +5,7 @@ char password[] = "";
 
 
 AsyncWebServer server (80) ;
-String tempValue ;
+String temperatureValue, humidityValue, co2Value, airQualityValue, pressureValue, particleValue;
 void setup () {
   Serial.begin (115200) ;
   initWiFi ();
@@ -25,17 +25,34 @@ void initWiFi () {
     Serial.println ( WiFi.macAddress ());
 }
 void initWebserver ( void ) {
-  server.on("/", HTTP_GET, []( AsyncWebServerRequest *request ) {
-    request -> send (200 , " text / plain ", "hey");
-  });
   server.on("/connect", HTTP_GET, []( AsyncWebServerRequest *request ) {
-    request -> send (200 , " text / plain ", "hey1");
+    request -> send (200 , " text / plain ", "connected");
   });
   server.on("/temperature", HTTP_GET, []( AsyncWebServerRequest *request ) {
-    request -> send (200 , "text/plain", tempValue);
+    request -> send (200 , "text/plain", temperatureValue);
   });
-  server.on("/getValue", HTTP_GET, []( AsyncWebServerRequest *request ) {
-    tempValue = String(request -> getParam ("temperature")->value());
+  server.on("/humidity", HTTP_GET, []( AsyncWebServerRequest *request ) {
+    request -> send (200 , "text/plain", humidityValue);
+  });
+  server.on("/co2", HTTP_GET, []( AsyncWebServerRequest *request ) {
+    request -> send (200 , "text/plain", co2Value);
+  });
+  server.on("/airQuality", HTTP_GET, []( AsyncWebServerRequest *request ) {
+    request -> send (200 , "text/plain", airQualityValue);
+  });
+  server.on("/pressure", HTTP_GET, []( AsyncWebServerRequest *request ) {
+    request -> send (200 , "text/plain", pressureValue);
+  });
+  server.on("/particle", HTTP_GET, []( AsyncWebServerRequest *request ) {
+    request -> send (200 , "text/plain", particleValue);
+  });
+  server.on("/readValue", HTTP_GET, []( AsyncWebServerRequest *request ) {
+    temperatureValue = String(request -> getParams ("temperature")->value());
+    humidityValue = String(request -> getParam ("humidity")->value());
+    co2Value = String(request -> getParams ("co2")->value());
+    airQualityValue = String(request -> getParam ("airQuality")->value());
+    pressureValue = String(request -> getParams ("pressure")->value());
+    particleValue = String(request -> getParam ("particle")->value());
     request -> send (200 , "text/plain", "R");
   });
   server.begin ();

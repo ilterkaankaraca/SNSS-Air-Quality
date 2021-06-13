@@ -10,12 +10,6 @@ namespace Air_Quality
     public partial class ConnectionForm : Form
     {
         private string ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
-        private int PORT = 80;
-        private string responseData;
-        private TcpClient tcpClient;
-        private NetworkStream stream;
-        private Byte[] data;
-        private int streamRead=-1;
         
         public ConnectionForm()
         {
@@ -35,6 +29,8 @@ namespace Air_Quality
                     ipAddress = ipTextbox.Text;
                     using (WebClient wc = new WebClient())
                     {
+                        //TODO: 
+                        //get connection response
                         answer = wc.DownloadString("http://"+ ipAddress + "/connect");
                     }
                     statusLabel.Text = answer;
