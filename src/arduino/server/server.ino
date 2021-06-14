@@ -47,11 +47,11 @@ void initWebserver ( void ) {
     request -> send (200 , "text/plain", particleValue);
   });
   server.on("/readValue", HTTP_GET, []( AsyncWebServerRequest *request ) {
-    temperatureValue = String(request -> getParams ("temperature")->value());
+    temperatureValue = String(request -> getParam ("temperature")->value());
     humidityValue = String(request -> getParam ("humidity")->value());
-    co2Value = String(request -> getParams ("co2")->value());
+    co2Value = String(request -> getParam ("co2")->value());
     airQualityValue = String(request -> getParam ("airQuality")->value());
-    pressureValue = String(request -> getParams ("pressure")->value());
+    pressureValue = String(request -> getParam ("pressure")->value());
     particleValue = String(request -> getParam ("particle")->value());
     request -> send (200 , "text/plain", "R");
   });
