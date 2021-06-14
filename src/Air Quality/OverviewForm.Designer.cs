@@ -268,7 +268,7 @@ namespace Air_Quality
             // 
             // timer
             // 
-            this.timer.Interval = 1000;
+            this.timer.Interval = 10000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // notificationLabel
@@ -281,7 +281,7 @@ namespace Air_Quality
             this.notificationLabel.Text = "Notifications:";
             this.notificationLabel.Click += new System.EventHandler(this.label1_Click);
             // 
-            // Form2
+            // OverviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -310,7 +310,7 @@ namespace Air_Quality
             this.Controls.Add(this.humidityLabel);
             this.Controls.Add(this.temperatureLabel);
             this.Controls.Add(this.settingsButton);
-            this.Name = "Form2";
+            this.Name = "OverviewForm";
             this.Text = "Overview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.ResumeLayout(false);

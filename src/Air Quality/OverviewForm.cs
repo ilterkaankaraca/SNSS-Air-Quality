@@ -29,7 +29,9 @@ namespace Air_Quality
             particleUrl = "http://" + form1.IpAddress + "/particle/";
             webClient = new WebClient();
             metrics = new AirMetrics();
-            updateMetrics(); 
+            updateMetrics();
+            updateComponents();
+            
             timer.Enabled = true;
         }
 
@@ -48,17 +50,26 @@ namespace Air_Quality
         private void timer_Tick(object sender, EventArgs e)
         {
             updateMetrics();
-            indoorTemperatureLabel.Text = metrics.Temperature.ToString();
+            updateComponents();
         }
 
         private void updateMetrics()
         {
-            metrics.Temperature = Double.Parse(webClient.DownloadString(temperatureUrl));
-            metrics.Humidity = Double.Parse(webClient.DownloadString(humidityUrl));
-            metrics.Co2 = Double.Parse(webClient.DownloadString(co2Url));
-            metrics.AirQuality = Double.Parse(webClient.DownloadString(airQualityUrl));
-            metrics.Pressure = Double.Parse(webClient.DownloadString(pressureUrl));
-            metrics.Particle = Double.Parse(webClient.DownloadString(particleUrl));
+            metrics.Temperature = Double.Parse(webClient.DownloadString(temperatureUrl).Replace('.', ','));
+            metrics.Humidity = Double.Parse(webClient.DownloadString(humidityUrl).Replace('.', ','));
+            metrics.Co2 = Double.Parse(webClient.DownloadString(co2Url).Replace('.', ','));
+            metrics.AirQuality = Double.Parse(webClient.DownloadString(airQualityUrl).Replace('.', ','));
+            metrics.Pressure = Double.Parse(webClient.DownloadString(pressureUrl).Replace('.', ','));
+            metrics.Particle = Double.Parse(webClient.DownloadString(particleUrl).Replace('.', ','));
+        }
+        private void updateComponents()
+        {
+            indoorTemperatureLabel.Text=metrics.Temperature.ToString() ;
+            indoorHumidityLabel.Text = metrics.Humidity.ToString();
+            indoorCo2Label.Text = metrics.Co2.ToString();
+            indoorAirqualityLevel.Text = metrics.AirQuality.ToString();
+            indoorPressureLevel.Text = metrics.Pressure.ToString();
+            indoorParticleLevel.Text = metrics.Particle.ToString();
         }
     }
 }
