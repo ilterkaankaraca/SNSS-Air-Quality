@@ -1,4 +1,6 @@
 /***************************************************
+ * INCLUDE COPYRIGHT
+ * 
   SHT
   ----
   the default I2C address is 0x44 and you can also select address 0x45
@@ -26,7 +28,6 @@
 #define SEALEVELPRESSURE_HPA (1013.25)
 
 
-bool enableHeater = false;
 uint8_t loopCnt = 0;
 
 Adafruit_SHT31 sht31 = Adafruit_SHT31();
@@ -38,7 +39,6 @@ void setup() {
    
   Serial.begin(9600);
   Wire.begin();
-  Serial.println("SHT31 12ddings");
   setupSHT31();
   setupBMP180();
   setupCCS811();
@@ -63,11 +63,6 @@ void setupSHT31() {
     Serial.println("Couldn't find SHT31");
     while (1) delay(1);
   }
-  Serial.print("Heater Enabled State: ");
-  if (sht31.isHeaterEnabled())
-    Serial.println("ENABLED");
-  else
-    Serial.println("DISABLED");
 }
 void readSHT31() {
   float t = sht31.readTemperature();
@@ -84,19 +79,6 @@ void readSHT31() {
     Serial.println("Failed to read humidity");
   }
   Serial.println();
-  // Toggle heater enabled state every 30 seconds
-  // An ~3.0 degC temperature increase can be noted when heater is enabled
-  if (++loopCnt == 30) {
-    enableHeater = !enableHeater;
-    sht31.heater(enableHeater);
-    Serial.print("Heater Enabled State: ");
-    if (sht31.isHeaterEnabled())
-      Serial.println("ENABLED");
-    else
-      Serial.println("DISABLED");
-
-    loopCnt = 0;
-  }
 }
 void setupBMP180() {
   if (!bmp.begin()) {
@@ -115,21 +97,21 @@ void readBMP180() {
 
   // Calculate altitude assuming 'standard' barometric
   // pressure of 1013.25 millibar = 101325 Pascal
-  Serial.print("Altitude = ");
-  Serial.print(bmp.readAltitude());
-  Serial.println(" meters");
-  Serial.print("Pressure at sealevel (calculated) = ");
-  Serial.print(bmp.readSealevelPressure());
-  Serial.println(" Pa");
+  // Serial.print("Altitude = ");
+  // Serial.print(bmp.readAltitude());
+  // Serial.println(" meters");
+  // Serial.print("Pressure at sealevel (calculated) = ");
+  // Serial.print(bmp.readSealevelPressure());
+  // Serial.println(" Pa");
 
   // you can get a more precise measurement of altitude
   // if you know the current sea level pressure which will
   // vary with weather and such. If it is 1015 millibars
   // that is equal to 101500 Pascals.
-  Serial.print("Real altitude = ");
-  Serial.print(bmp.readAltitude(101500));
-  Serial.println(" meters");
-  Serial.println();
+  // Serial.print("Real altitude = ");
+  // Serial.print(bmp.readAltitude(101500));
+  // Serial.println(" meters");
+  // Serial.println();
 }
 void setupCCS811() {
   Serial.println("CCS811 test");
@@ -194,9 +176,9 @@ void readBME680() {
   Serial.print(bme.gas_resistance / 1000.0);
   Serial.println(" KOhms");
 
-  Serial.print("Approx. Altitude = ");
-  Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-  Serial.println(" m");
+  // Serial.print("Approx. Altitude = ");
+  // Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
+  // Serial.println(" m");
 
   Serial.println();
 }
