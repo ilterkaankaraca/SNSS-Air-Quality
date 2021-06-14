@@ -140,10 +140,12 @@ namespace Air_Quality
             // 
             // cityTextBox
             // 
+            this.cityTextBox.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.cityTextBox.Location = new System.Drawing.Point(14, 265);
             this.cityTextBox.Name = "cityTextBox";
             this.cityTextBox.Size = new System.Drawing.Size(222, 23);
             this.cityTextBox.TabIndex = 9;
+            this.cityTextBox.Text = "Search city";
             // 
             // particleTextBox
             // 
@@ -209,7 +211,7 @@ namespace Air_Quality
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.searchButton);
             this.Name = "FormSettings";
-            this.Text = "FormSettings";
+            this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
             this.Load += new System.EventHandler(this.FormSettings_Load);
             this.ResumeLayout(false);
