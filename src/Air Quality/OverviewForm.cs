@@ -4,14 +4,20 @@ using System.Net;
 
 namespace Air_Quality
 {
-    public partial class Form2 : Form
+    public partial class OverviewForm : Form
     {
         
-        private ConnectionForm form1;
+        private LoginForm form1;
         AirMetrics metrics;
         WebClient webClient;
         string temperatureUrl, humidityUrl, co2Url, airQualityUrl, pressureUrl, particleUrl;
-        public Form2(ConnectionForm form1)
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public OverviewForm(LoginForm form1)
         {
             InitializeComponent();
             this.form1= form1;
@@ -34,7 +40,7 @@ namespace Air_Quality
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            FormSettings formSettings = new FormSettings(this);
+            SettingsForm formSettings = new SettingsForm(this);
             formSettings.Show();
             this.Hide();
         }

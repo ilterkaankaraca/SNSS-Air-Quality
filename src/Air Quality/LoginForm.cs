@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace Air_Quality
 {
-    public partial class ConnectionForm : Form
+    public partial class LoginForm : Form
     {
         private string ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
         
-        public ConnectionForm()
+        public LoginForm()
         {
             //TODO: Read the latest IP from the file.
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace Air_Quality
                     Console.WriteLine("SocketException: {0}", A);
                 }
             this.Hide();
-            Form2 form2 = new Form2(this);
+            OverviewForm form2 = new OverviewForm(this);
             form2.Show();
             }
             else 

@@ -1,7 +1,7 @@
 ﻿
 namespace Air_Quality
 {
-    partial class Form2
+    partial class OverviewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -54,11 +54,12 @@ namespace Air_Quality
             this.indoorLabel2 = new System.Windows.Forms.Label();
             this.outdoorLabel2 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.notificationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(640, 404);
+            this.settingsButton.Location = new System.Drawing.Point(640, 415);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 0;
@@ -270,11 +271,22 @@ namespace Air_Quality
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // notificationLabel
+            // 
+            this.notificationLabel.AutoSize = true;
+            this.notificationLabel.Location = new System.Drawing.Point(12, 415);
+            this.notificationLabel.Name = "notificationLabel";
+            this.notificationLabel.Size = new System.Drawing.Size(78, 15);
+            this.notificationLabel.TabIndex = 23;
+            this.notificationLabel.Text = "Notifications:";
+            this.notificationLabel.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 450);
+            this.Controls.Add(this.notificationLabel);
             this.Controls.Add(this.outdoorLabel2);
             this.Controls.Add(this.indoorLabel2);
             this.Controls.Add(this.outdoorLabel);
@@ -332,5 +344,6 @@ namespace Air_Quality
         private System.Windows.Forms.Label indoorLabel2;
         private System.Windows.Forms.Label outdoorLabel2;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label notificationLabel;
     }
 }

@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace Air_Quality
 {
-    public partial class FormSettings : Form
+    public partial class SettingsForm : Form
     {
-        Form2 form2;
-        public FormSettings(Form2 form2)
+        OverviewForm form2;
+        public SettingsForm(OverviewForm form2)
         {
             //TODO: get the values somewhere
             this.form2 = form2;

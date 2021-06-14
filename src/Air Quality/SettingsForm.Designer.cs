@@ -1,7 +1,7 @@
 ﻿
 namespace Air_Quality
 {
-    partial class FormSettings
+    partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
