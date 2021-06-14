@@ -42,7 +42,7 @@ void setup() {
   setupSHT31();
   setupBMP180();
   setupCCS811();
-  //setupBME680();
+  setupBME680();
   setupSPS30();
   setupSCD41();
 }
@@ -51,7 +51,7 @@ void loop() {
   readSHT31();
   readBMP180();
   readCCS811();
-  //readBME680();
+  readBME680();
   readSPS30();
   readSCD41();
   delay(5000);
@@ -141,21 +141,19 @@ void setupCCS811() {
   }
 }
 void setupBME680() {
- /* //Serial.println(F("BME280 test"));
+ Serial.println(F("BME680 test"));
 
-  bool status;
-
-   default settings
-   (you can also pass in a Wire library object like &Wire2)
-  status = bme.begin(0x77, &I2CBME);
-  if (!status) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring!");
+  if (!bme.begin(0x76)) {
+    Serial.println("Could not find a valid BME680 sensor, check wiring!");
     while (1);
   }
-
-  Serial.println("-- Default Test --");
-
-*/
+  
+  // Set up oversampling and filter initialization
+  bme.setTemperatureOversampling(BME680_OS_8X);
+  bme.setHumidityOversampling(BME680_OS_2X);
+  bme.setPressureOversampling(BME680_OS_4X);
+  bme.setIIRFilterSize(BME680_FILTER_SIZE_3);
+  bme.setGasHeater(320, 150); // 320*C for 150 ms
   Serial.println();
 }
 void readCCS811() {
@@ -175,27 +173,31 @@ void readCCS811() {
 
 }
 void readBME680() {
-  /*Serial.print("Temperature = ");
-  Serial.print(bme.readTemperature());
+ if (! bme.performReading()) {
+    Serial.println("Failed to perform reading :(");
+    return;
+  }
+  Serial.println("BME680");
+  Serial.print("Temperature = ");
+  Serial.print(bme.temperature);
   Serial.println(" *C");
 
-  // Convert temperature to Fahrenheit
-  Serial.print("Temperature = ");
-    Serial.print(1.8 * bme.readTemperature() + 32);
-    Serial.println(" *F");
-
   Serial.print("Pressure = ");
-  Serial.print(bme.readPressure() / 100.0F);
+  Serial.print(bme.pressure / 100.0);
   Serial.println(" hPa");
+
+  Serial.print("Humidity = ");
+  Serial.print(bme.humidity);
+  Serial.println(" %");
+
+  Serial.print("Gas = ");
+  Serial.print(bme.gas_resistance / 1000.0);
+  Serial.println(" KOhms");
 
   Serial.print("Approx. Altitude = ");
   Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
   Serial.println(" m");
 
-  Serial.print("Humidity = ");
-  Serial.print(bme.readHumidity());
-  Serial.println(" %");
-*/
   Serial.println();
 }
 void setupSPS30() {
