@@ -2,9 +2,9 @@
 
 
 ### Team members:
-Fabian Hauck
-Ayoub Ghodbani
-Jannik Hinsemann
-Melisa Xhepa
-Edris Ghodbani
-Ilterkaan Karaca
+- Fabian Hauck
+- Ayoub Ghodbani
+- Jannik Hinsemann
+- Melisa Xhepa
+- Edris Ghodbani
+- Ilterkaan Karaca
