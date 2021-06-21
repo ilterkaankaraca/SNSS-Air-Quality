@@ -7,17 +7,6 @@
 #include "Adafruit_BME680.h"
 #include <SensirionI2CScd4x.h>
 #include <sps30.h>
-#define BME_SCK 13
-#define BME_MISO 12
-#define BME_MOSI 11
-#define BME_CS 10
-#define I2C_SDA 33
-#define I2C_SCL 32
-
-#define SEALEVELPRESSURE_HPA (1013.25)
-
-
-uint8_t loopCnt = 0;
 
 Adafruit_SHT31 sht31 = Adafruit_SHT31();
 Adafruit_BMP085 bmp;
@@ -29,21 +18,21 @@ void setup() {
   Serial.begin(9600);
   Wire.begin();
   setupSHT31();
-  setupBMP180();
+  //setupBMP180();
   setupCCS811();
   setupBME680();
-  setupSPS30();
-  setupSCD41();
+ // setupSPS30();
+ // setupSCD41();
   Serial.println();
 }
 
 void loop() {
   readSHT31();
-  readBMP180();
+  //readBMP180();
   readCCS811();
   readBME680();
-  readSPS30();
-  readSCD41();
+  //readSPS30();
+  //readSCD41();
   delay(5000);
 }
 
@@ -131,7 +120,7 @@ void readCCS811() {
     if (!ccs.readData()) {
       Serial.print("eCO2: ");
       Serial.print(ccs.geteCO2());
-      Serial.print("ppm, TVOC: ");
+      Serial.print("ppm, TVOC: "); //ppb
       Serial.println(ccs.getTVOC());
     }
     else {

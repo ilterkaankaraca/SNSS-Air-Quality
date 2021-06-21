@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air Quality", "Air Quality.csproj", "{431944CC-B29E-4B2A-B3CA-3A509E8E9937}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Air Quality", "Air Quality.csproj", "{6B9229FC-3223-45BB-8297-E39BA771994B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{431944CC-B29E-4B2A-B3CA-3A509E8E9937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{431944CC-B29E-4B2A-B3CA-3A509E8E9937}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{431944CC-B29E-4B2A-B3CA-3A509E8E9937}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{431944CC-B29E-4B2A-B3CA-3A509E8E9937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B9229FC-3223-45BB-8297-E39BA771994B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B9229FC-3223-45BB-8297-E39BA771994B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B9229FC-3223-45BB-8297-E39BA771994B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B9229FC-3223-45BB-8297-E39BA771994B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D2017161-E237-405F-80B3-F52F04DCEFEF}
+		SolutionGuid = {B76AE23C-9AAA-4008-976E-A8D731F99EB1}
 	EndGlobalSection
 EndGlobal
