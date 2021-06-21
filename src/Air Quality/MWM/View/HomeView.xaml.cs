@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace AirQuality.MWM.View
 {
@@ -20,6 +21,7 @@ namespace AirQuality.MWM.View
     /// </summary>
     public partial class HomeView : UserControl
     {
+        
         public HomeView()
         {
             InitializeComponent();

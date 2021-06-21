@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AirQuality.MWM.ViewModel
+﻿namespace AirQuality.MWM.ViewModel
 {
     class LoginViewModel
     {
         private string ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
+        private MainViewModel mainViewModel;
 
         public LoginViewModel()
         {
+        }
+
+        public LoginViewModel(MainViewModel mainViewModel)
+        {
+            this.mainViewModel = mainViewModel;
             //TODO: Read the latest IP from the file.
           //  InitializeComponent();
         }
@@ -53,6 +53,7 @@ namespace AirQuality.MWM.ViewModel
         //    //}
         //}
         public string IpAddress { get => ipAddress; set => ipAddress = value; }
+        public MainViewModel MainViewModel { get => mainViewModel; set => mainViewModel = value; }
     }
 }
 

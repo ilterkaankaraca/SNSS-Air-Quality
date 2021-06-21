@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="AirQuality.MWM.View.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AirQuality.MWM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Height="22" Margin="289,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="connectButton" Content="Button" HorizontalAlignment="Left" Margin="423,247,0,0" VerticalAlignment="Top" Width="75" Click="connectButton_click"/>
+        <Label x:Name="label" Content="IP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,244,0,0" Foreground="White"/>
+        <Label x:Name="statusLabel" Content="Status&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="289,272,0,0" Foreground="White" Width="120"/>
+
+    </Grid>
+</UserControl>

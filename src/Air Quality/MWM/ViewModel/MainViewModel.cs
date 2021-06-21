@@ -9,6 +9,7 @@ namespace AirQuality.MWM.ViewModel
         private object _currentView;
 
         public HomeViewModel HomeVM { get; set; }
+        public LoginViewModel LoginVM { get; set; }
 
         public object CurrentView
         {
@@ -24,6 +25,7 @@ namespace AirQuality.MWM.ViewModel
         public MainViewModel() 
         {
             HomeVM = new HomeViewModel();
+            LoginVM = new LoginViewModel();
             CurrentView = HomeVM;
         }
 
