@@ -22,7 +22,6 @@ namespace AirQuality.MWM.View
         private void connectButton_click(object sender, RoutedEventArgs e)
         {
             //TODO: Save the latest IP in a file.
-            Console.WriteLine(12);
             if (String.IsNullOrWhiteSpace(ipTextBox.Text) == false)
             {
                 string answer;
@@ -33,7 +32,10 @@ namespace AirQuality.MWM.View
                     {
                         //TODO: 
                         //get connection response
-                        answer = wc.DownloadString("http://" + ipAddress + "/connect");
+                        if(int.TryParse(ipAddress[0].ToString(), out _))
+                            answer = wc.DownloadString("http://" + ipAddress + "/connect");
+                        else
+                            answer = wc.DownloadString("http://" + ipAddress + ".local/connect");
                     }
                     statusLabel.Content = answer;
                 }
@@ -45,8 +47,8 @@ namespace AirQuality.MWM.View
                 {
                     Console.WriteLine("SocketException: {0}", A);
                 }
-                LoginViewModel loginViewModel = new LoginViewModel();
-                loginViewModel.MainViewModel.CurrentView = loginViewModel.MainViewModel.HomeVM;
+               // LoginViewModel loginViewModel = new LoginViewModel();
+                //loginViewModel.MainViewModel.CurrentView = loginViewModel.MainViewModel.HomeVM;
               
                 //  this.Hide();
               //  OverviewForm form2 = new OverviewForm(this);

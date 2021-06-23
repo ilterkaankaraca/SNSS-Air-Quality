@@ -473,7 +473,7 @@ void printSerialNumber(uint16_t serial0, uint16_t serial1, uint16_t serial2) {
 void transmitValues(){
   if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
        HTTPClient http;
-       http.begin("http://192.168.0.250/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
+       http.begin("http://esp32.local/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
        httpCode = http.GET();                                        //Make the request
        if (httpCode > 0) { //Check for the returning code
          String payload = http.getString();

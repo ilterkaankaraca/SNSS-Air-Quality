@@ -26,7 +26,7 @@ namespace AirQuality.MWM.ViewModel
         {
             HomeVM = new HomeViewModel();
             LoginVM = new LoginViewModel();
-            CurrentView = HomeVM;
+            CurrentView = LoginVM;
         }
 
     }
