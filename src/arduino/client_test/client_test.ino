@@ -23,7 +23,7 @@
 Adafruit_SHT31 sht31 = Adafruit_SHT31();
 Adafruit_BMP085 bmp;
 Adafruit_CCS811 ccs;
-Adafruit_BME680 bme; // I2C
+Adafruit_BME680 bme;
 SensirionI2CScd4x scd4x;
 
 char ssid[] = "Vodafone-262F_T";       //  your network SSID (name)
@@ -40,6 +40,10 @@ typedef enum {
   READ_SCD41,
   CALCULATE_TEMPERATURE,
   CALCULATE_HUMIDITY,
+  CALCULATE_CO2,
+  CALCULATE_AIR_QUALITY,
+  CALCULATE_PRESSURE,
+  CALCULATE_PARTICLE,
   TRANSMIT_VALUES,
   WAIT
 } AppState_t ;
@@ -96,33 +100,36 @@ void loop () {
       state = CALCULATE_TEMPERATURE ;
       break;
     case CALCULATE_TEMPERATURE:
+      //find a average
       temperature = temperature / 4;
       state = CALCULATE_HUMIDITY ;
       break;
     case CALCULATE_HUMIDITY:
+      //find a average
       humidity = humidity / 3;
-      state = TRANSMIT_VALUES ;
+      state = CALCULATE_CO2 ;
       break;
     case CALCULATE_CO2:
+      state = CALCULATE_AIR_QUALITY ;
+      break;
+    case CALCULATE_AIR_QUALITY:
+    //TODO: decide a calculation way for air quality
+      state = CALCULATE_PRESSURE ;
+      break;
+    case CALCULATE_PRESSURE:
+      //find a average
+      pressure = pressure / 2;
+      state = CALCULATE_PARTICLE ;
+      break;
+    case CALCULATE_PARTICLE:
+      //TODO: decide a way for particles
       state = TRANSMIT_VALUES ;
       break;
     case TRANSMIT_VALUES:
-      if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
-        HTTPClient http;
-        http.begin("http://192.168.0.247/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
-        httpCode = http.GET();                                        //Make the request
-        if (httpCode > 0) { //Check for the returning code
-          String payload = http.getString();
-        }
-        else {
-          Serial.println("Error on HTTP request");
-        }
-        http.end(); //Free the resources
-      }
-      state = WAIT ;
+      transmitValues();
+      state = WAIT;
       break ;
     case WAIT :
-      Serial.println("FINAL TEMP" +String(temperature));
       temperature = 0;
       humidity = 0;
       co2 = 0;
@@ -431,11 +438,11 @@ void readSCD41() {
     Serial.print("Error trying to execute readMeasurement(): ");
     errorToString(error, errorMessage, 256);
     Serial.println(errorMessage);
-  } else if (co2 == 0) {
+  } else if (scdCo2 == 0) {
     Serial.println("Invalid sample detected, skipping.");
   } else {
     Serial.print("Co2:");
-    Serial.print(co2);
+    Serial.print(scdCo2);
     Serial.print("\t");
     Serial.print("Temperature:");
     Serial.print(scdTemperature * 175.0 / 65536.0 - 45.0);
@@ -462,3 +469,19 @@ void printSerialNumber(uint16_t serial0, uint16_t serial1, uint16_t serial2) {
   printUint16Hex(serial2);
   Serial.println();
 }
+
+void transmitValues(){
+  if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
+       HTTPClient http;
+       http.begin("http://192.168.0.250/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
+       httpCode = http.GET();                                        //Make the request
+       if (httpCode > 0) { //Check for the returning code
+         String payload = http.getString();
+       }
+       else {
+         Serial.println("Error on HTTP request");
+       }
+       http.end(); //Free the resources
+     }
+}
+

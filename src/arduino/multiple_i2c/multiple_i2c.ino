@@ -1,3 +1,12 @@
+/*
+ * Used examples
+ * bme680test.ino
+ * BMP085test.ino
+ * CCS811_test.ino
+ * SHT31test.ino
+ * exampleUsage from SCD41 library
+ * sps30
+ */
 #include <Arduino.h>
 #include <Wire.h>
 #include "Adafruit_SHT31.h"

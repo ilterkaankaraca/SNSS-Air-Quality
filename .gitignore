@@ -467,3 +467,4 @@ gherkin-features/
 *.exe
 *.out
 *.app
+src/arduino/remarks.txt
