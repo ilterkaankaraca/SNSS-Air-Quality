@@ -66,12 +66,13 @@ namespace AirQuality.MWM.ViewModel
         }
         private void updateComponents()
         {
-            indoorTemperatureLabel.Text = metrics.Temperature.ToString();
-            indoorHumidityLabel.Text = metrics.Humidity.ToString();
-            indoorCo2Label.Text = metrics.Co2.ToString();
-            indoorAirqualityLevel.Text = metrics.AirQuality.ToString();
-            indoorPressureLevel.Text = metrics.Pressure.ToString();
-            indoorParticleLevel.Text = metrics.Particle.ToString();
+            //TODO: update with correct components
+            //indoorTemperatureLabel.Text = metrics.Temperature.ToString();
+            //indoorHumidityLabel.Text = metrics.Humidity.ToString();
+            //indoorCo2Label.Text = metrics.Co2.ToString();
+            //indoorAirqualityLevel.Text = metrics.AirQuality.ToString();
+            //indoorPressureLevel.Text = metrics.Pressure.ToString();
+            //indoorParticleLevel.Text = metrics.Particle.ToString();
         }
     }
 }
