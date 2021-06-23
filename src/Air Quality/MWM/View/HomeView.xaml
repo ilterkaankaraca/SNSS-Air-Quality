@@ -127,6 +127,26 @@
 
             </StackPanel>
 
+            <TextBlock x:Name="humidityIndoorValue" Text="20% " Foreground="white" FontSize="30"
+                                   Margin="20,-100,10,0"/>
+            <TextBlock Text="20% " Foreground="white" FontSize="25"
+                                   Margin="20,-50,10,0"/>
+
+            <TextBlock Text="20% " Foreground="white" FontSize="30"
+                                   Margin="185,-100,10,0"/>
+            <TextBlock Text="20% " Foreground="white" FontSize="25"
+                                   Margin="185,-50,10,0"/>
+
+            <TextBlock Text="20% " Foreground="white" FontSize="30"
+                                   Margin="345,-100,10,0"/>
+            <TextBlock Text="20% " Foreground="white" FontSize="25"
+                                   Margin="345,-50,10,0"/>
+
+            <TextBlock Text="20% " Foreground="white" FontSize="30"
+                                   Margin="515,-100,10,0"/>
+            <TextBlock Text="20% " Foreground="white" FontSize="25"
+                                   Margin="515,-50,10,0"/>
+
         </StackPanel>
         <RadioButton x:Name="radioButton" Content="RadioButton"/>
 
