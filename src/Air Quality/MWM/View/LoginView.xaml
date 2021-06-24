@@ -5,13 +5,72 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AirQuality.MWM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+           >
 
     <Grid>
-        <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Height="22" Margin="289,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="connectButton" Content="Button" HorizontalAlignment="Left" Margin="423,247,0,0" VerticalAlignment="Top" Width="75" Click="connectButton_click"/>
-        <Label x:Name="label" Content="IP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,244,0,0" Foreground="White"/>
-        <Label x:Name="statusLabel" Content="Status&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="289,272,0,0" Foreground="White" Width="120"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
+            <StackPanel VerticalAlignment="Center">
+                <TextBox Text="SERVER CONNECTION" x:Name="ipTextBox"
+                           FontWeight="SemiBold"   BorderThickness="0" 
+                           FontFamily="helvetica" 
+                           FontSize="22"  Background="Transparent"
+                           Foreground="White"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+
+
+            <StackPanel Grid.Row="1" Margin="0,-50,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox FontFamily="Helvetica"
+                             FontWeight="Light"
+                             Text="IP Address"
+                             FontSize="20"
+                             HorizontalAlignment="Center"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="235"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.3"
+                             Height="25"
+                             Margin="300,0,0,0"/>
+                    
+                    
+                  
+                </StackPanel>
+                
+                
+                <Border Width="250"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+
+
+                <StackPanel Orientation="Horizontal" Margin="240,30,0,0">
+                    <Button Width="100" 
+                            Height="40" 
+                            x:Name="connectButton" 
+                            Content="Connect" 
+                            Margin="60,0,60,0" 
+                            
+                           />
+                 
+                </StackPanel>
+
+            </StackPanel>
+
+
+
+
+
+
+        </Grid>
     </Grid>
 </UserControl>
