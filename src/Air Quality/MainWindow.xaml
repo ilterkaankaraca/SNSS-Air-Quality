@@ -72,8 +72,6 @@ AllowsTransparency = "True">
                             Grid.Column="1" 
                             Margin="10,79,10,29" 
                            Content="{Binding CurrentView}" Grid.RowSpan="2"/>
-
-
         </Grid>
     </Border>
 </Window>

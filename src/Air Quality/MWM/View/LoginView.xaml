@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel VerticalAlignment="Center">
-                <TextBox Text="SERVER CONNECTION" x:Name="ipTextBox"
+                <TextBox Text="SERVER CONNECTION" x:Name="titleLabel"
                            FontWeight="SemiBold"   BorderThickness="0" 
                            FontFamily="helvetica" 
                            FontSize="22"  Background="Transparent"
@@ -28,7 +28,7 @@
 
             <StackPanel Grid.Row="1" Margin="0,-50,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox FontFamily="Helvetica"
+                    <TextBox x:Name="ipTextBox" FontFamily="Helvetica"
                              FontWeight="Light"
                              Text="IP Address"
                              FontSize="20"
@@ -40,10 +40,9 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.3"
                              Height="25"
-                             Margin="300,0,0,0"/>
-                    
-                    
-                  
+                             Margin="300,0,0,0" GotFocus="ipTextBox_GotFocus"
+                           />
+                             
                 </StackPanel>
                 
                 
@@ -59,7 +58,7 @@
                             x:Name="connectButton" 
                             Content="Connect" 
                             Margin="60,0,60,0" 
-                            
+                            Click="connectButton_click"
                            />
                  
                 </StackPanel>

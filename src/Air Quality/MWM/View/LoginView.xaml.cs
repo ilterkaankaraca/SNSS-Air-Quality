@@ -32,14 +32,14 @@ namespace AirQuality.MWM.View
                     ipAddress = ipTextBox.Text;
                     using (WebClient wc = new WebClient())
                     {
-                        //TODO: 
-                        //get connection response
-                        if(int.TryParse(ipAddress[0].ToString(), out _))
+                        
+                        //check if it is ip or hostname
+                        if (int.TryParse(ipAddress[0].ToString(), out _))
                             answer = wc.DownloadString("http://" + ipAddress + "/connect");
                         else
                             answer = wc.DownloadString("http://" + ipAddress + ".local/connect");
                     }
-                    //statusLabel.Content = answer;
+                    titleLabel.Text = answer;
                 }
                 catch (ArgumentNullException A)
                 {
@@ -49,25 +49,17 @@ namespace AirQuality.MWM.View
                 {
                     Console.WriteLine("SocketException: {0}", A);
                 }
-               // LoginViewModel loginViewModel = new LoginViewModel();
-                //loginViewModel.MainViewModel.CurrentView = loginViewModel.MainViewModel.HomeVM;
-              
-                //  this.Hide();
-              //  OverviewForm form2 = new OverviewForm(this);
-              //form2.Show();
             }
             else
             {
-                //statusLabel.Foreground = Brushes.Red;
-                //statusLabel.Content = "Please type an IP address";
-              //  v.SetError("Negative values are not allowed. Please correct.", ErrorType.Critical);
-                //return new ValidationResult(false, "Required Field Validation");
+               //Label.Foreground = Brushes.Red;
+                titleLabel.Text = "Please type an IP address";
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+        private void ipTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-
+            ipTextBox.Text = null;
         }
     }
 }
