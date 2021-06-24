@@ -1,73 +1,50 @@
 ﻿using AirQuality.MWM.Model;
-
 using System;
-
 using System.Collections.Generic;
-
 using System.Linq;
-
 using System.Net;
-
 using System.Text;
-
 using System.Threading.Tasks;
-
 using System.Windows;
-
 using System.Windows.Controls;
-
 using System.Windows.Data;
-
 using System.Windows.Documents;
-
 using System.Windows.Input;
-
 using System.Windows.Media;
-
 using System.Windows.Media.Imaging;
-
 using System.Windows.Navigation;
-
 using System.Windows.Shapes;
-
 using System.Windows.Threading;
 
-
-
 namespace AirQuality.MWM.View
-
 {
-
     /// <summary> 
-
     /// Interaction logic for HomeView.xaml 
-
     /// </summary> 
 
     public partial class HomeView : UserControl
-
     {
-
         // private LoginForm form1; 
-
         AirMetrics metrics;
-
         WebClient webClient;
-
         string temperatureUrl, humidityUrl, co2Url, airQualityUrl, pressureUrl, particleUrl;
 
 
 
         public HomeView()
-
         {
-
             InitializeComponent();
-
-
-
+            temperatureUrl = "http://esp32.local/temperature/";
+            humidityUrl = "http://esp32.local/humidity/";
+            co2Url = "http://esp32.local/co2/";
+            airQualityUrl = "http://esp32.local/airQuality/";
+            pressureUrl = "http://esp32.local/pressure/";
+            particleUrl = "http://esp32.local/particle/";
+            webClient = new WebClient();
+            metrics = new AirMetrics();
+            updateMetrics();
+            updateComponents();
         }
-
 
 
         //public OverviewForm(LoginForm form1) 
@@ -78,17 +55,7 @@ namespace AirQuality.MWM.View
 
         //    this.form1 = form1; 
 
-        //    temperatureUrl = "http://" + form1.IpAddress + "/temperature/"; 
 
-        //    humidityUrl = "http://" + form1.IpAddress + "/humidity/"; 
-
-        //    co2Url = "http://" + form1.IpAddress + "/co2/"; 
-
-        //    airQualityUrl = "http://" + form1.IpAddress + "/airQuality/"; 
-
-        //    pressureUrl = "http://" + form1.IpAddress + "/pressure/"; 
-
-        //    particleUrl = "http://" + form1.IpAddress + "/particle/"; 
 
         //    webClient = new WebClient(); 
 

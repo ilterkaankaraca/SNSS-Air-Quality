@@ -1,5 +1,6 @@
 ﻿using System;
 using AirQuality.Core;
+using AirQuality.MWM.View;
 
 namespace AirQuality.MWM.ViewModel
 {
@@ -31,8 +32,8 @@ namespace AirQuality.MWM.ViewModel
             HomeVM = new HomeViewModel();
             LoginVM = new LoginViewModel();
             SettingsVM = new SettingsViewModel();
-
-            CurrentView = LoginVM;
+ 
+            CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => 
             {
