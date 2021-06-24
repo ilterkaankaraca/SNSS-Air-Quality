@@ -15,7 +15,7 @@ void setup () {
   initWiFi ();
   initWebserver ();
   if(!MDNS.begin("esp32")) {
-     Serial.println("Error starting mDNS");
+    // Serial.println("Error starting mDNS");
      return;
 }
 }
@@ -81,7 +81,7 @@ void initWebserver (void) {
     particleValue = request -> getParam ("particle")->value().toFloat();
     request -> send (200 , "text/plain", "R");
   });
-  server.on("/plot", HTTP_GET, []( AsyncWebServerRequest * request ) {
+  server.on("/plot", HTTP_GET, []( AsyncWebServerRequest * request ) { //will be used to change the plot metric
      plotMetric = request -> getParam ("plotMetric")->value();
   });
   server.begin ();
