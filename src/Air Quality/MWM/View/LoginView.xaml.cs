@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Xml.Schema;
+
 namespace AirQuality.MWM.View
 {
     /// <summary>
@@ -37,7 +39,7 @@ namespace AirQuality.MWM.View
                         else
                             answer = wc.DownloadString("http://" + ipAddress + ".local/connect");
                     }
-                    statusLabel.Content = answer;
+                    //statusLabel.Content = answer;
                 }
                 catch (ArgumentNullException A)
                 {
@@ -56,9 +58,16 @@ namespace AirQuality.MWM.View
             }
             else
             {
-                statusLabel.Foreground = Brushes.Red;
-                statusLabel.Content = "Please type an IP address";
+                //statusLabel.Foreground = Brushes.Red;
+                //statusLabel.Content = "Please type an IP address";
+              //  v.SetError("Negative values are not allowed. Please correct.", ErrorType.Critical);
+                //return new ValidationResult(false, "Required Field Validation");
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
