@@ -4,12 +4,11 @@
 char ssid[] = "Vodafone-262F_T";       //  your network SSID (name)
 char password[] = "Tarti.38";
 
-#define RXD2 16
-#define TXD2 17
+
 
 AsyncWebServer server(80);
 float temperatureValue, humidityValue, co2Value, airQualityValue, pressureValue, particleValue;
-String plotMetric;
+String plotMetric="temperature";
 void setup () {
   Serial.begin(115200);
   initWiFi ();
@@ -20,23 +19,34 @@ void setup () {
 }
 }
 void loop () {
+  if (plotMetric == "temperature"){
     Serial.print("Temperature:");
-    Serial.print(temperatureValue);
-    Serial.print(", ");
-    Serial.print("Humidity:");
-    Serial.print(humidityValue);
-    Serial.print(", ");
-    Serial.print("CO2:");
-    Serial.print(co2Value);
-    Serial.print(", ");
+    Serial.print(temperatureValue); 
+    }
+    else if (plotMetric == "humidity"){
+    // Serial.print(", ");
+      Serial.print("Humidity:");
+      Serial.print(humidityValue);
+    }
+    // Serial.print(", ");
+    else if (plotMetric == "co2"){
+      Serial.print("CO2:");
+      Serial.print(co2Value);
+      // Serial.print(", ");
+   }
+   else if (plotMetric == "airquality"){
     Serial.print("AirQuality:");
     Serial.print(airQualityValue);
-    Serial.print(", ");
+   }
+    else if (plotMetric == "pressure"){
+   // Serial.print(", ");
     Serial.print("Pressure:");
-    Serial.print(pressureValue);
-    Serial.print(", ");
+    Serial.print(pressureValue);}
+    else if (plotMetric == "particle"){
+   // Serial.print(", ");
     Serial.print("Particle:");
-    Serial.println(particleValue);
+    Serial.print(particleValue);}
+    Serial.println();
     delay(7000);
 }
 void initWiFi () {
@@ -83,6 +93,7 @@ void initWebserver (void) {
   });
   server.on("/plot", HTTP_GET, []( AsyncWebServerRequest * request ) { //will be used to change the plot metric
      plotMetric = request -> getParam ("plotMetric")->value();
+     request -> send (200 , "text/plain", plotMetric);
   });
   server.begin ();
 }
