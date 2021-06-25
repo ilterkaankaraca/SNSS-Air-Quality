@@ -5,7 +5,7 @@ char ssid[] = "Vodafone-262F_T"; //  your network SSID (name)
 char password[] = "Tarti.38";
 
 AsyncWebServer server(80);
-float temperatureValue, humidityValue, co2Value, airQualityValue, pressureValue, particleValue;
+float temperatureValue, humidityValue, co2Value, airQualityValue, pressureValue, tvocValue, pm25Value, pm10Value;
 String plotMetric = "temperature";
 void setup()
 {
@@ -44,17 +44,17 @@ void loop()
   else if (plotMetric == "pm25")
   {
     Serial.print("PM2.5:");
-    Serial.print(particleValue);
+    Serial.print(pm25Value);
   }
   else if (plotMetric == "pm10")
   {
     Serial.print("PM10:");
-    Serial.print(particleValue);
+    Serial.print(pm10Value);
   }
   else if (plotMetric == "tvoc")
   {
     Serial.print("TVOC:");
-    Serial.print(particleValue);
+    Serial.print(tvocValue);
   }
   Serial.println();
   delay(7000);
