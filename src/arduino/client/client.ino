@@ -26,12 +26,12 @@ Adafruit_CCS811 ccs;
 Adafruit_BME680 bme;
 SensirionI2CScd4x scd4x;
 
-char ssid[] = "Vodafone-262F_T";       //  your network SSID (name)
+char ssid[] = "Vodafone-262F_T"; //  your network SSID (name)
 char password[] = "Tarti.38";
 float temperature, humidity, co2, airQuality, pressure, particle;
 int httpCode = 0;
-uint8_t upperByte, lowerByte ;
-typedef enum {
+typedef enum
+{
   READ_SHT31,
   READ_BMP180,
   READ_CCS811,
@@ -43,16 +43,18 @@ typedef enum {
   CALCULATE_CO2,
   CALCULATE_AIR_QUALITY,
   CALCULATE_PRESSURE,
-  CALCULATE_PARTICLE,
+  CALCULATE_PM25,
+  CALCULATE_PM10,
+  CALCULATE_TVOC,
   TRANSMIT_VALUES,
   WAIT
-} AppState_t ;
+} AppState_t;
 AppState_t state = READ_SHT31;
-void setup () {
-
-  Serial.begin (115200) ;
+void setup()
+{
+  Serial.begin(115200);
   Wire.begin();
-  initWiFi ();
+  initWiFi();
   setupSHT31();
   setupBMP180();
   setupCCS811();
@@ -60,161 +62,172 @@ void setup () {
   setupSPS30();
   setupSCD41();
 }
-
-void initWiFi () {
-  WiFi.mode ( WIFI_STA );
-  WiFi.begin (ssid , password );
-  Serial.print (" Connecting to WiFi ..");
-  while ( WiFi.status () != WL_CONNECTED ) {
-    Serial.print (".");
-    delay (1000) ;
+void initWiFi()
+{
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.print(" Connecting to WiFi ..");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(1000);
   }
-  Serial.println ( WiFi.localIP ());
-  Serial.println ( WiFi.macAddress ());
+  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.macAddress());
 }
-
-void loop () {
-  switch ( state ) {
-    case READ_SHT31:
-      readSHT31();
-      state = READ_BMP180 ;
-      break;
-    case READ_BMP180:
-      readBMP180();
-      state = READ_CCS811 ;
-      break;
-    case READ_CCS811:
-      readCCS811();
-      state = READ_BME680 ;
-      break;
-    case READ_BME680:
-      readBME680();
-      state = READ_SPS30 ;
-      break;
-    case READ_SPS30:
-      readSPS30();
-      state = READ_SCD41 ;
-      break;
-    case READ_SCD41:
-      readSCD41();
-      state = CALCULATE_TEMPERATURE ;
-      break;
-    case CALCULATE_TEMPERATURE:
-      //find a average
-      temperature = temperature / 4;
-      state = CALCULATE_HUMIDITY ;
-      break;
-    case CALCULATE_HUMIDITY:
-      //find a average
-      humidity = humidity / 3;
-      state = CALCULATE_CO2 ;
-      break;
-    case CALCULATE_CO2:
-      state = CALCULATE_AIR_QUALITY ;
-      break;
-    case CALCULATE_AIR_QUALITY:
+void loop()
+{
+  switch (state)
+  {
+  case READ_SHT31:
+    readSHT31();
+    state = READ_BMP180;
+    break;
+  case READ_BMP180:
+    readBMP180();
+    state = READ_CCS811;
+    break;
+  case READ_CCS811:
+    readCCS811();
+    state = READ_BME680;
+    break;
+  case READ_BME680:
+    readBME680();
+    state = READ_SPS30;
+    break;
+  case READ_SPS30:
+    readSPS30();
+    state = READ_SCD41;
+    break;
+  case READ_SCD41:
+    readSCD41();
+    state = CALCULATE_TEMPERATURE;
+    break;
+  case CALCULATE_TEMPERATURE:
+    //find a average
+    temperature = temperature / 4;
+    state = CALCULATE_HUMIDITY;
+    break;
+  case CALCULATE_HUMIDITY:
+    //find a average
+    humidity = humidity / 3;
+    state = CALCULATE_CO2;
+    break;
+  case CALCULATE_CO2:
+    state = CALCULATE_AIR_QUALITY;
+    break;
+  case CALCULATE_AIR_QUALITY:
     //TODO: decide a calculation way for air quality
-      state = CALCULATE_PRESSURE ;
-      break;
-    case CALCULATE_PRESSURE:
-      //find a average
-      pressure = pressure / 2;
-      state = CALCULATE_PARTICLE ;
-      break;
-    case CALCULATE_PARTICLE:
-      //TODO: decide a way for particles
-      state = TRANSMIT_VALUES ;
-      break;
-    case TRANSMIT_VALUES:
-      transmitValues();
-      state = WAIT;
-      break ;
-    case WAIT :
-      temperature = 0;
-      humidity = 0;
-      co2 = 0;
-      airQuality = 0;
-      pressure = 0;
-      particle = 0;
-      delay(5000);
-      state = READ_SHT31;
+    state = CALCULATE_PRESSURE;
+    break;
+  case CALCULATE_PRESSURE:
+    //find a average
+    pressure = pressure / 2;
+    state = CALCULATE_PARTICLE;
+    break;
+  case CALCULATE_PARTICLE:
+    //TODO: decide a way for particles
+    state = TRANSMIT_VALUES;
+    break;
+  case TRANSMIT_VALUES:
+    transmitValues();
+    state = WAIT;
+    break;
+  case WAIT:
+    temperature = 0;
+    humidity = 0;
+    co2 = 0;
+    airQuality = 0;
+    pressure = 0;
+    particle = 0;
+    delay(5000);
+    state = READ_SHT31;
   }
 }
-
-void setupSHT31() {
+void setupSHT31()
+{
   Serial.println("SHT31");
-  if (! sht31.begin(0x44)) {   // Set to 0x45 for alternate i2c addr
+  if (!sht31.begin(0x44))
+  { // Set to 0x45 for alternate i2c addr
     Serial.println("Couldn't find SHT31");
-    while (1) delay(1);
+    while (1)
+      delay(1);
   }
 }
-void readSHT31() {
+void readSHT31()
+{
   float t = sht31.readTemperature();
-  
+
   float h = sht31.readHumidity();
   Serial.println("SHT31 Readings");
-  if (! isnan(t)) {  // check if 'is not a number'
-    Serial.print("Temp *C = "); Serial.print(t); Serial.print("\t\t");
-  } else {
+  if (!isnan(t))
+  { // check if 'is not a number'
+    Serial.print("Temp *C = ");
+    Serial.print(t);
+    Serial.print("\t\t");
+  }
+  else
+  {
     Serial.println("Failed to read temperature");
   }
-  if (! isnan(h)) {  // check if 'is not a number'
-    Serial.print("Hum. % = "); Serial.println(h);
-  } else {
+  if (!isnan(h))
+  { // check if 'is not a number'
+    Serial.print("Hum. % = ");
+    Serial.println(h);
+  }
+  else
+  {
     Serial.println("Failed to read humidity");
   }
   temperature = temperature + t;
   humidity += h;
   Serial.println();
 }
-void setupBMP180() {
-  if (!bmp.begin()) {
+void setupBMP180()
+{
+  if (!bmp.begin())
+  {
     Serial.println("Could not find a valid BMP085 sensor, check wiring!");
-    while (1) {}
+    while (1)
+    {
+    }
   }
 }
-void readBMP180() {
-  temperature += bmp.readTemperature();
+void readBMP180()
+{
+  float bmpTemperature=bmp.readTemperature();
+  float bmpPressure=bmp.readPressure()*100;
   Serial.println("BMP180");
   Serial.print("Temperature = ");
-  Serial.print(bmp.readTemperature());
+  Serial.print(bmpTemperature);
   Serial.println(" *C");
   Serial.print("Pressure = ");
-  Serial.print(bmp.readPressure());
-  Serial.println(" Pa");
-
-  // Calculate altitude assuming 'standard' barometric
-  // pressure of 1013.25 millibar = 101325 Pascal
-  // Serial.print("Altitude = ");
-  // Serial.print(bmp.readAltitude());
-  // Serial.println(" meters");
-  // Serial.print("Pressure at sealevel (calculated) = ");
-  // Serial.print(bmp.readSealevelPressure());
-  // Serial.println(" Pa");
-
-  // you can get a more precise measurement of altitude
-  // if you know the current sea level pressure which will
-  // vary with weather and such. If it is 1015 millibars
-  // that is equal to 101500 Pascals.
-  // Serial.print("Real altitude = ");
-  // Serial.print(bmp.readAltitude(101500));
-  // Serial.println(" meters");
-  // Serial.println();
+  Serial.print(bmpPressure);
+  Serial.println(" hPa");
+  temperature += bmpTemperature;
+  pressure += bmpPressure;
 }
-void setupCCS811() {
+void setupCCS811()
+{
   Serial.println("CCS811 test");
-  if (!ccs.begin()) {
+  if (!ccs.begin())
+  {
     Serial.println("Failed to start sensor! Please check your wiring.");
-    while (1);
+    while (1)
+      ;
     // Wait for the sensor to be ready
-    while (!ccs.available());
+    while (!ccs.available())
+      ;
   }
 }
-void setupBME680() {
+void setupBME680()
+{
   Serial.println(F("BME680 test"));
-  if (!bme.begin(0x76)) {
+  if (!bme.begin(0x76))
+  {
     Serial.println("Could not find a valid BME680 sensor, check wiring!");
-    while (1);
+    while (1)
+      ;
   }
   // Set up oversampling and filter initialization
   bme.setTemperatureOversampling(BME680_OS_8X);
@@ -224,24 +237,30 @@ void setupBME680() {
   bme.setGasHeater(320, 150); // 320*C for 150 ms
   Serial.println();
 }
-void readCCS811() {
-  if (ccs.available()) {
+void readCCS811()
+{
+  if (ccs.available())
+  {
     Serial.println("CCS811");
-    if (!ccs.readData()) {
+    if (!ccs.readData())
+    {
       Serial.print("CO2: ");
       Serial.print(ccs.geteCO2());
       Serial.print("ppm, TVOC: ");
       Serial.println(ccs.getTVOC());
     }
-    else {
+    else
+    {
       Serial.println("ERROR!");
-      while (1);
+      while (1)
+        ;
     }
   }
-
 }
-void readBME680() {
-  if (! bme.performReading()) {
+void readBME680()
+{
+  if (!bme.performReading())
+  {
     Serial.println("Failed to perform reading :(");
     return;
   }
@@ -266,7 +285,8 @@ void readBME680() {
 
   Serial.println();
 }
-void setupSPS30() {
+void setupSPS30()
+{
   int16_t ret;
   uint8_t auto_clean_days = 4;
   uint32_t auto_clean;
@@ -274,7 +294,8 @@ void setupSPS30() {
 
   sensirion_i2c_init();
 
-  while (sps30_probe() != 0) {
+  while (sps30_probe() != 0)
+  {
     Serial.print("SPS sensor probing failed\n");
     delay(500);
   }
@@ -283,13 +304,15 @@ void setupSPS30() {
 #endif /* PLOTTER_FORMAT */
 
   ret = sps30_set_fan_auto_cleaning_interval_days(auto_clean_days);
-  if (ret) {
+  if (ret)
+  {
     Serial.print("error setting the auto-clean interval: ");
     Serial.println(ret);
   }
 
   ret = sps30_start_measurement();
-  if (ret < 0) {
+  if (ret < 0)
+  {
     Serial.print("error starting measurement\n");
   }
 
@@ -307,20 +330,22 @@ void setupSPS30() {
 
   delay(1000);
 }
-
-
-void readSPS30() {
+void readSPS30()
+{
   struct sps30_measurement m;
   char serial[SPS30_MAX_SERIAL_LEN];
   uint16_t data_ready;
   int16_t ret;
 
-  do {
+  do
+  {
     ret = sps30_read_data_ready(&data_ready);
-    if (ret < 0) {
+    if (ret < 0)
+    {
       Serial.print("error reading data-ready flag: ");
       Serial.println(ret);
-    } else if (!data_ready)
+    }
+    else if (!data_ready)
       Serial.print("data not ready, no new measurement available\n");
     else
       break;
@@ -328,9 +353,12 @@ void readSPS30() {
   } while (1);
 
   ret = sps30_read_measurement(&m);
-  if (ret < 0) {
+  if (ret < 0)
+  {
     Serial.print("error reading measurement\n");
-  } else {
+  }
+  else
+  {
 
 #ifndef PLOTTER_FORMAT
     Serial.print("PM  1.0: ");
@@ -372,24 +400,22 @@ void readSPS30() {
 
     Serial.print(m.nc_0p5);
     Serial.print(" ");
-    Serial.print(m.nc_1p0  - m.nc_0p5);
+    Serial.print(m.nc_1p0 - m.nc_0p5);
     Serial.print(" ");
-    Serial.print(m.nc_2p5  - m.nc_1p0);
+    Serial.print(m.nc_2p5 - m.nc_1p0);
     Serial.print(" ");
-    Serial.print(m.nc_4p0  - m.nc_2p5);
+    Serial.print(m.nc_4p0 - m.nc_2p5);
     Serial.print(" ");
     Serial.print(m.nc_10p0 - m.nc_4p0);
     Serial.println();
 
-
 #endif /* PLOTTER_FORMAT */
-
   }
 
   delay(1000);
 }
-void setupSCD41() {
-
+void setupSCD41()
+{
 
   uint16_t error;
   char errorMessage[256];
@@ -398,7 +424,8 @@ void setupSCD41() {
 
   // stop potentially previously started measurement
   error = scd4x.stopPeriodicMeasurement();
-  if (error) {
+  if (error)
+  {
     Serial.print("Error trying to execute stopPeriodicMeasurement(): ");
     errorToString(error, errorMessage, 256);
     Serial.println(errorMessage);
@@ -408,24 +435,29 @@ void setupSCD41() {
   uint16_t serial1;
   uint16_t serial2;
   error = scd4x.getSerialNumber(serial0, serial1, serial2);
-  if (error) {
+  if (error)
+  {
     Serial.print("Error trying to execute getSerialNumber(): ");
     errorToString(error, errorMessage, 256);
     Serial.println(errorMessage);
-  } else {
+  }
+  else
+  {
     printSerialNumber(serial0, serial1, serial2);
   }
 
   // Start Measurement
   error = scd4x.startPeriodicMeasurement();
-  if (error) {
+  if (error)
+  {
     Serial.print("Error trying to execute startPeriodicMeasurement(): ");
     errorToString(error, errorMessage, 256);
     Serial.println(errorMessage);
   }
   delay(5000);
 }
-void readSCD41() {
+void readSCD41()
+{
   Serial.println("SCD41");
   uint16_t error;
   char errorMessage[256];
@@ -434,13 +466,18 @@ void readSCD41() {
   uint16_t scdTemperature;
   uint16_t scdHumidity;
   error = scd4x.readMeasurement(scdCo2, scdTemperature, scdHumidity);
-  if (error) {
+  if (error)
+  {
     Serial.print("Error trying to execute readMeasurement(): ");
     errorToString(error, errorMessage, 256);
     Serial.println(errorMessage);
-  } else if (scdCo2 == 0) {
+  }
+  else if (scdCo2 == 0)
+  {
     Serial.println("Invalid sample detected, skipping.");
-  } else {
+  }
+  else
+  {
     Serial.print("Co2:");
     Serial.print(scdCo2);
     Serial.print("\t");
@@ -453,35 +490,38 @@ void readSCD41() {
   Serial.println();
   temperature += (scdTemperature * 175.0 / 65536.0 - 45.0);
   humidity += (scdHumidity * 100.0 / 65536.0);
-  co2=scdCo2;
+  co2 = scdCo2;
 }
-void printUint16Hex(uint16_t value) {
+void printUint16Hex(uint16_t value)
+{
   Serial.print(value < 4096 ? "0" : "");
   Serial.print(value < 256 ? "0" : "");
   Serial.print(value < 16 ? "0" : "");
   Serial.print(value, HEX);
 }
-
-void printSerialNumber(uint16_t serial0, uint16_t serial1, uint16_t serial2) {
+void printSerialNumber(uint16_t serial0, uint16_t serial1, uint16_t serial2)
+{
   Serial.print("Serial: 0x");
   printUint16Hex(serial0);
   printUint16Hex(serial1);
   printUint16Hex(serial2);
   Serial.println();
 }
-
-void transmitValues(){
-  if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
-       HTTPClient http;
-       http.begin("http://esp32.local/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
-       httpCode = http.GET();                                        //Make the request
-       if (httpCode > 0) { //Check for the returning code
-         String payload = http.getString();
-       }
-       else {
-         Serial.println("Error on HTTP request");
-       }
-       http.end(); //Free the resources
-     }
+void transmitValues()
+{
+  if ((WiFi.status() == WL_CONNECTED))
+  { //Check the current connection status
+    HTTPClient http;
+    http.begin("http://esp32.local/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
+    httpCode = http.GET();                                                                                                                                                                                                                              //Make the request
+    if (httpCode > 0)
+    { //Check for the returning code
+      String payload = http.getString();
+    }
+    else
+    {
+      Serial.println("Error on HTTP request");
+    }
+    http.end(); //Free the resources
+  }
 }
-
