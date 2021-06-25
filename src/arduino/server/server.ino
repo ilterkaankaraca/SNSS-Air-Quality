@@ -23,16 +23,13 @@ void loop()
   }
   else if (plotMetric == "humidity")
   {
-    // Serial.print(", ");
     Serial.print("Humidity:");
     Serial.print(humidityValue);
   }
-  // Serial.print(", ");
   else if (plotMetric == "co2")
   {
     Serial.print("CO2:");
     Serial.print(co2Value);
-    // Serial.print(", ");
   }
   else if (plotMetric == "airquality")
   {
@@ -41,14 +38,22 @@ void loop()
   }
   else if (plotMetric == "pressure")
   {
-    // Serial.print(", ");
     Serial.print("Pressure:");
     Serial.print(pressureValue);
   }
-  else if (plotMetric == "particle")
+  else if (plotMetric == "pm25")
   {
-    // Serial.print(", ");
-    Serial.print("Particle:");
+    Serial.print("PM2.5:");
+    Serial.print(particleValue);
+  }
+  else if (plotMetric == "pm10")
+  {
+    Serial.print("PM10:");
+    Serial.print(particleValue);
+  }
+  else if (plotMetric == "tvoc")
+  {
+    Serial.print("TVOC:");
     Serial.print(particleValue);
   }
   Serial.println();
