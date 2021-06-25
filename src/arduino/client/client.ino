@@ -28,7 +28,7 @@ SensirionI2CScd4x scd4x;
 
 char ssid[] = "Vodafone-262F_T"; //  your network SSID (name)
 char password[] = "Tarti.38";
-float temperature, humidity, co2, airQuality, pressure, particle;
+float temperature, humidity, co2, airQuality, pressure, pm25, pm10, tvoc;
 int httpCode = 0;
 typedef enum
 {
@@ -123,12 +123,14 @@ void loop()
   case CALCULATE_PRESSURE:
     //find a average
     pressure = pressure / 2;
-    state = CALCULATE_PARTICLE;
+    state = CALCULATE_PM25;
     break;
-  case CALCULATE_PARTICLE:
-    //TODO: decide a way for particles
+  case CALCULATE_PM25:
+    state = CALCULATE_PM10;
+    break;
+  case CALCULATE_PM10:
     state = TRANSMIT_VALUES;
-    break;
+    break;  
   case TRANSMIT_VALUES:
     transmitValues();
     state = WAIT;
@@ -139,7 +141,9 @@ void loop()
     co2 = 0;
     airQuality = 0;
     pressure = 0;
-    particle = 0;
+    pm10 = 0;
+    pm25 = 0;
+    tvoc = 0;
     delay(5000);
     state = READ_SHT31;
   }
@@ -179,7 +183,7 @@ void readSHT31()
   {
     Serial.println("Failed to read humidity");
   }
-  temperature = temperature + t;
+  temperature += t;
   humidity += h;
   Serial.println();
 }
@@ -195,8 +199,9 @@ void setupBMP180()
 }
 void readBMP180()
 {
-  float bmpTemperature=bmp.readTemperature();
-  float bmpPressure=bmp.readPressure()*100;
+  // 1pa/100=1hpa
+  float bmpPressure = bmp.readPressure() / 100;
+  float bmpTemperature = bmp.readTemperature();
   Serial.println("BMP180");
   Serial.print("Temperature = ");
   Serial.print(bmpTemperature);
@@ -241,13 +246,14 @@ void readCCS811()
 {
   if (ccs.available())
   {
+    tvoc = ccs.getTVOC();
     Serial.println("CCS811");
     if (!ccs.readData())
     {
       Serial.print("CO2: ");
-      Serial.print(ccs.geteCO2());
+      //Serial.print(ccs.geteCO2());
       Serial.print("ppm, TVOC: ");
-      Serial.println(ccs.getTVOC());
+      Serial.println(tvoc);
     }
     else
     {
@@ -264,8 +270,6 @@ void readBME680()
     Serial.println("Failed to perform reading :(");
     return;
   }
-  temperature += bme.temperature;
-  humidity += bme.humidity;
   Serial.println("BME680");
   Serial.print("Temperature = ");
   Serial.print(bme.temperature);
@@ -279,11 +283,14 @@ void readBME680()
   Serial.print(bme.humidity);
   Serial.println(" %");
 
-  Serial.print("Gas = ");
-  Serial.print(bme.gas_resistance / 1000.0);
-  Serial.println(" KOhms");
+  // Serial.print("Gas = ");
+  // Serial.print(bme.gas_resistance / 1000.0);
+  // Serial.println(" KOhms");
 
   Serial.println();
+  temperature += bme.temperature;
+  humidity += bme.humidity;
+  pressure += bme.pressure / 100;
 }
 void setupSPS30()
 {
@@ -411,8 +418,9 @@ void readSPS30()
 
 #endif /* PLOTTER_FORMAT */
   }
-
-  delay(1000);
+  pm25=m.mc_2p5;
+  pm10=m.mc_10p0;
+  //delay(1000);
 }
 void setupSCD41()
 {
@@ -512,7 +520,7 @@ void transmitValues()
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://esp32.local/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(airQuality) + "&pressure=" + String(pressure) + "&particle=" + String(particle)); //Specify the URL
+    http.begin("http://esp32.local/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&airQuality=" + String(tvoc) + "&pressure=" + String(pressure) + "&pm25=" + String(pm25) + "&pm10=" + String(pm10)); //Specify the URL
     httpCode = http.GET();                                                                                                                                                                                                                              //Make the request
     if (httpCode > 0)
     { //Check for the returning code
