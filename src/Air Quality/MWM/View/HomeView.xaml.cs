@@ -28,6 +28,11 @@ namespace AirQuality.MWM.View
         AirMetrics metrics;
         WebClient webClient;
         string temperatureUrl, humidityUrl, co2Url, tvocUrl, pressureUrl, pm25Url, pm10Url;
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        
+
+
+
 
         public HomeView()
         {
@@ -43,7 +48,17 @@ namespace AirQuality.MWM.View
             metrics = new AirMetrics();
             updateMetrics();
             updateComponents();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
         }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            updateMetrics();
+            updateComponents();
+        }
+
         private void updateMetrics()
         {
             metrics.Temperature = Double.Parse(webClient.DownloadString(temperatureUrl).Replace('.', ','));
@@ -65,4 +80,5 @@ namespace AirQuality.MWM.View
             //TODO: need two particle fields pm2.5 and pm10
         }
     }
+    
 }

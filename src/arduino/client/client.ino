@@ -540,6 +540,7 @@ void transmitValues()
   }
 }
 void resolveIP(){
+  //needs to be different for each esp32
   if (!MDNS.begin("esp32whatever")) {
     Serial.println("Error setting up MDNS responder!");
   } else {
