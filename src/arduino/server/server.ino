@@ -12,7 +12,7 @@ void setup()
   Serial.begin(115200);
   initWiFi();
   initWebserver();
-  MDNS.begin("esp32")
+  MDNS.begin("esp32");
 }
 void loop()
 {
@@ -82,22 +82,23 @@ void initWebserver(void)
             { request->send(200, "text/plain", String(humidityValue)); });
   server.on("/co2", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(200, "text/plain", String(co2Value)); });
-  server.on("/airQuality", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(airQualityValue)); });
+  server.on("/tvoc", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(200, "text/plain", String(tvocValue)); });
   server.on("/pressure", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(200, "text/plain", String(pressureValue)); });
-  server.on("/particle", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(particleValue)); });
+  server.on("/pm25", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(200, "text/plain", String(pm25Value)); });
+  server.on("/pm10", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(200, "text/plain", String(pm10Value)); });
   server.on("/readValue", HTTP_GET, [](AsyncWebServerRequest *request)
             {
               temperatureValue = request->getParam("temperature")->value().toFloat();
               humidityValue = request->getParam("humidity")->value().toFloat();
               co2Value = request->getParam("co2")->value().toFloat();
-              airQualityValue = request->getParam("airQuality")->value().toFloat();
+              tvocValue = request->getParam("tvoc")->value().toFloat();
               pressureValue = request->getParam("pressure")->value().toFloat();
               pm25Value = request->getParam("pm25")->value().toFloat();
               pm10Value = request->getParam("pm10")->value().toFloat();
-              tvocValue = request->getParam("tvoc")->value().toFloat();
               request->send(200, "text/plain", "R");
             });
   server.on("/plot", HTTP_GET, [](AsyncWebServerRequest *request) { //will be used to change the plot metric
