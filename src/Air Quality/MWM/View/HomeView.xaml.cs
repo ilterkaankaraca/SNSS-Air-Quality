@@ -27,9 +27,7 @@ namespace AirQuality.MWM.View
         // private LoginForm form1; 
         AirMetrics metrics;
         WebClient webClient;
-        string temperatureUrl, humidityUrl, co2Url, airQualityUrl, pressureUrl, particleUrl;
-
-
+        string temperatureUrl, humidityUrl, co2Url, tvocUrl, pressureUrl, pm25Url, pm10Url;
 
         public HomeView()
         {
@@ -37,124 +35,34 @@ namespace AirQuality.MWM.View
             temperatureUrl = "http://esp32.local/temperature/";
             humidityUrl = "http://esp32.local/humidity/";
             co2Url = "http://esp32.local/co2/";
-            airQualityUrl = "http://esp32.local/airQuality/";
+            tvocUrl = "http://esp32.local/tvoc/";
             pressureUrl = "http://esp32.local/pressure/";
-            particleUrl = "http://esp32.local/particle/";
+            pm25Url = "http://esp32.local/pm25/";
+            pm10Url = "http://esp32.local/pm10/";
             webClient = new WebClient();
             metrics = new AirMetrics();
             updateMetrics();
             updateComponents();
         }
-
-
-        //public OverviewForm(LoginForm form1) 
-
-        //{ 
-
-        //    InitializeComponent(); 
-
-        //    this.form1 = form1; 
-
-
-
-        //    webClient = new WebClient(); 
-
-        //    metrics = new AirMetrics(); 
-
-        //    updateMetrics(); 
-
-        //    updateComponents(); 
-
-
-
-        //    timer.Enabled = true; 
-
-        //} 
-
-
-
-        //private void Form2_FormClosing(object sender, FormClosingEventArgs e) 
-
-        //{ 
-
-        //    Application.Exit(); 
-
-        //} 
-
-
-
-        //private void settingsButton_Click(object sender, EventArgs e) 
-
-        //{ 
-
-        //    SettingsForm formSettings = new SettingsForm(this); 
-
-        //    formSettings.Show(); 
-
-        //    this.Hide(); 
-
-        //} 
-
-
-
-        //private void timer_Tick(object sender, EventArgs e) 
-
-        //{ 
-
-        //    updateMetrics(); 
-
-        //    updateComponents(); 
-
-        //} 
-
-
-
         private void updateMetrics()
-
         {
-
             metrics.Temperature = Double.Parse(webClient.DownloadString(temperatureUrl).Replace('.', ','));
-
             metrics.Humidity = Double.Parse(webClient.DownloadString(humidityUrl).Replace('.', ','));
-
             metrics.Co2 = Double.Parse(webClient.DownloadString(co2Url).Replace('.', ','));
-
-            metrics.AirQuality = Double.Parse(webClient.DownloadString(airQualityUrl).Replace('.', ','));
-
+            metrics.Tvoc = Double.Parse(webClient.DownloadString(tvocUrl).Replace('.', ','));
             metrics.Pressure = Double.Parse(webClient.DownloadString(pressureUrl).Replace('.', ','));
-
-            metrics.Particle = Double.Parse(webClient.DownloadString(particleUrl).Replace('.', ','));
-
+            metrics.Pm25 = Double.Parse(webClient.DownloadString(pm25Url).Replace('.', ','));
+            metrics.Pm10 = Double.Parse(webClient.DownloadString(pm10Url).Replace('.', ','));
         }
-
-
-
         private void updateComponents()
-
         {
-
-
-
             indoorTemperatureValue.Text = metrics.Temperature.ToString();
-
-            indoorHumidityValue.Text = metrics.Temperature.ToString();
-
-            co2IndoorValue.Text = metrics.Temperature.ToString();
-
-            tvocIndoorValue.Text = metrics.Temperature.ToString();
-
-            pressureIndoorValue.Text = metrics.Humidity.ToString();
-
-            particleIndoorValue.Text = metrics.AirQuality.ToString();
-
-
-
+            indoorHumidityValue.Text = metrics.Humidity.ToString();
+            co2IndoorValue.Text = metrics.Co2.ToString();
+            tvocIndoorValue.Text = metrics.Tvoc.ToString();
+            pressureIndoorValue.Text = metrics.Pressure.ToString();
+            particleIndoorValue.Text = metrics.Pm25.ToString();
+            //TODO: need two particle fields pm2.5 and pm10
         }
-
-
-
-
-
     }
-
 }
