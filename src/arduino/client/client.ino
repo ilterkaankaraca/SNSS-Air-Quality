@@ -6,8 +6,12 @@
 
   BME
   - SDI -> SDA / SDO -> GND for address 0x76
+SCD-41
+  Green cable = SDA
+Red cable = VDD
+Yellow cable = SCL
+black cable = GND
  ****************************************************/
-
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <Wire.h>
@@ -20,6 +24,10 @@
 #include <SensirionI2CScd4x.h>
 #include <sps30.h>
 #include <ESPmDNS.h>
+#include "arduino_secrets.h"
+
+char ssid[] = SECRET_SSID; //  your network SSID (name)
+char password[] = SECRET_PASS;
 
 Adafruit_SHT31 sht31 = Adafruit_SHT31();
 Adafruit_BMP085 bmp;
@@ -27,8 +35,6 @@ Adafruit_CCS811 ccs;
 Adafruit_BME680 bme;
 SensirionI2CScd4x scd4x;
 
-char ssid[] = "Vodafone-262F_T"; //  your network SSID (name)
-char password[] = "Tarti.38";
 float temperature, humidity, co2, airQuality, pressure, pm25, pm10, tvoc;
 int httpCode = 0;
 IPAddress serverIp;
@@ -52,7 +58,6 @@ typedef enum
   WAIT
 } AppState_t;
 AppState_t state = READ_SHT31;
-
 
 void setup()
 {
@@ -135,7 +140,7 @@ void loop()
     break;
   case CALCULATE_PM10:
     state = TRANSMIT_VALUES;
-    break;  
+    break;
   case TRANSMIT_VALUES:
     transmitValues();
     state = WAIT;
@@ -251,12 +256,12 @@ void readCCS811()
 {
   if (ccs.available())
   {
-    tvoc = ccs.getTVOC();
     Serial.println("CCS811");
     if (!ccs.readData())
     {
       Serial.print("CO2: ");
-      //Serial.print(ccs.geteCO2());
+      Serial.print(ccs.geteCO2());
+      tvoc = ccs.getTVOC();
       Serial.print("ppm, TVOC: ");
       Serial.println(tvoc);
     }
@@ -423,8 +428,8 @@ void readSPS30()
 
 #endif /* PLOTTER_FORMAT */
   }
-  pm25=m.mc_2p5;
-  pm10=m.mc_10p0;
+  pm25 = m.mc_2p5;
+  pm10 = m.mc_10p0;
   //delay(1000);
 }
 void setupSCD41()
@@ -525,8 +530,7 @@ void transmitValues()
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://"+serverIp.toString()+"/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&tvoc=" + String(tvoc) + "&pressure=" + String(pressure) + "&pm25=" + String(pm25) + "&pm10=" + String(pm10)); 
-    Serial.println("http://"+serverIp.toString()+"/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&tvoc=" + String(tvoc) + "&pressure=" + String(pressure) + "&pm25=" + String(pm25) + "&pm10=" + String(pm10));
+    http.begin("http://" + serverIp.toString() + "/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&tvoc=" + String(tvoc) + "&pressure=" + String(pressure) + "&pm25=" + String(pm25) + "&pm10=" + String(pm10));
     httpCode = http.GET(); //Make the request
     if (httpCode > 0)
     { //Check for the returning code
@@ -539,16 +543,21 @@ void transmitValues()
     http.end(); //Free the resources
   }
 }
-void resolveIP(){
+void resolveIP()
+{
   //needs to be different for each esp32
-  if (!MDNS.begin("esp32whatever")) {
+  if (!MDNS.begin("esp32whatever"))
+  {
     Serial.println("Error setting up MDNS responder!");
-  } else {
+  }
+  else
+  {
     Serial.println("Finished intitializing the MDNS client...");
   }
   Serial.println("mDNS responder started");
   serverIp = MDNS.queryHost("esp32");
-  while (serverIp.toString() == "0.0.0.0") {
+  while (serverIp.toString() == "0.0.0.0")
+  {
     Serial.println("Trying again to resolve mDNS");
     delay(250);
     serverIp = MDNS.queryHost("esp32");

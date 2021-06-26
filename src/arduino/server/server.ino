@@ -1,8 +1,9 @@
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include "ESPAsyncWebServer.h"
-char ssid[] = "Vodafone-262F_T"; //  your network SSID (name)
-char password[] = "Tarti.38";
+#include "arduino_secrets.h"
+char ssid[] = SECRET_SSID; //  your network SSID (name)
+char password[] = SECRET_PASS;
 
 AsyncWebServer server(80);
 float temperatureValue, humidityValue, co2Value, airQualityValue, pressureValue, tvocValue, pm25Value, pm10Value;

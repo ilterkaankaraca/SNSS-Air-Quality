@@ -468,3 +468,5 @@ gherkin-features/
 *.out
 *.app
 src/arduino/remarks.txt
+src/arduino/server/arduino_secrets.h
+src/arduino/client/arduino_secrets.h
