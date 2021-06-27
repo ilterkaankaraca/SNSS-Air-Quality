@@ -11,6 +11,8 @@ SCD-41
 Red cable = VDD
 Yellow cable = SCL
 black cable = GND
+
+define ssid and password in ArduinoSecrets.h file
  ****************************************************/
 #include <WiFi.h>
 #include <HTTPClient.h>
@@ -24,7 +26,7 @@ black cable = GND
 #include <SensirionI2CScd4x.h>
 #include <sps30.h>
 #include <ESPmDNS.h>
-#include "arduino_secrets.h"
+#include "ArduinoSecrets.h"
 
 char ssid[] = SECRET_SSID; //  your network SSID (name)
 char password[] = SECRET_PASS;
@@ -35,7 +37,7 @@ Adafruit_CCS811 ccs;
 Adafruit_BME680 bme;
 SensirionI2CScd4x scd4x;
 
-float temperature, humidity, co2, airQuality, pressure, pm25, pm10, tvoc;
+float indoorTemperature, indoorHumidity, indoorCo2, indoorAirQuality, indoorPressure, indoorPm25, indoorPm10, indoorTvoc;
 int httpCode = 0;
 IPAddress serverIp;
 typedef enum
@@ -115,12 +117,12 @@ void loop()
     break;
   case CALCULATE_TEMPERATURE:
     //find a average
-    temperature = temperature / 4;
+    indoorTemperature = indoorTemperature / 4;
     state = CALCULATE_HUMIDITY;
     break;
   case CALCULATE_HUMIDITY:
     //find a average
-    humidity = humidity / 3;
+    indoorHumidity = indoorHumidity / 3;
     state = CALCULATE_CO2;
     break;
   case CALCULATE_CO2:
@@ -132,7 +134,7 @@ void loop()
     break;
   case CALCULATE_PRESSURE:
     //find a average
-    pressure = pressure / 2;
+    indoorPressure = indoorPressure / 2;
     state = CALCULATE_PM25;
     break;
   case CALCULATE_PM25:
@@ -146,13 +148,13 @@ void loop()
     state = WAIT;
     break;
   case WAIT:
-    temperature = 0;
-    humidity = 0;
-    co2 = 0;
-    airQuality = 0;
-    pressure = 0;
+    indoorTemperature = 0;
+    indoorHumidity = 0;
+    indoorCo2 = 0;
+    indoorAirQuality = 0;
+    indoorPressure = 0;
     pm10 = 0;
-    pm25 = 0;
+    indoorPm25 = 0;
     tvoc = 0;
     delay(5000);
     state = READ_SHT31;
@@ -193,8 +195,8 @@ void readSHT31()
   {
     Serial.println("Failed to read humidity");
   }
-  temperature += t;
-  humidity += h;
+  indoorTemperature += t;
+  indoorHumidity += h;
   Serial.println();
 }
 void setupBMP180()
@@ -219,8 +221,8 @@ void readBMP180()
   Serial.print("Pressure = ");
   Serial.print(bmpPressure);
   Serial.println(" hPa");
-  temperature += bmpTemperature;
-  pressure += bmpPressure;
+  indoorTemperature += bmpTemperature;
+  indoorPressure += bmpPressure;
 }
 void setupCCS811()
 {
@@ -298,9 +300,9 @@ void readBME680()
   // Serial.println(" KOhms");
 
   Serial.println();
-  temperature += bme.temperature;
-  humidity += bme.humidity;
-  pressure += bme.pressure / 100;
+  indoorTemperature += bme.temperature;
+  indoorHumidity += bme.humidity;
+  indoorPressure += bme.pressure / 100;
 }
 void setupSPS30()
 {
@@ -428,7 +430,7 @@ void readSPS30()
 
 #endif /* PLOTTER_FORMAT */
   }
-  pm25 = m.mc_2p5;
+  indoorPm25 = m.mc_2p5;
   pm10 = m.mc_10p0;
   //delay(1000);
 }
@@ -506,9 +508,9 @@ void readSCD41()
     Serial.println(scdHumidity * 100.0 / 65536.0);
   }
   Serial.println();
-  temperature += (scdTemperature * 175.0 / 65536.0 - 45.0);
-  humidity += (scdHumidity * 100.0 / 65536.0);
-  co2 = scdCo2;
+  indoorTemperature += (scdTemperature * 175.0 / 65536.0 - 45.0);
+  indoorHumidity += (scdHumidity * 100.0 / 65536.0);
+  indoorCo2 = scdCo2;
 }
 void printUint16Hex(uint16_t value)
 {
@@ -530,7 +532,7 @@ void transmitValues()
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://" + serverIp.toString() + "/readValue/?temperature=" + String(temperature) + "&humidity=" + String(humidity) + "&co2=" + String(co2) + "&tvoc=" + String(tvoc) + "&pressure=" + String(pressure) + "&pm25=" + String(pm25) + "&pm10=" + String(pm10));
+    http.begin("http://" + serverIp.toString() + "/readValue/?temperature=" + String(indoorTemperature) + "&humidity=" + String(indoorHumidity) + "&co2=" + String(indoorCo2) + "&tvoc=" + String(tvoc) + "&pressure=" + String(indoorPressure) + "&pm25=" + String(indoorPm25) + "&pm10=" + String(pm10));
     httpCode = http.GET(); //Make the request
     if (httpCode > 0)
     { //Check for the returning code
