@@ -6,7 +6,7 @@
         xmlns:viewModel="clr-namespace:AirQuality.MWM.ViewModel"
         xmlns:local="clr-namespace:AirQuality"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="920"
+        Title="MainWindow" Height="600" Width="1050"
         WindowStyle="none"
 ResizeMode="NoResize"
 Background = "Transparent"
