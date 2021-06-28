@@ -92,7 +92,7 @@
 
 
 
-            <Border Width="200"  
+            <Border Width="370"  
 
                     Height="200"  
 
@@ -181,21 +181,12 @@
             <StackPanel Orientation="Horizontal" >
 
                 <Border Width="150"  
-
                     Height="150"  
-
                     Background="#844eff"  
-
                     CornerRadius="10" 
-
                     Margin="0">
-
                     <TextBlock Text="CO2" Foreground="white" FontSize="23" 
-
-
                                    Margin="20,10,10,0"/>
-
-
 
                 </Border>
 
@@ -245,68 +236,90 @@
 
                     CornerRadius="10" >
 
-                    <TextBlock Text="Particle" Foreground="white" FontSize="23" 
+                    <TextBlock Text="PM2.5" Foreground="white" FontSize="23" 
 
                                    Margin="20,10,10,0"/>
 
                 </Border>
 
+                <Border Width="150"  
 
+                    Height="150"  
+
+                    Background="#ec4fee"  
+
+                    CornerRadius="10" >
+
+                    <TextBlock Text="PM10" Foreground="white" FontSize="23" 
+
+                                   Margin="20,10,10,0"/>
+
+                </Border>
 
             </StackPanel>
 
 
 
-            <TextBlock x:Name="co2IndoorValue" Text="20% " Foreground="white" FontSize="30" 
+            <TextBlock x:Name="indoorCo2Value" Text="20% " Foreground="white" FontSize="30" 
 
                                    Margin="20,-100,10,0"/>
 
-            <TextBlock x:Name="co2OutdoorValue" Text="20% " Foreground="white" FontSize="25" 
+            <TextBlock x:Name="outdoorCo2Value" Text="20% " Foreground="white" FontSize="25" 
 
                                    Margin="20,-50,10,0"/>
 
 
 
-            <TextBlock x:Name="tvocIndoorValue" Text="20% " Foreground="white" FontSize="30" 
+            <TextBlock x:Name="indoorTvocValue" Text="20% " Foreground="white" FontSize="30" 
 
                                    Margin="185,-100,10,0"/>
 
-            <TextBlock x:Name="tvocOutoorValue" Text="20% " Foreground="white" FontSize="25" 
+            <TextBlock x:Name="outdoorTvocValue" Text="20% " Foreground="white" FontSize="25" 
 
                                    Margin="185,-50,10,0"/>
 
 
 
-            <TextBlock x:Name="pressureIndoorValue" Text="20% " Foreground="white" FontSize="30" 
+            <TextBlock x:Name="indoorPressureValue" Text="20% " Foreground="white" FontSize="30" 
 
                                    Margin="345,-100,10,0"/>
 
-            <TextBlock x:Name="pressureOutoorValue" Text="20% " Foreground="white" FontSize="25" 
+            <TextBlock x:Name="outdoorPressureValue" Text="20% " Foreground="white" FontSize="25" 
 
                                    Margin="345,-50,10,0"/>
 
 
 
-            <TextBlock x:Name="particleIndoorValue" Text="20% " Foreground="white" FontSize="30" 
+            <TextBlock x:Name="indoorPm25Value" Text="20% " Foreground="white" FontSize="30" 
 
                                    Margin="515,-100,10,0"/>
 
-            <TextBlock x:Name="particleOutoorValue" Text="20% " Foreground="white" FontSize="25" 
+            <TextBlock x:Name="outdoorPm25Value" Text="20% " Foreground="white" FontSize="25" 
 
                                    Margin="515,-50,10,0"/>
+
+            <TextBlock x:Name="indoorPm10Value" Text="20% " Foreground="white" FontSize="30" 
+
+                                   Margin="680,-100,10,0"/>
+
+            <TextBlock x:Name="outdoorPm10Value" Text="20% " Foreground="white" FontSize="25" 
+
+                                   Margin="680,-50,10,0"/>
 
 
 
         </StackPanel>
 
-        <RadioButton x:Name="radioButton" Content="RadioButton"/>
+        <!--<Button Width="100" 
+                            Height="40" 
+                            x:Name="connectButton" 
+                            Content="Connect" 
+                            Margin="60,0,60,0" 
+                            Click="connectButton_click"
+                           />-->
 
-
-
-
-
-
-
+        <!--<Button>-->
+         
     </StackPanel>
 
 

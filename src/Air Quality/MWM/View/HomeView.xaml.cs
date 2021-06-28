@@ -15,19 +15,27 @@ namespace AirQuality.MWM.View
         // private LoginForm form1; 
         AirMetrics indoorMetrics, outdoorMetrics;
         WebClient webClient;
-        string temperatureUrl, humidityUrl, co2Url, tvocUrl, pressureUrl, pm25Url, pm10Url;
+        string indoorTemperatureUrl, indoorHumidityUrl, indoorCo2Url, indoorTvocUrl, indoorPressureUrl, indoorPm25Url, indoorPm10Url;
+        string outdoorTemperatureUrl, outdoorHumidityUrl, outdoorCo2Url, outdoorTvocUrl, outdoorPressureUrl, outdoorPm25Url, outdoorPm10Url;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         public HomeView()
         {
             InitializeComponent();
-            temperatureUrl = "http://esp32.local/temperature/";
-            humidityUrl = "http://esp32.local/humidity/";
-            co2Url = "http://esp32.local/co2/";
-            tvocUrl = "http://esp32.local/tvoc/";
-            pressureUrl = "http://esp32.local/pressure/";
-            pm25Url = "http://esp32.local/pm25/";
-            pm10Url = "http://esp32.local/pm10/";
+           indoorTemperatureUrl = "http://esp32.local/indoorTemperature/";
+           indoorHumidityUrl = "http://esp32.local/indoorHumidity/";
+           indoorCo2Url = "http://esp32.local/indoorCo2/";
+           indoorTvocUrl = "http://esp32.local/indoorTvoc/";
+           indoorPressureUrl = "http://esp32.local/indoorPressure/";
+           indoorPm25Url = "http://esp32.local/indoorPm25/";
+           indoorPm10Url = "http://esp32.local/indoorPm10/";
+            outdoorTemperatureUrl = "http://esp32.local/outdoorTemperature/";
+            outdoorHumidityUrl = "http://esp32.local/outdoorHumidity/";
+            outdoorCo2Url = "http://esp32.local/outdoorCo2/";
+            outdoorTvocUrl = "http://esp32.local/outdoorTvoc/";
+            outdoorPressureUrl = "http://esp32.local/outdoorPressure/";
+            outdoorPm25Url = "http://esp32.local/outdoorPm25/";
+            outdoorPm10Url = "http://esp32.local/outdoorPm10/";
             webClient = new WebClient();
             indoorMetrics = new AirMetrics();
             outdoorMetrics = new AirMetrics();
@@ -44,23 +52,40 @@ namespace AirQuality.MWM.View
         }
         private void updateMetrics()
         {
-            indoorMetrics.Temperature = Double.Parse(webClient.DownloadString(temperatureUrl).Replace('.', ','));
-            indoorMetrics.Humidity = Double.Parse(webClient.DownloadString(humidityUrl).Replace('.', ','));
-            indoorMetrics.Co2 = Double.Parse(webClient.DownloadString(co2Url).Replace('.', ','));
-            indoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(tvocUrl).Replace('.', ','));
-            indoorMetrics.Pressure = Double.Parse(webClient.DownloadString(pressureUrl).Replace('.', ','));
-            indoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(pm25Url).Replace('.', ','));
-            indoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(pm10Url).Replace('.', ','));
+            indoorMetrics.Temperature = Double.Parse(webClient.DownloadString(indoorTemperatureUrl).Replace('.', ','));
+            indoorMetrics.Humidity = Double.Parse(webClient.DownloadString(indoorHumidityUrl).Replace('.', ','));
+            indoorMetrics.Co2 = Double.Parse(webClient.DownloadString(indoorCo2Url).Replace('.', ','));
+            indoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(indoorTvocUrl).Replace('.', ','));
+            indoorMetrics.Pressure = Double.Parse(webClient.DownloadString(indoorPressureUrl).Replace('.', ','));
+            indoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(indoorPm25Url).Replace('.', ','));
+            indoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(indoorPm10Url).Replace('.', ','));
+
+            outdoorMetrics.Temperature = Double.Parse(webClient.DownloadString(outdoorTemperatureUrl).Replace('.', ','));
+            outdoorMetrics.Humidity = Double.Parse(webClient.DownloadString(outdoorHumidityUrl).Replace('.', ','));
+            outdoorMetrics.Co2 = Double.Parse(webClient.DownloadString(outdoorCo2Url).Replace('.', ','));
+            outdoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(outdoorTvocUrl).Replace('.', ','));
+            outdoorMetrics.Pressure = Double.Parse(webClient.DownloadString(outdoorPressureUrl).Replace('.', ','));
+            outdoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(outdoorPm25Url).Replace('.', ','));
+            outdoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(outdoorPm10Url).Replace('.', ','));
         }
         private void updateComponents()
         {
             indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString();
             indoorHumidityValue.Text = indoorMetrics.Humidity.ToString();
-            co2IndoorValue.Text = indoorMetrics.Co2.ToString();
-            tvocIndoorValue.Text = indoorMetrics.Tvoc.ToString();
-            pressureIndoorValue.Text = indoorMetrics.Pressure.ToString();
-            particleIndoorValue.Text = indoorMetrics.Pm25.ToString();
-            //TODO: need two particle fields pm2.5 and pm10
+            indoorCo2Value.Text = indoorMetrics.Co2.ToString();
+            indoorTvocValue.Text = indoorMetrics.Tvoc.ToString();
+            indoorPressureValue.Text = indoorMetrics.Pressure.ToString();
+            indoorPm25Value.Text = indoorMetrics.Pm25.ToString();
+            indoorPm10Value.Text = indoorMetrics.Pm25.ToString();
+
+            outdoorTemperatureValue.Text = outdoorMetrics.Temperature.ToString();
+            outdoorHumidityValue.Text = outdoorMetrics.Humidity.ToString();
+            outdoorCo2Value.Text = outdoorMetrics.Co2.ToString();
+            outdoorTvocValue.Text = outdoorMetrics.Tvoc.ToString();
+            outdoorPressureValue.Text = outdoorMetrics.Pressure.ToString();
+            outdoorPm25Value.Text = outdoorMetrics.Pm25.ToString();
+            outdoorPm10Value.Text = outdoorMetrics.Pm25.ToString();
+
         }
     }
 }
