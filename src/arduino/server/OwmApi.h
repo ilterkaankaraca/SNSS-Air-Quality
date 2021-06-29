@@ -3,7 +3,7 @@
 #include <Wire.h>
 #include <ArduinoJson.h>
 
-extern float outdoorTemperature, outdoorPressure, outdoorHumidity, outdoorPm25, outdoorPm10, latitude, longitude;
+extern float outdoorTemperatureValue, outdoorPressureValue, outdoorHumidityValue, outdoorPm25Value, outdoorPm10Value, latitude, longitude;
 
 StaticJsonDocument<1024> weatherMetrics;
 StaticJsonDocument<1024> pollutionMetrics;
@@ -62,14 +62,14 @@ void deserialize(String metricJson, char flag)
 
     longitude = weatherMetrics["coord"]["lon"].as<float>();
     latitude = weatherMetrics["coord"]["lat"].as<float>();
-    outdoorTemperature = weatherMetrics["main"]["temp"].as<float>();
-    outdoorHumidity = weatherMetrics["main"]["humidity"].as<float>();
-    outdoorPressure = weatherMetrics["main"]["pressure"].as<float>();
+    outdoorTemperatureValue = weatherMetrics["main"]["temp"].as<float>();
+    outdoorHumidityValue = weatherMetrics["main"]["humidity"].as<float>();
+    outdoorPressureValue = weatherMetrics["main"]["pressure"].as<float>();
   }
   else if (flag == 'P')
   {
     deserializeJson(pollutionMetrics, metricJson);
-    outdoorPm25 = pollutionMetrics["list"][0]["components"]["pm2_5"].as<float>();
-    outdoorPm10 = pollutionMetrics["list"][0]["components"]["pm10"].as<float>();
+    outdoorPm25Value = pollutionMetrics["list"][0]["components"]["pm2_5"].as<float>();
+    outdoorPm10Value = pollutionMetrics["list"][0]["components"]["pm10"].as<float>();
   }
 }
