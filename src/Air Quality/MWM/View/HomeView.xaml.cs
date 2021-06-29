@@ -22,13 +22,13 @@ namespace AirQuality.MWM.View
         public HomeView()
         {
             InitializeComponent();
-           indoorTemperatureUrl = "http://esp32.local/indoorTemperature/";
-           indoorHumidityUrl = "http://esp32.local/indoorHumidity/";
-           indoorCo2Url = "http://esp32.local/indoorCo2/";
-           indoorTvocUrl = "http://esp32.local/indoorTvoc/";
-           indoorPressureUrl = "http://esp32.local/indoorPressure/";
-           indoorPm25Url = "http://esp32.local/indoorPm25/";
-           indoorPm10Url = "http://esp32.local/indoorPm10/";
+            indoorTemperatureUrl = "http://esp32.local/indoorTemperature/";
+            indoorHumidityUrl = "http://esp32.local/indoorHumidity/";
+            indoorCo2Url = "http://esp32.local/indoorCo2/";
+            indoorTvocUrl = "http://esp32.local/indoorTvoc/";
+            indoorPressureUrl = "http://esp32.local/indoorPressure/";
+            indoorPm25Url = "http://esp32.local/indoorPm25/";
+            indoorPm10Url = "http://esp32.local/indoorPm10/";
             outdoorTemperatureUrl = "http://esp32.local/outdoorTemperature/";
             outdoorHumidityUrl = "http://esp32.local/outdoorHumidity/";
             outdoorCo2Url = "http://esp32.local/outdoorCo2/";
@@ -84,7 +84,7 @@ namespace AirQuality.MWM.View
             outdoorTvocValue.Text = outdoorMetrics.Tvoc.ToString();
             outdoorPressureValue.Text = outdoorMetrics.Pressure.ToString();
             outdoorPm25Value.Text = outdoorMetrics.Pm25.ToString();
-            outdoorPm10Value.Text = outdoorMetrics.Pm25.ToString();
+            outdoorPm10Value.Text = outdoorMetrics.Pm10.ToString();
 
         }
     }
