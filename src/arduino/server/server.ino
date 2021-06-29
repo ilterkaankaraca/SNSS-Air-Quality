@@ -11,9 +11,8 @@ float indoorTemperatureValue, indoorHumidityValue, indoorCo2Value, indoorAirQual
 String plotMetric = "temperature";
 String city = "Langen";
 AsyncWebServer server(80);
-float temperature, pressure, humidity;
-// COORD
-float latitude, longitude;
+//EXTERN VARIABLES
+float outdoorTemperature, outdoorPressure, outdoorHumidity, outdoorPm25, outdoorPm10, latitude, longitude;
 
 void setup()
 {
@@ -21,18 +20,14 @@ void setup()
   initWiFi();
   initWebserver();
   MDNS.begin("esp32");
-  deserialize(getWeatherJson("langen"));
+  Serial.println(getWeatherJson("langen"));
+  Serial.println(getPollutionJson(latitude, longitude));
+  deserialize(getWeatherJson("langen"),getPollutionJson(latitude, longitude));
 
 }
 void loop()
 {
-  Serial.println(temperature);
-  Serial.println(humidity);
-  Serial.println(pressure);
-  Serial.println(longitude);
-  Serial.println(latitude);
- // Serial.println(country);
-  //plot();
+  plot();
   delay(7000);
 }
 void initWiFi()
@@ -54,33 +49,63 @@ void initWebserver(void)
   {
     request->send(200, " text / plain ", "connected");
   });
-  server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest * request)
+  //INDOOR
+  server.on("/indoorTemperature", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorTemperatureValue));
   });
-  server.on("/humidity", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/indoorHumidity", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorHumidityValue));
   });
-  server.on("/co2", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/indoorCo2", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorCo2Value));
   });
-  server.on("/tvoc", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/indoorTvoc", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorTvocValue));
   });
-  server.on("/pressure", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/indoorPressure", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorPressureValue));
   });
-  server.on("/pm25", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/indoorPm25", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorPm25Value));
   });
-  server.on("/pm10", HTTP_GET, [](AsyncWebServerRequest * request)
+  server.on("/indoorPm10", HTTP_GET, [](AsyncWebServerRequest * request)
   {
     request->send(200, "text/plain", String(indoorPm10Value));
+  });
+  //OUTDOOR
+  server.on("/outdoorTemperature", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", String(outdoorTemperature));
+  });
+  server.on("/outdoorHumidity", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", String(outdoorHumidity));
+  });
+  server.on("/outdoorCo2", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", "400");
+  });
+  server.on("/outdoorTvoc", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", "0");
+  });
+  server.on("/outdoorPressure", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", String(outdoorPressure));
+  });
+  server.on("/outdoorPm25", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", String(outdoorPm25));
+  });
+  server.on("/outdoorPm10", HTTP_GET, [](AsyncWebServerRequest * request)
+  {
+    request->send(200, "text/plain", String(outdoorPm10));
   });
   server.on("/readValue", HTTP_GET, [](AsyncWebServerRequest * request)
   {
