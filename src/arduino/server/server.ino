@@ -13,17 +13,17 @@ String city = "Langen";
 AsyncWebServer server(80);
 //EXTERN VARIABLES
 float outdoorTemperature, outdoorPressure, outdoorHumidity, outdoorPm25, outdoorPm10, latitude, longitude;
-
+String wJson, pJson;
 void setup()
 {
   Serial.begin(115200);
   initWiFi();
   initWebserver();
   MDNS.begin("esp32");
-  Serial.println(getWeatherJson("langen"));
-  Serial.println(getPollutionJson(latitude, longitude));
-  deserialize(getWeatherJson("langen"),getPollutionJson(latitude, longitude));
-
+  wJson=getWeatherJson(city);
+  pJson=getPollutionJson(latitude, longitude)
+  deserialize(wJson,'W');
+  deserialize(pJson,'P');
 }
 void loop()
 {
