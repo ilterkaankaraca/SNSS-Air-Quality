@@ -20,7 +20,7 @@
 
 		<StackPanel Orientation="Horizontal">
 
-			<Border Width="400" Height="200" >
+			<Border Width="400" Height="200" x:Name="TemperatureBorder">
 
 				<Border.Background>
 
@@ -89,7 +89,7 @@
 
 
 
-			<Border Width="365"
+			<Border Width="365" x:Name="HumidityBorder"
 
                     Height="200"
 
@@ -188,7 +188,7 @@
 
 			<StackPanel Orientation="Horizontal" >
 
-				<Border Width="150"
+				<Border Width="150" x:Name="CO2Border"
                     Height="150"
                     Background="#844eff"
                     CornerRadius="10"
@@ -204,7 +204,7 @@
 
 
 
-				<Border Width="150"
+				<Border Width="150" x:Name="TVOCBorder"
 
                     Height="150"
 
@@ -220,7 +220,7 @@
 
 
 
-				<Border Width="150"
+				<Border Width="150" x:Name="PressureBorder"
 
                     Height="150"
 
@@ -236,7 +236,7 @@
 
 
 
-				<Border Width="150"
+				<Border Width="150" x:Name="PM25Border"
 
                     Height="150"
 
@@ -250,7 +250,7 @@
 
 				</Border>
 
-				<Border Width="150"
+				<Border Width="150" x:Name="PM10Border"
 
                     Height="150"
 
