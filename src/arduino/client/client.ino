@@ -49,13 +49,6 @@ typedef enum
   READ_SPS30,
   READ_SCD41,
   CALCULATE_TEMPERATURE,
-  CALCULATE_HUMIDITY,
-  CALCULATE_CO2,
-  CALCULATE_AIR_QUALITY,
-  CALCULATE_PRESSURE,
-  CALCULATE_PM25,
-  CALCULATE_PM10,
-  CALCULATE_TVOC,
   TRANSMIT_VALUES,
   WAIT
 } AppState_t;
@@ -113,34 +106,13 @@ void loop()
     break;
   case READ_SCD41:
     readSCD41();
-    state = CALCULATE_TEMPERATURE;
+    state = CALCULATE;
     break;
-  case CALCULATE_TEMPERATURE:
+  case CALCULATE:
     //find a average
     indoorTemperature = indoorTemperature / 4;
-    state = CALCULATE_HUMIDITY;
-    break;
-  case CALCULATE_HUMIDITY:
-    //find a average
     indoorHumidity = indoorHumidity / 3;
-    state = CALCULATE_CO2;
-    break;
-  case CALCULATE_CO2:
-    state = CALCULATE_AIR_QUALITY;
-    break;
-  case CALCULATE_AIR_QUALITY:
-    //TODO: decide a calculation way for air quality
-    state = CALCULATE_PRESSURE;
-    break;
-  case CALCULATE_PRESSURE:
-    //find a average
     indoorPressure = indoorPressure / 2;
-    state = CALCULATE_PM25;
-    break;
-  case CALCULATE_PM25:
-    state = CALCULATE_PM10;
-    break;
-  case CALCULATE_PM10:
     state = TRANSMIT_VALUES;
     break;
   case TRANSMIT_VALUES:
