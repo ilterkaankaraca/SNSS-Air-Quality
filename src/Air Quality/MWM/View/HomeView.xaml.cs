@@ -52,21 +52,21 @@ namespace AirQuality.MWM.View
         }
         private void updateMetrics()
         {
-            indoorMetrics.Temperature = Double.Parse(webClient.DownloadString(indoorTemperatureUrl).Replace('.', ','));
-            indoorMetrics.Humidity = Double.Parse(webClient.DownloadString(indoorHumidityUrl).Replace('.', ','));
-            indoorMetrics.Co2 = Double.Parse(webClient.DownloadString(indoorCo2Url).Replace('.', ','));
-            indoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(indoorTvocUrl).Replace('.', ','));
-            indoorMetrics.Pressure = Double.Parse(webClient.DownloadString(indoorPressureUrl).Replace('.', ','));
-            indoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(indoorPm25Url).Replace('.', ','));
-            indoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(indoorPm10Url).Replace('.', ','));
+            //indoorMetrics.Temperature = Double.Parse(webClient.DownloadString(indoorTemperatureUrl).Replace('.', ','));
+            //indoorMetrics.Humidity = Double.Parse(webClient.DownloadString(indoorHumidityUrl).Replace('.', ','));
+            //indoorMetrics.Co2 = Double.Parse(webClient.DownloadString(indoorCo2Url).Replace('.', ','));
+            //indoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(indoorTvocUrl).Replace('.', ','));
+            //indoorMetrics.Pressure = Double.Parse(webClient.DownloadString(indoorPressureUrl).Replace('.', ','));
+            //indoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(indoorPm25Url).Replace('.', ','));
+            //indoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(indoorPm10Url).Replace('.', ','));
 
-            outdoorMetrics.Temperature = Double.Parse(webClient.DownloadString(outdoorTemperatureUrl).Replace('.', ','));
-            outdoorMetrics.Humidity = Double.Parse(webClient.DownloadString(outdoorHumidityUrl).Replace('.', ','));
-            outdoorMetrics.Co2 = Double.Parse(webClient.DownloadString(outdoorCo2Url).Replace('.', ','));
-            outdoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(outdoorTvocUrl).Replace('.', ','));
-            outdoorMetrics.Pressure = Double.Parse(webClient.DownloadString(outdoorPressureUrl).Replace('.', ','));
-            outdoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(outdoorPm25Url).Replace('.', ','));
-            outdoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(outdoorPm10Url).Replace('.', ','));
+            //outdoorMetrics.Temperature = Double.Parse(webClient.DownloadString(outdoorTemperatureUrl).Replace('.', ','));
+            //outdoorMetrics.Humidity = Double.Parse(webClient.DownloadString(outdoorHumidityUrl).Replace('.', ','));
+            //outdoorMetrics.Co2 = Double.Parse(webClient.DownloadString(outdoorCo2Url).Replace('.', ','));
+            //outdoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(outdoorTvocUrl).Replace('.', ','));
+            //outdoorMetrics.Pressure = Double.Parse(webClient.DownloadString(outdoorPressureUrl).Replace('.', ','));
+            //outdoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(outdoorPm25Url).Replace('.', ','));
+            //outdoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(outdoorPm10Url).Replace('.', ','));
         }
         private void updateComponents()
         {

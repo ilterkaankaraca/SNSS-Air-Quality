@@ -8,13 +8,11 @@ namespace AirQuality.MWM.ViewModel
     {
 
         public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand SettingsViewCommand { get; set; }
 
         private object _currentView;
 
         public HomeViewModel HomeVM { get; set; }
         public LoginViewModel LoginVM { get; set; }
-        public SettingsViewModel SettingsVM { get; set; }
 
         public object CurrentView
         {
@@ -31,7 +29,6 @@ namespace AirQuality.MWM.ViewModel
         {
             HomeVM = new HomeViewModel();
             LoginVM = new LoginViewModel();
-            SettingsVM = new SettingsViewModel();
  
             CurrentView = HomeVM;
 
@@ -40,10 +37,6 @@ namespace AirQuality.MWM.ViewModel
                 CurrentView = HomeVM;
             });
 
-            SettingsViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = SettingsVM;
-            });
         }
 
     }
