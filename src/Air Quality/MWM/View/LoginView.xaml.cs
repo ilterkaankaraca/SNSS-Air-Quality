@@ -52,8 +52,8 @@ namespace AirQuality.MWM.View
             }
             else
             {
-               //Label.Foreground = Brushes.Red;
-                titleLabel.Text = "Please type an IP address";
+                errorLabel.Foreground = Brushes.Red;
+                errorLabel.Content = "Please type an IP address";
             }
         }
         

@@ -1,4 +1,37 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
+
+    <Style TargetType="{x:Type Border}">
+         
+
+
+        <!--<Setter Property="Background" Value="#12d170" />
+        <Style.Triggers>-->
+            <!--<DataTrigger Binding="{Binding Foo}" Value="1">
+                <Setter Property="Background" Value="#12d170" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Foo}" Value="2">
+                <Setter Property="Background" Value="#ed3825" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Foo}" Value="2">
+                <Setter Property="Background" Value="#fcf004" />
+            </DataTrigger>-->
+
+            
+            
+        <!--</Style.Triggers>-->
+
+    </Style>
+
+
+
+
+
+
+
+
+
 </ResourceDictionary>

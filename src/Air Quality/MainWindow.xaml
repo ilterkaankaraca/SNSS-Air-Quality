@@ -12,39 +12,39 @@ ResizeMode="NoResize"
 Background = "Transparent"
 AllowsTransparency = "True">
 
-     <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext> 
+	<Window.DataContext>
+		<viewModel:MainViewModel/>
+	</Window.DataContext>
 
-    <Border Background = '#272537'
+	<Border Background = '#272537'
     CornerRadius = "20">
 
 
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
 
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="80"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
 
 
 
-            <TextBlock Text="Air Quality"
+			<TextBlock Text="Air Quality"
                         VerticalAlignment ="Center"
                          HorizontalAlignment ="Left"
                         Foreground="White"
                         FontSize = "30" 
                         Margin = "30,0,0,0" />
 
- 
 
-            <ContentControl 
+
+			<ContentControl 
                             Grid.Column="1" 
                             Margin="10,79,10,29" 
                            Content="{Binding CurrentView}" Grid.RowSpan="2"/>
@@ -54,12 +54,11 @@ AllowsTransparency = "True">
 					 Height="40" 
 					 VerticalContentAlignment="Center" 
 					 HorizontalAlignment="Left" 
-					 Margin="0" 
-					 Grid.Column="1"
-					 Style="{StaticResource ModernTextbox}"/>
-				
-			 
-			
-        </Grid>
-    </Border>
+					 Margin="-19,7,0,473" 
+					 Style="{StaticResource ModernTextbox}" Grid.ColumnSpan="2" Grid.Row="1"/>
+
+
+
+		</Grid>
+	</Border>
 </Window>
