@@ -1,11 +1,9 @@
-﻿using AirQuality.MWM.ViewModel;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml.Schema;
 
 namespace AirQuality.MWM.View
 {
@@ -52,8 +50,8 @@ namespace AirQuality.MWM.View
             }
             else
             {
-                errorLabel.Foreground = Brushes.Red;
-                errorLabel.Content = "Please type an IP address";
+                //errorLabel.Foreground = Brushes.Red;
+                //errorLabel.Content = "Please type an IP address";
             }
         }
         

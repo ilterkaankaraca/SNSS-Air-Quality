@@ -2,7 +2,7 @@
 {
     class LoginViewModel
     {
-        private string ipAddress;//   The servers hostname or IP address need //need to find a way to get it  
+        private string ipAddress;
         private MainViewModel mainViewModel;
 
         public LoginViewModel()

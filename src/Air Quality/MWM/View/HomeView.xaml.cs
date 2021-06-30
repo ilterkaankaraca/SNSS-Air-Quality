@@ -18,10 +18,12 @@ namespace AirQuality.MWM.View
         string indoorTemperatureUrl, indoorHumidityUrl, indoorCo2Url, indoorTvocUrl, indoorPressureUrl, indoorPm25Url, indoorPm10Url;
         string outdoorTemperatureUrl, outdoorHumidityUrl, outdoorCo2Url, outdoorTvocUrl, outdoorPressureUrl, outdoorPm25Url, outdoorPm10Url;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-
+        bool ipAddressGiven;
+        
         public HomeView()
         {
             InitializeComponent();
+            this.ipAddressGiven = ipAddressGiven;
             indoorTemperatureUrl = "http://esp32.local/indoorTemperature/";
             indoorHumidityUrl = "http://esp32.local/indoorHumidity/";
             indoorCo2Url = "http://esp32.local/indoorCo2/";
@@ -39,16 +41,17 @@ namespace AirQuality.MWM.View
             webClient = new WebClient();
             indoorMetrics = new AirMetrics();
             outdoorMetrics = new AirMetrics();
-           // updateMetrics();
-            updateComponents();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Start();
+            
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-           // updateMetrics();
-            updateComponents();
+            
+                updateMetrics();
+                updateComponents();
+            
+
         }
         private void updateMetrics()
         {
@@ -85,58 +88,6 @@ namespace AirQuality.MWM.View
             outdoorPressureValue.Text = outdoorMetrics.Pressure.ToString();
             outdoorPm25Value.Text = outdoorMetrics.Pm25.ToString();
             outdoorPm10Value.Text = outdoorMetrics.Pm10.ToString();
-
-        }
-
-        public void updateBorder()
-        {
-            if (Convert.ToInt16(indoorTemperatureValue) > 25 )
-            {
-                TemperatureBorder.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorHumidityValue) > 0)
-            {
-                HumidityBorder.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorCo2Value) > 0)
-            {
-                CO2Border.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorTemperatureValue) > 0)
-            {
-                TemperatureBorder.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorTvocValue) > 0)
-            {
-                TVOCBorder.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorPressureValue) > 0)
-            {
-                PressureBorder.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorPm25Value) > 0)
-            {
-                PM25Border.Background = Brushes.Red;
-
-            }
-
-            if (Convert.ToInt16(indoorPm10Value) > 0)
-            {
-                PM10Border.Background = Brushes.Red;
-
-            }
         }
     }
 }

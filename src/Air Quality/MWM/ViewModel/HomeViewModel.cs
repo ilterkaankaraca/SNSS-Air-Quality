@@ -2,13 +2,10 @@
 {
     class HomeViewModel
     {
-    
-
+        string ip;
         public HomeViewModel()
         {
 
         }
-     
-     
     }
 }

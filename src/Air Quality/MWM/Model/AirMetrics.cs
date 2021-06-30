@@ -11,7 +11,5 @@
         public double Pressure { get; set; }
         public double Pm25 { get; set; }
         public double Pm10 { get; set; }
-
     }
-
 }
