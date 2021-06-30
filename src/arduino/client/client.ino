@@ -153,9 +153,9 @@ void loop()
     indoorCo2 = 0;
     indoorAirQuality = 0;
     indoorPressure = 0;
-    pm10 = 0;
+    indoorPm10 = 0;
     indoorPm25 = 0;
-    tvoc = 0;
+    indoorTvoc = 0;
     delay(5000);
     state = READ_SHT31;
   }
@@ -263,9 +263,9 @@ void readCCS811()
     {
       Serial.print("CO2: ");
       Serial.print(ccs.geteCO2());
-      tvoc = ccs.getTVOC();
+      indoorTvoc = ccs.getTVOC();
       Serial.print("ppm, TVOC: ");
-      Serial.println(tvoc);
+      Serial.println(indoorTvoc);
     }
     else
     {
@@ -431,7 +431,7 @@ void readSPS30()
 #endif /* PLOTTER_FORMAT */
   }
   indoorPm25 = m.mc_2p5;
-  pm10 = m.mc_10p0;
+  indoorPm10 = m.mc_10p0;
   //delay(1000);
 }
 void setupSCD41()
@@ -532,7 +532,7 @@ void transmitValues()
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://" + serverIp.toString() + "/readValue/?temperature=" + String(indoorTemperature) + "&humidity=" + String(indoorHumidity) + "&co2=" + String(indoorCo2) + "&tvoc=" + String(tvoc) + "&pressure=" + String(indoorPressure) + "&pm25=" + String(indoorPm25) + "&pm10=" + String(pm10));
+    http.begin("http://" + serverIp.toString() + "/readValue/?temperature=" + String(indoorTemperature) + "&humidity=" + String(indoorHumidity) + "&co2=" + String(indoorCo2) + "&tvoc=" + String(indoorTvoc) + "&pressure=" + String(indoorPressure) + "&pm25=" + String(indoorPm25) + "&pm10=" + String(indoorPm10));
     httpCode = http.GET(); //Make the request
     if (httpCode > 0)
     { //Check for the returning code
