@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace AirQuality.MWM.View
@@ -86,6 +87,57 @@ namespace AirQuality.MWM.View
             outdoorPm25Value.Text = outdoorMetrics.Pm25.ToString();
             outdoorPm10Value.Text = outdoorMetrics.Pm10.ToString();
 
+        }
+
+        public void updateBorder()
+        {
+            if (Convert.ToInt16(indoorTemperatureValue) > 25 )
+            {
+                TemperatureBorder.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorHumidityValue) > 0)
+            {
+                HumidityBorder.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorCo2Value) > 0)
+            {
+                CO2Border.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorTemperatureValue) > 0)
+            {
+                TemperatureBorder.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorTvocValue) > 0)
+            {
+                TVOCBorder.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorPressureValue) > 0)
+            {
+                PressureBorder.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorPm25Value) > 0)
+            {
+                PM25Border.Background = Brushes.Red;
+
+            }
+
+            if (Convert.ToInt16(indoorPm10Value) > 0)
+            {
+                PM10Border.Background = Brushes.Red;
+
+            }
         }
     }
 }
