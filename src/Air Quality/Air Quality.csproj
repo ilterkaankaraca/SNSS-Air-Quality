@@ -98,29 +98,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\ObservableObject.cs" />
-    <Compile Include="Core\RelayCommands.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MWM\View\HomeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MWM\View\LoginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MWM\View\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Theme\LoginButtonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Theme\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,19 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MWM\Model\AirMetrics.cs" />
-    <Compile Include="MWM\ViewModel\HomeViewModel.cs" />
-    <Compile Include="MWM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MWM\ViewModel\MainViewModel.cs" />
-    <Compile Include="MWM\ViewModel\SettingsViewModel.cs" />
-    <Compile Include="MWM\View\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MWM\View\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MWM\View\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -170,8 +140,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Fonts\" />
-    <Folder Include="Images\" />
+    <Folder Include="MWM\View\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

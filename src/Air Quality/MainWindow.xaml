@@ -92,17 +92,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 					</StackPanel>
 
 				</StackPanel>
-				<!--<TextBox x:Name="searchTextBox" Width="250" 
-					 Height="40" 
-					 VerticalContentAlignment="Center" 
-					 HorizontalAlignment="Left" 
-					 Margin="10,470,0,10" 
-					 Grid.ColumnSpan="2" Grid.Row="1"
-                     Background="Transparent"
-                     BorderThickness="0"
-                     Text="Frankfurt, DE"
-                     Foreground="LightBlue" FontStyle="Italic" KeyDown="searchTextBox_KeyDown"/>
-             -->
+
 			</Grid>
 
 			<!--<StackPanel x:Name="homeGrid"  Visibility="Visible">-->
@@ -125,10 +115,9 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 					<Border.Clip>
 
-						<RectangleGeometry RadiusX="10"
-
+						<RectangleGeometry
+							RadiusX="10"
                             RadiusY="10"
-
                             Rect="0,0,400,200"/>
 
 					</Border.Clip>
@@ -141,29 +130,33 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 							<TextBlock Margin="20,10,10,0" >
 								<Run Text="Temperature              " Foreground="white" FontSize="28"  FontWeight="DemiBold"/>
-								 
+
 								<Run Text="Target Value: 20°C" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 							</TextBlock>
 
 
 							<StackPanel Orientation="Horizontal">
 
-								<TextBlock x:Name="indoorTemperatureValue" Text="45°C" Foreground="white" FontSize="50"
+								<!--<TextBlock x:Name="indoorTemperatureValue" Text="45°C" Foreground="white" FontSize="50" Margin="60,30,0,0"/>-->
 
-                                    Margin="60,30,0,0"/>
+								<TextBlock  Margin="60,30,0,0" >
+									<Run x:Name="indoorTemperatureValue" Text="20"  Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+									<Run Text="°C" Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+								</TextBlock>
 
-								<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
-
-                                    Margin="-60,100,0,0"/>
+								<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="-60,100,0,0"/>
 
 
-								<TextBlock x:Name="outdoorTemperatureValue" Text="25°C" Foreground="white" FontSize="50"
+								<!--<TextBlock x:Name="outdoorTemperatureValue" Text="25°C" Foreground="white" FontSize="50" Margin="60,30,0,0"/>-->
 
-                                    Margin="60,30,0,0"/>
+								<TextBlock  Margin="60,30,0,0" >
+									<Run x:Name="outdoorTemperatureValue" Text="20"  Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+									<Run Text="°C" Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+								</TextBlock>
 
 								<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="-65,100,0,0"/>
 
-								  
+
 							</StackPanel>
 
 						</StackPanel>
@@ -176,15 +169,11 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 
 
-				<Border Width="365" x:Name="HumidityBorder"
-
+				<Border Width="365"
+						x:Name="HumidityBorder"
                     Height="200"
-
                     CornerRadius="10"
-
                     Margin="45,0,0,0">
-
-
 
 					<Border.Background>
 
@@ -202,8 +191,8 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 					<Grid>
 
 						<StackPanel>
- 
-							
+
+
 							<TextBlock Margin="20,10,10,0" >
 								<Run Text="Humidity              " Foreground="white" FontSize="28"  FontWeight="DemiBold"/>
 
@@ -213,21 +202,24 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 							<StackPanel Orientation="Horizontal">
 
 
-								<TextBlock x:Name="indoorHumidityValue" Text="20%" Foreground="white" FontSize="50"
+								<!--<TextBlock x:Name="indoorHumidityValue" Text="20%" Foreground="white" FontSize="50" Margin="65,30,0,0"/>-->
 
-                                    Margin="65,30,0,0"/>
+								<TextBlock  Margin="65,30,0,0" >
+									<Run x:Name="indoorHumidityValue" Text="20"  Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+									<Run Text="%" Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+								</TextBlock>
 
-								<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
+								<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="-60,100,0,0"/>
 
-                                    Margin="-60,100,0,0"/>
+								<!--<TextBlock x:Name="outdoorHumidityValue" Text="30% " Foreground="white" FontSize="50" Margin="40,30,0,0"/>-->
+								
+								<TextBlock  Margin="40,30,0,0" >
+									<Run x:Name="outdoorHumidityValue" Text="20"  Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+									<Run Text="%" Foreground="white" FontSize="50"  FontWeight="DemiBold"/>
+								</TextBlock>
 
-								<TextBlock x:Name="outdoorHumidityValue" Text="30% " Foreground="white" FontSize="50"
 
-                                    Margin="40,30,0,0"/>
-
-								<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
-
-                                    Margin="-80,100,0,0"/>
+								<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="-80,100,0,0"/>
 
 							</StackPanel>
 
@@ -247,9 +239,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 				<StackPanel.Resources>
 
 					<Style TargetType="{x:Type Border}">
-
 						<Setter Property="Margin" Value="15,0,0,0" />
-
 					</Style>
 
 				</StackPanel.Resources>
@@ -257,13 +247,9 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 
 				<TextBlock Text=""
-
                     Foreground="White"
-
                     FontSize = "20"
-
                     HorizontalAlignment="Left"
-
                     Margin="0,0,0,10" />
 
 
@@ -276,194 +262,145 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                         CornerRadius="10"
                         Margin="0">
 
-						<TextBlock Text="CO2" Foreground="white" FontSize="25"  FontWeight="DemiBold"
+						<TextBlock Text="CO2" Foreground="white" FontSize="25"  FontWeight="DemiBold" Margin="20,10,10,0"/>
 
-                            Margin="20,10,10,0"/>
-					    
 					</Border>
- 
 
-
-					<Border Width="150" x:Name="TVOCBorder"
-
+					<Border Width="150"
+							x:Name="TVOCBorder"
                         Height="150"
-
                         Background="#4e99ff"
-
                         CornerRadius="10" >
 
-						  <TextBlock Text="TVOC" Foreground="white" FontSize="25"  FontWeight="DemiBold"
-
-                            Margin="20,10,10,0"/> 
- 
+						<TextBlock Text="TVOC" Foreground="white" FontSize="25"  FontWeight="DemiBold" Margin="20,10,10,0"/>
 
 					</Border>
 
-
-
-					<Border Width="150" x:Name="PressureBorder"
-
+					<Border Width="150"
+							x:Name="PressureBorder"
                         Height="150"
-
                         Background="#00d780 "
-
                         CornerRadius="10" >
+						<TextBlock Text="Pressure" Foreground="white" FontSize="25"  FontWeight="DemiBold" Margin="20,10,10,0"/>
 
-						 <TextBlock Text="Pressure" Foreground="white" FontSize="25"  FontWeight="DemiBold"
-
-                            Margin="20,10,10,0"/> 
- 
 
 					</Border>
 
 
 
-					<Border Width="150" x:Name="PM25Border"
-
+					<Border Width="150"
+							x:Name="PM25Border"
                         Height="150"
-
                         Background="#ec4fee"
-
                         CornerRadius="10" >
-
-						<TextBlock Text="PM2.5" Foreground="white" FontSize="25"  FontWeight="DemiBold"
-
-                            Margin="20,10,10,0"/>
+						<TextBlock Text="PM2.5" Foreground="white" FontSize="25"  FontWeight="DemiBold" Margin="20,10,10,0"/>
 
 					</Border>
 
-					<Border Width="150" x:Name="PM10Border"
-
-                        Height="150"
-
-                        Background="#ec4fee"
-
-                        CornerRadius="10" >
-
-						<TextBlock Text="PM10" Foreground="white" FontSize="25"  FontWeight="DemiBold"
-
-                            Margin="20,10,10,0"/>
-
+					<Border Width="150"
+							x:Name="PM10Border"
+							Height="150"
+							Background="#ec4fee"
+							CornerRadius="10" >
+						<TextBlock Text="PM10" Foreground="white" FontSize="25"  FontWeight="DemiBold" Margin="20,10,10,0"/>
 					</Border>
 
 				</StackPanel>
 
 				<!--indoorCo2Value-->
-				<!--<TextBlock x:Name="indoorCo2Value" Text="20ppm " Foreground="white" FontSize="22"
 
-                    Margin="20,-95,0,0"/>
-
-				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
-
-                    Margin="110,-100,0,0"/>-->
-
+				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="110,-95,0,0"/>
 				<TextBlock  Margin="20,-95,0,0" >
 					<Run x:Name="indoorCo2Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-
-					<Run Text="ppm      INDOOR " Foreground="white" FontSize="8"  FontWeight="DemiBold"/>
+					<Run Text="ppm" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 
 				<!--outdoorCo2Value-->
-				<TextBlock x:Name="outdoorCo2Value" Text="20ppm " Foreground="white" FontSize="18"
 
-                    Margin="20,-50,10,0"/>
+				<TextBlock  Margin="20,-50,10,0" >
+					<Run x:Name="outdoorCo2Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="ppm" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
-
-                    Margin="105,-50,10,0"/>
- 
-
-				<TextBlock Text="Target Value:20%" Foreground="white" FontSize="8"  FontWeight="DemiBold"
-
-											   Margin="10,-15,10,0"/>
-
+				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="105,-50,10,0"/>
+				<TextBlock Text="Target Value:20%" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="10,-15,10,0"/>
 
 				<!--indoorTvocValue-->
-				<TextBlock x:Name="indoorTvocValue" Text="20mg/m3 " Foreground="white" FontSize="22"
 
-                    Margin="185,-95,10,0"/>
+				<TextBlock  Margin="185,-95,10,0" >
+					<Run x:Name="indoorTvocValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="mg/m3" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
-
-                    Margin="275,-100,0,0"/>
+				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="275,-100,0,0"/>
 
 				<!--outdoorTvocValue-->
-				<TextBlock x:Name="outdoorTvocValue" Text="20mg/m3 " Foreground="white" FontSize="18"
 
-                    Margin="185,-50,10,0"/>
+				<TextBlock  Margin="185,-50,10,0" >
+					<Run x:Name="outdoorTvocValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="mg/m3" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
-
-                    Margin="270,-50,0,0"/>
-
-				<TextBlock Text="Target Value:20mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold"
-
-											   Margin="180,-15,10,0"/>
+				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="270,-50,0,0"/>
+				<TextBlock Text="Target Value:20mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="180,-15,10,0"/>
 
 				<!--indoorPressureValue-->
-				<TextBlock x:Name="indoorPressureValue" Text="20Pa " Foreground="white" FontSize="22"
 
-                    Margin="350,-95,10,0"/>
+				<TextBlock  Margin="350,-95,10,0" >
+					<Run x:Name="indoorPressureValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
-
-                    Margin="440,-100,0,0"/>
+				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="440,-100,0,0"/>
 
 				<!--outdoorPressureValue-->
-				<TextBlock x:Name="outdoorPressureValue" Text="20Pa " Foreground="white" FontSize="22"
 
-                    Margin="350,-50,10,0"/>
+				<TextBlock  Margin="350,-50,10,0" >
+					<Run x:Name="outdoorPressureValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
-
-                    Margin="435,-50,0,0"/>
-
-				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold"
-
-											   Margin="340,-15,10,0"/>
+				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="435,-50,0,0"/>
+				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="340,-15,10,0"/>
 
 				<!--indoorPm25Value-->
-				<TextBlock x:Name="indoorPm25Value" Text="20% " Foreground="white" FontSize="22"
 
-                    Margin="515,-95,10,0"/>
-
-				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
-                    Margin="600,-100,0,0"/>
+				<TextBlock  Margin="515,-95,10,0" >
+					<Run x:Name="indoorPm25Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
+				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="600,-100,0,0"/>
 
 				<!--outdoorPm25Value-->
-				<TextBlock x:Name="outdoorPm25Value" Text="20% " Foreground="white" FontSize="18"
 
-                    Margin="515,-50,10,0"/>
+				<TextBlock  Margin="515,-50,10,0" >
+					<Run x:Name="outdoorPm25Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
-                    Margin="595,-50,0,0"/>
-
-				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold"
-
-											   Margin="505,-15,10,0"/>
+				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="595,-50,0,0"/>
+				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="505,-15,10,0"/>
 
 				<!--indoorPm10Value-->
-				<TextBlock x:Name="indoorPm10Value" Text="20% " Foreground="white" FontSize="22"
 
-                    Margin="680,-95,10,0"/>
-
-				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8"
-                    Margin="770,-100,0,0"/>
+				<TextBlock  Margin="680,-95,10,0" >
+					<Run x:Name="indoorPm10Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
+				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="770,-100,0,0"/>
 
 				<!--outdoorPm10Value-->
-				<TextBlock x:Name="outdoorPm10Value" Text="20% " Foreground="white" FontSize="18"
 
-                    Margin="680,-50,10,0"/>
+				<TextBlock  Margin="680,-50,10,0" >
+					<Run x:Name="outdoorPm10Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+				</TextBlock>
 
-				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
-                    Margin="760,-50,0,0"/>
+				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="760,-50,0,0"/>
+				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
 
-				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold"
-
-											   Margin="670,-15,10,0"/>
-				
 			</StackPanel>
-			<Button Content="X" 
+			<Button Content="X"
 					Foreground="white"
 					FontSize="15" Grid.Column="1"
 					HorizontalAlignment="Left"
@@ -472,6 +409,18 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 					Width="61" Click="closeButton_Click"
 					Background="Transparent"
 					Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+
+			<TextBox x:Name="searchTextBox" Width="250" Visibility="Visible"
+					Height="40"
+					VerticalContentAlignment="Center"
+					HorizontalAlignment="Left"
+					Margin="10,470,0,10"
+					Grid.ColumnSpan="2" Grid.Row="1"
+					Background="Transparent"
+					BorderThickness="0"
+					Text="Frankfurt, DE"
+					Foreground="LightBlue" FontStyle="Italic" KeyDown="searchTextBox_KeyDown"/>
+
 
 
 		</Grid>

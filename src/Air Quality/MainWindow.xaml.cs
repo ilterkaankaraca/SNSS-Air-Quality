@@ -49,20 +49,20 @@ namespace AirQuality
         }
 
 
-        //private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    string cityName = searchTextBox.Text;
-        //    searchTextBox.Text = String.Empty;
-        //    if (e.Key == Key.Enter)
-        //    {
-        //        string answer = wc.DownloadString("http://esp32.local/city/?name=" + cityName);
-        //    }
-        //    else
-        //    {
-        //        searchTextBox.Text = cityName;
-        //    }
+        private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            string cityName = searchTextBox.Text;
+            searchTextBox.Text = String.Empty;
+            if (e.Key == Key.Enter)
+            {
+                string answer = wc.DownloadString("http://+ ipAddress +/city/?name=" + cityName);
+            }
+            else
+            {
+                searchTextBox.Text = cityName;
+            }
 
-        //}
+        }
 
         private void ipTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -138,6 +138,7 @@ namespace AirQuality
                 loginGrid.Visibility = Visibility.Hidden;
                 homeGrid1.Visibility = Visibility.Visible;
                 homeGrid2.Visibility = Visibility.Visible;
+                searchTextBox.Visibility = Visibility.Visible;
             }
             else
             {
