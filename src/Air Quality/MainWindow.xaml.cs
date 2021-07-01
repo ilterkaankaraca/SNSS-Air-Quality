@@ -28,20 +28,7 @@ namespace AirQuality
             wc = new WebClient();
             this.Height = 175.5;
             this.Width = 210;
-            indoorTemperatureUrl = "http://esp32.local/indoorTemperature/";
-            indoorHumidityUrl = "http://esp32.local/indoorHumidity/";
-            indoorCo2Url = "http://esp32.local/indoorCo2/";
-            indoorTvocUrl = "http://esp32.local/indoorTvoc/";
-            indoorPressureUrl = "http://esp32.local/indoorPressure/";
-            indoorPm25Url = "http://esp32.local/indoorPm25/";
-            indoorPm10Url = "http://esp32.local/indoorPm10/";
-            outdoorTemperatureUrl = "http://esp32.local/outdoorTemperature/";
-            outdoorHumidityUrl = "http://esp32.local/outdoorHumidity/";
-            outdoorCo2Url = "http://esp32.local/outdoorCo2/";
-            outdoorTvocUrl = "http://esp32.local/outdoorTvoc/";
-            outdoorPressureUrl = "http://esp32.local/outdoorPressure/";
-            outdoorPm25Url = "http://esp32.local/outdoorPm25/";
-            outdoorPm10Url = "http://esp32.local/outdoorPm10/";
+
             webClient = new WebClient();
             indoorMetrics = new AirMetrics();
             outdoorMetrics = new AirMetrics();
@@ -69,7 +56,7 @@ namespace AirQuality
             {
                 searchTextBox.Text = cityName;
             }
-            
+
         }
 
         private void ipTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -81,10 +68,10 @@ namespace AirQuality
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (String.IsNullOrWhiteSpace(ipTextBox.Text) == false)
             {
-                string answer="";
+                string answer = "";
                 try
                 {
                     ipAddress = ipTextBox.Text;
@@ -94,12 +81,14 @@ namespace AirQuality
                         //check if it is ip or hostname
                         if (int.TryParse(ipAddress[0].ToString(), out _))
                         {
+
                             answer = wc.DownloadString("http://" + ipAddress + "/connect");
                         }
                         else
                         {
-                            answer = wc.DownloadString("http://" + ipAddress + ".local/connect");
-                            
+                            ipAddress = ipAddress + ".local";
+                            answer = wc.DownloadString("http://" + ipAddress + "/connect");
+
                         }
                     }
                     ipTextBox.Foreground = Brushes.Red;
@@ -112,12 +101,12 @@ namespace AirQuality
                 {
                     Console.WriteLine("SocketException: {0}", A);
                 }
-                catch(WebException A)
+                catch (WebException A)
                 {
                     ipTextBox.Text = "connection error";
                 }
                 if (answer == "connected")
-                { 
+                {
                     updateMetrics();
                     updateComponents();
                     dispatcherTimer.Start();
@@ -125,6 +114,20 @@ namespace AirQuality
                     ipTextBox.Visibility = Visibility.Hidden;
                     this.Height = 600;
                     this.Width = 1050;
+                    indoorTemperatureUrl = "http://" + ipAddress + "/indoorTemperature/";
+                    indoorHumidityUrl = "http://" + ipAddress + "/indoorHumidity/";
+                    indoorCo2Url = "http://" + ipAddress + "/indoorCo2/";
+                    indoorTvocUrl = "http://" + ipAddress + "/indoorTvoc/";
+                    indoorPressureUrl = "http://" + ipAddress + "/indoorPressure/";
+                    indoorPm25Url = "http://" + ipAddress + "/indoorPm25/";
+                    indoorPm10Url = "http://" + ipAddress + "/indoorPm10/";
+                    outdoorTemperatureUrl = "http://" + ipAddress + "/outdoorTemperature/";
+                    outdoorHumidityUrl = "http://" + ipAddress + "/outdoorHumidity/";
+                    outdoorCo2Url = "http://" + ipAddress + "/outdoorCo2/";
+                    outdoorTvocUrl = "http://" + ipAddress + "/outdoorTvoc/";
+                    outdoorPressureUrl = "http://" + ipAddress + "/outdoorPressure/";
+                    outdoorPm25Url = "http://" + ipAddress + "/outdoorPm25/";
+                    outdoorPm10Url = "http://" + ipAddress + "/outdoorPm10/";
                 }
             }
             else
