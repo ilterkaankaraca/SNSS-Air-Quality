@@ -42,8 +42,8 @@ AllowsTransparency = "True">
                         FontSize = "30" 
                         Margin = "30,0,0,0" />
 
-
-            <TextBox x:Name="searchTextBox" Width="250" 
+			<Grid x:Name="loginGrid"  Visibility="Visible">
+			<TextBox x:Name="searchTextBox" Width="250" 
 					 Height="40" 
 					 VerticalContentAlignment="Center" 
 					 HorizontalAlignment="Left" 
@@ -55,8 +55,10 @@ AllowsTransparency = "True">
                      Foreground="LightBlue" FontStyle="Italic" KeyDown="searchTextBox_KeyDown"/>
             <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Please give a host name" VerticalAlignment="Top" Width="180" GotFocus="ipTextBox_GotFocus"/>
             <Button x:Name="button" Content="Connect" HorizontalAlignment="Left" Margin="10,40,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="connectButton_Click" />
-            <StackPanel Orientation="Horizontal" Margin="10,7,9,313" Grid.Column="1" Grid.Row="1">
+			</Grid>
 
+			<!--<StackPanel x:Name="homeGrid"  Visibility="Visible">-->
+			<StackPanel Orientation="Horizontal" Margin="10,7,9,313" Grid.Column="1" Grid.Row="1" x:Name="homeGrid1"  Visibility="Hidden" >	
                 <Border Width="400" Height="200" x:Name="TemperatureBorder">
 
                     <Border.Background>
@@ -188,11 +190,7 @@ AllowsTransparency = "True">
                 </Border>
 
             </StackPanel>
-            <StackPanel Margin="10,207,9,126" Grid.Row="1" Grid.Column="1">
-
-
-
-
+            <StackPanel Margin="10,207,9,126" Grid.Row="1" Grid.Column="1" x:Name="homeGrid2" Visibility="Hidden" >
 
 
 
@@ -232,11 +230,7 @@ AllowsTransparency = "True">
 
                     </Border>
 
-
-
-
-
-
+  
 
                     <Border Width="150" x:Name="TVOCBorder"
 
@@ -387,7 +381,8 @@ AllowsTransparency = "True">
                 <TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8"
                     Margin="760,-50,0,0"/>
             </StackPanel>
-
+			<!--</StackPanel>-->
+			
         </Grid>
     </Border>
 </Window>

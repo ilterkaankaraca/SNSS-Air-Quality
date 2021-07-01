@@ -129,6 +129,9 @@ namespace AirQuality
                     outdoorPm25Url = "http://" + ipAddress + "/outdoorPm25/";
                     outdoorPm10Url = "http://" + ipAddress + "/outdoorPm10/";
                 }
+                loginGrid.Visibility = Visibility.Hidden;
+                homeGrid1.Visibility = Visibility.Visible;
+                homeGrid2.Visibility = Visibility.Visible;
             }
             else
             {
