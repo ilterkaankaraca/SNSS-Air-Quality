@@ -107,13 +107,6 @@ namespace AirQuality
                 }
                 if (answer == "connected")
                 {
-                    updateMetrics();
-                    updateComponents();
-                    dispatcherTimer.Start();
-                    button.Visibility = Visibility.Hidden;
-                    ipTextBox.Visibility = Visibility.Hidden;
-                    this.Height = 600;
-                    this.Width = 1050;
                     indoorTemperatureUrl = "http://" + ipAddress + "/indoorTemperature/";
                     indoorHumidityUrl = "http://" + ipAddress + "/indoorHumidity/";
                     indoorCo2Url = "http://" + ipAddress + "/indoorCo2/";
@@ -128,6 +121,14 @@ namespace AirQuality
                     outdoorPressureUrl = "http://" + ipAddress + "/outdoorPressure/";
                     outdoorPm25Url = "http://" + ipAddress + "/outdoorPm25/";
                     outdoorPm10Url = "http://" + ipAddress + "/outdoorPm10/";
+                    updateMetrics();
+                    updateComponents();
+                    dispatcherTimer.Start();
+                    button.Visibility = Visibility.Hidden;
+                    ipTextBox.Visibility = Visibility.Hidden;
+                    this.Height = 600;
+                    this.Width = 1050;
+                    
                 }
                 loginGrid.Visibility = Visibility.Hidden;
                 homeGrid1.Visibility = Visibility.Visible;
