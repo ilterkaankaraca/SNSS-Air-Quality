@@ -23,7 +23,7 @@ namespace AirQuality.MWM.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        
 
         public MainViewModel() 
         {

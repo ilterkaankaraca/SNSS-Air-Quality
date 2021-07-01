@@ -18,6 +18,13 @@ namespace AirQuality
         WebClient webClient;
         string indoorTemperatureUrl, indoorHumidityUrl, indoorCo2Url, indoorTvocUrl, indoorPressureUrl, indoorPm25Url, indoorPm10Url;
         string outdoorTemperatureUrl, outdoorHumidityUrl, outdoorCo2Url, outdoorTvocUrl, outdoorPressureUrl, outdoorPm25Url, outdoorPm10Url;
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            App.Current.MainWindow.DragMove();
+        }
+ 
+
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         WebClient wc;
         string ipAddress;
@@ -26,9 +33,6 @@ namespace AirQuality
         {
             InitializeComponent();
             wc = new WebClient();
-            this.Height = 175.5;
-            this.Width = 210;
-
             webClient = new WebClient();
             indoorMetrics = new AirMetrics();
             outdoorMetrics = new AirMetrics();
@@ -44,20 +48,21 @@ namespace AirQuality
             updateComponents();
         }
 
-        private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            string cityName = searchTextBox.Text;
-            searchTextBox.Text = String.Empty;
-            if (e.Key == Key.Enter)
-            {
-                string answer = wc.DownloadString("http://esp32.local/city/?name=" + cityName);
-            }
-            else
-            {
-                searchTextBox.Text = cityName;
-            }
 
-        }
+        //private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    string cityName = searchTextBox.Text;
+        //    searchTextBox.Text = String.Empty;
+        //    if (e.Key == Key.Enter)
+        //    {
+        //        string answer = wc.DownloadString("http://esp32.local/city/?name=" + cityName);
+        //    }
+        //    else
+        //    {
+        //        searchTextBox.Text = cityName;
+        //    }
+
+        //}
 
         private void ipTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -65,7 +70,11 @@ namespace AirQuality
             button.IsEnabled = true;
             button.Foreground = Brushes.Black;
         }
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
 
+        }
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -124,10 +133,6 @@ namespace AirQuality
                     updateMetrics();
                     updateComponents();
                     dispatcherTimer.Start();
-                    button.Visibility = Visibility.Hidden;
-                    ipTextBox.Visibility = Visibility.Hidden;
-                    this.Height = 600;
-                    this.Width = 1050;
                     
                 }
                 loginGrid.Visibility = Visibility.Hidden;
