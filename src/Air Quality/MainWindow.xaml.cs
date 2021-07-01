@@ -40,6 +40,11 @@ namespace AirQuality
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             button.IsEnabled = false;
             button.Foreground = Brushes.Gray;
+            loginGrid.Visibility = Visibility.Visible;
+            homeGrid1.Visibility = Visibility.Hidden;
+            homeGrid2.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -55,7 +60,7 @@ namespace AirQuality
             searchTextBox.Text = String.Empty;
             if (e.Key == Key.Enter)
             {
-                string answer = wc.DownloadString("http://+ ipAddress +/city/?name=" + cityName);
+                string answer = wc.DownloadString("http://" + ipAddress + "/city/?name=" + cityName);
             }
             else
             {
@@ -116,6 +121,7 @@ namespace AirQuality
                 }
                 if (answer == "connected")
                 {
+                    //Send city
                     indoorTemperatureUrl = "http://" + ipAddress + "/indoorTemperature/";
                     indoorHumidityUrl = "http://" + ipAddress + "/indoorHumidity/";
                     indoorCo2Url = "http://" + ipAddress + "/indoorCo2/";
