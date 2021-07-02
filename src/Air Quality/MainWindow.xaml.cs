@@ -172,7 +172,7 @@ namespace AirQuality
         }
         private void updateComponents()
         {
-            indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString();
+            indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString().Substring(0,2);
             indoorHumidityValue.Text = indoorMetrics.Humidity.ToString();
             indoorCo2Value.Text = indoorMetrics.Co2.ToString();
             indoorTvocValue.Text = indoorMetrics.Tvoc.ToString();
