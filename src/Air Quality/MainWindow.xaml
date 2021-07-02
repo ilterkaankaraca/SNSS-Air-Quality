@@ -131,7 +131,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 							<TextBlock Margin="20,10,10,0" >
 								<Run Text="Temperature              " Foreground="white" FontSize="28"  FontWeight="DemiBold"/>
 
-								<Run Text="Target Value: 20°C" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+								<Run Text="Target Value: " Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 							</TextBlock>
 
 
@@ -196,7 +196,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 							<TextBlock Margin="20,10,10,0" >
 								<Run Text="Humidity              " Foreground="white" FontSize="28"  FontWeight="DemiBold"/>
 
-								<Run Text="Target Value: 20%" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+								<Run Text="Target Value: " Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 							</TextBlock>
 
 							<StackPanel Orientation="Horizontal">
@@ -323,7 +323,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 				</TextBlock>
 
 				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="105,-50,10,0"/>
-				<TextBlock Text="Target Value:20%" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="10,-15,10,0"/>
+				<TextBlock Text="Target Value:" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="10,-15,10,0"/>
 
 				<!--indoorTvocValue-->
 
@@ -342,13 +342,13 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 				</TextBlock>
 
 				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="270,-50,0,0"/>
-				<TextBlock Text="Target Value:20mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="180,-15,10,0"/>
+				<TextBlock Text="Target Value:" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="180,-15,10,0"/>
 
 				<!--indoorPressureValue-->
 
 				<TextBlock  Margin="350,-95,10,0" >
 					<Run x:Name="indoorPressureValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+					<Run Text="hPa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 
 				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="440,-100,0,0"/>
@@ -357,17 +357,17 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 				<TextBlock  Margin="350,-50,10,0" >
 					<Run x:Name="outdoorPressureValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+					<Run Text="hPa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 
 				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="435,-50,0,0"/>
-				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="340,-15,10,0"/>
+				<TextBlock Text="Target Value:" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="340,-15,10,0"/>
 
 				<!--indoorPm25Value-->
 
 				<TextBlock  Margin="515,-95,10,0" >
 					<Run x:Name="indoorPm25Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+					<Run Text="μg/m³" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="600,-100,0,0"/>
 
@@ -375,17 +375,17 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 				<TextBlock  Margin="515,-50,10,0" >
 					<Run x:Name="outdoorPm25Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+					<Run Text="μg/m³" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 
 				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="595,-50,0,0"/>
-				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="505,-15,10,0"/>
+				<TextBlock Text="Target Value:" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="505,-15,10,0"/>
 
 				<!--indoorPm10Value-->
 
 				<TextBlock  Margin="680,-95,10,0" >
 					<Run x:Name="indoorPm10Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+					<Run Text="μg/m³" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 				<TextBlock  Text="INDOOR " Foreground="white" FontSize="8" Margin="770,-100,0,0"/>
 
@@ -393,11 +393,11 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 
 				<TextBlock  Margin="680,-50,10,0" >
 					<Run x:Name="outdoorPm10Value" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
-					<Run Text="Pa" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
+					<Run Text="μg/m³" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
 				</TextBlock>
 
 				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="760,-50,0,0"/>
-				<TextBlock Text="Target Value:20Pa" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
+				<TextBlock Text="Target Value:" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
 
 			</StackPanel>
 			<Button Content="X"
@@ -418,7 +418,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 					Grid.ColumnSpan="2" Grid.Row="1"
 					Background="Transparent"
 					BorderThickness="0"
-					Text="Frankfurt, DE"
+					Text="Langen, DE"
 					Foreground="LightBlue" FontStyle="Italic" KeyDown="searchTextBox_KeyDown"/>
 
 

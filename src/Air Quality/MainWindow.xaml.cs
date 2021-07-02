@@ -173,15 +173,15 @@ namespace AirQuality
         private void updateComponents()
         {
             indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString().Substring(0,2);
-            indoorHumidityValue.Text = indoorMetrics.Humidity.ToString();
+            indoorHumidityValue.Text = indoorMetrics.Humidity.ToString().Substring(0, 2);
             indoorCo2Value.Text = indoorMetrics.Co2.ToString();
             indoorTvocValue.Text = indoorMetrics.Tvoc.ToString();
             indoorPressureValue.Text = indoorMetrics.Pressure.ToString();
             indoorPm25Value.Text = indoorMetrics.Pm25.ToString();
             indoorPm10Value.Text = indoorMetrics.Pm25.ToString();
 
-            outdoorTemperatureValue.Text = outdoorMetrics.Temperature.ToString();
-            outdoorHumidityValue.Text = outdoorMetrics.Humidity.ToString();
+            outdoorTemperatureValue.Text = outdoorMetrics.Temperature.ToString().Substring(0, 2);
+            outdoorHumidityValue.Text = outdoorMetrics.Humidity.ToString().Substring(0, 2);
             outdoorCo2Value.Text = outdoorMetrics.Co2.ToString();
             outdoorTvocValue.Text = outdoorMetrics.Tvoc.ToString();
             outdoorPressureValue.Text = outdoorMetrics.Pressure.ToString();
