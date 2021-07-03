@@ -397,7 +397,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 				</TextBlock>
 
 				<TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="760,-50,0,0"/>
-                <TextBlock Text="Target Value: Target Range: &lt;20mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
+                <TextBlock Text="Target Range: &lt;20mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
 
 			</StackPanel>
 			<Button Content="X"
