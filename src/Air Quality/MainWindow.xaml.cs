@@ -18,21 +18,20 @@ namespace AirQuality
         WebClient webClient;
         string indoorTemperatureUrl, indoorHumidityUrl, indoorCo2Url, indoorTvocUrl, indoorPressureUrl, indoorPm25Url, indoorPm10Url;
         string outdoorTemperatureUrl, outdoorHumidityUrl, outdoorCo2Url, outdoorTvocUrl, outdoorPressureUrl, outdoorPm25Url, outdoorPm10Url;
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        string ipAddress;
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             App.Current.MainWindow.DragMove();
         }
- 
 
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        WebClient wc;
-        string ipAddress;
+
+       
 
         public MainWindow()
         {
             InitializeComponent();
-            wc = new WebClient();
             webClient = new WebClient();
             indoorMetrics = new AirMetrics();
             outdoorMetrics = new AirMetrics();
@@ -60,7 +59,7 @@ namespace AirQuality
             searchTextBox.Text = String.Empty;
             if (e.Key == Key.Enter)
             {
-                string answer = wc.DownloadString("http://" + ipAddress + "/city/?name=" + cityName);
+                string answer = webClient.DownloadString("http://" + ipAddress + "/city/?name=" + cityName);
             }
             else
             {
@@ -139,12 +138,12 @@ namespace AirQuality
                     updateMetrics();
                     updateComponents();
                     dispatcherTimer.Start();
-                    
+                    loginGrid.Visibility = Visibility.Hidden;
+                    homeGrid1.Visibility = Visibility.Visible;
+                    homeGrid2.Visibility = Visibility.Visible;
+                    searchTextBox.Visibility = Visibility.Visible;
                 }
-                loginGrid.Visibility = Visibility.Hidden;
-                homeGrid1.Visibility = Visibility.Visible;
-                homeGrid2.Visibility = Visibility.Visible;
-                searchTextBox.Visibility = Visibility.Visible;
+
             }
             else
             {
@@ -154,6 +153,7 @@ namespace AirQuality
         }
         private void updateMetrics()
         {
+
             indoorMetrics.Temperature = Double.Parse(webClient.DownloadString(indoorTemperatureUrl).Replace('.', ','));
             indoorMetrics.Humidity = Double.Parse(webClient.DownloadString(indoorHumidityUrl).Replace('.', ','));
             indoorMetrics.Co2 = Double.Parse(webClient.DownloadString(indoorCo2Url).Replace('.', ','));
@@ -169,10 +169,11 @@ namespace AirQuality
             outdoorMetrics.Pressure = Double.Parse(webClient.DownloadString(outdoorPressureUrl).Replace('.', ','));
             outdoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(outdoorPm25Url).Replace('.', ','));
             outdoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(outdoorPm10Url).Replace('.', ','));
+
         }
         private void updateComponents()
         {
-            indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString().Substring(0,2);
+            indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString().Substring(0, 2);
             indoorHumidityValue.Text = indoorMetrics.Humidity.ToString().Substring(0, 2);
             indoorCo2Value.Text = indoorMetrics.Co2.ToString();
             indoorTvocValue.Text = indoorMetrics.Tvoc.ToString();
