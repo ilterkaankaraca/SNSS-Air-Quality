@@ -9,13 +9,15 @@ char password[] = SECRET_PASS;
 AsyncWebServer server(80);
 
 //EXTERN VARIABLES(from OwmApi.h)
-float outdoorTemperature, outdoorPressure, outdoorHumidity, outdoorPm25, outdoorPm10, outdoorCo2, outdoorTvoc, latitude, longitude;
+float outdoorTemperature, outdoorPressure, outdoorHumidity, outdoorPm25, outdoorPm10, outdoorTvoc, latitude, longitude;
+float outdoorCo2=415;
 float indoorTemperature_1, indoorHumidity_1, indoorCo2_1, indoorPressure_1, indoorTvoc_1, indoorPm25_1, indoorPm10_1;
 float indoorTemperature_2, indoorHumidity_2, indoorCo2_2, indoorPressure_2, indoorTvoc_2, indoorPm25_2, indoorPm10_2;
 float indoorTemperatureFinal, indoorHumidityFinal, indoorCo2Final, indoorPressureFinal, indoorTvocFinal, indoorPm25Final, indoorPm10Final;
 String plotMetric = "statistic";
 String city = "Langen";
 String wJson, pJson;
+String json="empty";
 unsigned long lastMillis;
 int airQualityCategories[6];
 void setup()
@@ -29,6 +31,7 @@ void setup()
   deserialize(wJson, 'W');
   pJson = getPollutionJson(latitude, longitude);
   deserialize(pJson, 'P');
+  //Serial.println(getCo2());
 }
 void loop()
 {
@@ -42,7 +45,7 @@ void loop()
     deserialize(pJson, 'P');
   }
   plot();
-  //Serial.println(city);
+  json = buildJson();
   if(decision()==1){
     Serial.println("Ventilation required");
   }
@@ -50,7 +53,6 @@ void loop()
   {
     Serial.println("Ventilation not required");
   }
-  Serial.println(decision());
   delay(7000);
 }
 void initWiFi()
@@ -75,47 +77,19 @@ void initWebserver(void)
     plotMetric = request->getParam("plotMetric")->value();
     request->send(200, "text/plain", plotMetric);
   });
-  server.on("/city", HTTP_GET, [](AsyncWebServerRequest *request) { //will be used to change the plot metric
+  server.on("/city", HTTP_GET, [](AsyncWebServerRequest *request) { //will be used to change the city
     city = request->getParam("name")->value();
     request->send(200, "text/plain", "Received");
   });
-  //INDOOR
-  server.on("/indoorTemperature", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorTemperature_1)); });
-  server.on("/indoorHumidity", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorHumidity_1)); });
-  server.on("/indoorCo2", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorCo2_1)); });
-  server.on("/indoorTvoc", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorTvoc_1)); });
-  server.on("/indoorPressure", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorPressure_1)); });
-  server.on("/indoorPm25", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorPm25_1)); });
-  server.on("/indoorPm10", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(indoorPm10_1)); });
-  //OUTDOOR
-  server.on("/outdoorTemperature", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(outdoorTemperature)); });
-  server.on("/outdoorHumidity", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(outdoorHumidity)); });
-  server.on("/outdoorCo2", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(415)); });
-  server.on("/outdoorTvoc", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", "0"); });
-  server.on("/outdoorPressure", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(outdoorPressure)); });
-  server.on("/outdoorPm25", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(outdoorPm25)); });
-  server.on("/outdoorPm10", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(200, "text/plain", String(outdoorPm10)); });
+  server.on("/json", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(200, "text/plain", json);});
   //READINGS FROM CLIENT 1
   server.on("/readValue", HTTP_GET, [](AsyncWebServerRequest *request)
             {
               indoorTemperature_1 = request->getParam("temperature")->value().toFloat();
               indoorHumidity_1 = request->getParam("humidity")->value().toFloat();
               indoorCo2_1 = request->getParam("co2")->value().toFloat();
-              indoorTvoc_1 = request->getParam("tvoc")->value().toFloat();
+              indoorTvoc_1 = request->getParam("tvoc")->value().toFloat() * 0.00515;  // convertion from ppb to mg/m³
               indoorPressure_1 = request->getParam("pressure")->value().toFloat();
               indoorPm25_1 = request->getParam("pm25")->value().toFloat();
               indoorPm10_1 = request->getParam("pm10")->value().toFloat();
@@ -140,7 +114,7 @@ void plot()
   if (plotMetric == "temperature")
   {
     Serial.print("Indoor Temperature:");
-    Serial.println(indoorTemperatureFinal);
+    Serial.println(indoorTemperatureFinal); Serial.print("Outdoor Temperature:");
     Serial.print("Outdoor Temperature:");
     Serial.println(outdoorTemperature);
   }
@@ -189,53 +163,85 @@ void plot()
   else if (plotMetric == "statistic")
   {
 
-    Serial.println("LOG  " + String(millis() * 60 * 1000UL));
+    Serial.println("LOG  " + String(millis() / (60 * 1000UL)));
 
     Serial.print("Indoor Temperature: ");
-    Serial.println(indoorTemperature_1);
-    Serial.print("Outdoor Temperature: ");
-    Serial.println(outdoorTemperature);
+    Serial.print(indoorTemperature_1); Serial.println("°C");
+    Serial.print("Outdoor Temperature: "); 
+    Serial.print(outdoorTemperature); Serial.println("°C");
     Serial.println();
 
     Serial.print("Indoor Humidity: ");
-    Serial.println(indoorHumidity_1);
+    Serial.print(indoorHumidity_1); Serial.println("%");
     Serial.print("Outdoor Humidity: ");
-    Serial.println(outdoorHumidity);
+    Serial.print(outdoorHumidity); Serial.println("%");
     Serial.println(" ");
 
     Serial.print("Indoor CO2: ");
-    Serial.println(indoorCo2_1);
+    Serial.print(indoorCo2_1); Serial.println(" ppm");
     Serial.print("Outdoor CO2: ");
-    Serial.println(400);
+    Serial.print(outdoorCo2); Serial.println(" ppm");
     Serial.println(" ");
 
     Serial.print("Indoor Pressure: ");
-    Serial.println(indoorPressure_1);
+    Serial.print(indoorPressure_1); Serial.println(" hPa");
     Serial.print("Outdoor Pressure:");
-    Serial.println(outdoorPressure);
+    Serial.print(outdoorPressure); Serial.println(" hPa");
     Serial.println(" ");
 
     Serial.print("Indoor PM2.5: ");
-    Serial.println(indoorPm25_1);
+    Serial.print(indoorPm25_1);  Serial.println(" ppm");
     Serial.print("Outdoor PM2.5: ");
-    Serial.println(outdoorPm25);
+    Serial.print(outdoorPm25); Serial.println(" ppm");
     Serial.println(" ");
 
     Serial.print("Indoor PM10: ");
-    Serial.println(indoorPm10_1);
+    Serial.print(indoorPm10_1); Serial.println(" ppm");
     Serial.print("Outdoor PM10: ");
-    Serial.println(outdoorPm10);
+    Serial.print(outdoorPm10); Serial.println(" ppm");
     Serial.println(" ");
 
-    Serial.print("Indoor TVOC:");
-    Serial.println(indoorTvoc_1);
+    Serial.print("Indoor TVOC: ");
+    Serial.print(indoorTvoc_1); Serial.println(" mg/m³");
     Serial.print("Outdoor TVOC:");
-    Serial.println("0");
+    Serial.print("<1"); Serial.println(" mg/m³");
     Serial.println(" ");
   }
   Serial.println(" ");
 }
-
+String buildJson(){
+  String json="{";
+  json += "\"indoorTemperature\":\"";
+  json += String(indoorTemperature_1);
+  json += "\",\"outdoorTemperature\":\"";
+  json += String(outdoorTemperature);
+  json += "\",\"indoorHumidity\":\"";
+  json += String(indoorHumidity_1);
+  json += "\",\"outdoorHumidity\":\"";
+  json += String(outdoorHumidity);
+  json += "\",\"indoorCo2\":\"";
+  json += String(indoorCo2_1);
+  json += "\",\"outdoorCo2\":\"";
+  json += String(outdoorCo2);
+  json += "\",\"indoorPressure\":\"";
+  json += String(indoorPressure_1);
+  json += "\",\"outdoorPressure\":\"";
+  json += String(outdoorPressure);
+  json += "\",\"indoorPm25\":\"";
+  json += String(indoorPm25_1);
+  json += "\",\"outdoorPm25\":\"";
+  json += String(outdoorPm25);
+  json += "\",\"indoorPm10\":\"";
+  json += String(indoorPm10_1);
+  json += "\",\"outdoorPm10\":\"";
+  json += String(outdoorPm10);
+  json += "\",\"indoorTvoc\":\"";
+  json += String(indoorTvoc_1);
+  json += "\",\"outdoorTvoc\":\"";
+  json += String(0)+"\"";
+  json += "}";
+  return json;
+}
 
 
 float calculateIndoorHumidity(float outdoorTemperature, float outdoorHumidity, float indoorTemperature)
@@ -284,16 +290,16 @@ bool decision()
   int maxValueAqOutdoor = 1;
   int numberOfHighestElementAqOutdoor = 0;
 
-  for (int i = 0; i <= 5; ++i)
+  for (int i = 0; i <= 5; i++)
   {
     airQualityCategories[i] = 1;
   }
-  categorizeAirQualityMetrics(indoorTemperatureFinal, indoorHumidityFinal, indoorTvocFinal, indoorCo2Final, indoorPm25Final, indoorPm10Final);
+  categorizeAirQualityMetrics(indoorTemperature_1, indoorHumidity_1, indoorTvoc_1, indoorCo2_1, indoorPm25_1, indoorPm10_1);
   maxValueAqIndoor = getHighestElement();
   numberOfHighestElementAqIndoor = getNumberOfHighestElement(maxValueAqIndoor);
 
-  float extrapolatedHumidityIndoor = calculateIndoorHumidity(outdoorTemperature, outdoorHumidity, indoorTemperatureFinal);
-  for (int i = 0; i <= 5; ++i)
+  float extrapolatedHumidityIndoor = calculateIndoorHumidity(outdoorTemperature, outdoorHumidity, indoorTemperature_1);
+  for (int i = 0; i <= 5; i++)
   {
     airQualityCategories[i] = 1;
   }

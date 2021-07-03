@@ -38,7 +38,7 @@ String getPollutionJson(float lat, float lon)
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    // http.begin("http://pro.openweathermap.org/data/2.5/air_pollution?lat="+String(lat)+"&lon="+lon+"&appid="+API_KEY);
+    http.begin("http://pro.openweathermap.org/data/2.5/air_pollution?lat="+String(lat)+"&lon="+lon+"&appid="+API_KEY);
     httpCode = http.GET(); //Make the request
     if (httpCode > 0)
     { //Check for the returning code
@@ -63,7 +63,7 @@ String getCo2()
   if ((WiFi.status() == WL_CONNECTED))
   {
     HTTPClient http;
-   // http.begin("https://global-warming.org/api/co2-api");
+  // http.begin("https://ilterkaankaraca.github.io/");
     httpCode = http.GET();
     if (httpCode > 0)
     {
@@ -75,12 +75,9 @@ String getCo2()
     }
     http.end();
   }
-  lastOpeningQuote = payload.lastIndexOf(':') + 2;
-  lastClosingQuote = payload.lastIndexOf('"');
-  return "400";
-  //return payload.substring(lastOpeningQuote, lastClosingQuote);
-  
-}
+  return "415";
+  //return payload;
+ }
 
 void deserialize(String metricJson, char flag)
 {

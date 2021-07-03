@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Newtonsoft.Json;
 
 namespace AirQuality
 {
@@ -14,45 +15,35 @@ namespace AirQuality
     /// </summary>
     public partial class MainWindow : Window
     {
-        AirMetrics indoorMetrics, outdoorMetrics;
+        AirMetrics metrics;
         WebClient webClient;
-        string indoorTemperatureUrl, indoorHumidityUrl, indoorCo2Url, indoorTvocUrl, indoorPressureUrl, indoorPm25Url, indoorPm10Url;
-        string outdoorTemperatureUrl, outdoorHumidityUrl, outdoorCo2Url, outdoorTvocUrl, outdoorPressureUrl, outdoorPm25Url, outdoorPm10Url;
+        string jsonUrl;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         string ipAddress;
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            App.Current.MainWindow.DragMove();
-        }
-
-
-       
 
         public MainWindow()
         {
             InitializeComponent();
             webClient = new WebClient();
-            indoorMetrics = new AirMetrics();
-            outdoorMetrics = new AirMetrics();
+            metrics = new AirMetrics();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             button.IsEnabled = false;
             button.Foreground = Brushes.Gray;
             loginGrid.Visibility = Visibility.Visible;
             homeGrid1.Visibility = Visibility.Hidden;
             homeGrid2.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
-
         }
-
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.MainWindow.DragMove();
+        }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             updateMetrics();
             updateComponents();
         }
-
-
         private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             string cityName = searchTextBox.Text;
@@ -67,7 +58,6 @@ namespace AirQuality
             }
 
         }
-
         private void ipTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             ipTextBox.Text = null;
@@ -88,19 +78,19 @@ namespace AirQuality
                 try
                 {
                     ipAddress = ipTextBox.Text;
-                    using (WebClient wc = new WebClient())
+                    using (webClient)
                     {
 
                         //check if it is ip or hostname
                         if (int.TryParse(ipAddress[0].ToString(), out _))
                         {
 
-                            answer = wc.DownloadString("http://" + ipAddress + "/connect");
+                            answer = webClient.DownloadString("http://" + ipAddress + "/connect");
                         }
                         else
                         {
                             ipAddress = ipAddress + ".local";
-                            answer = wc.DownloadString("http://" + ipAddress + "/connect");
+                            answer = webClient.DownloadString("http://" + ipAddress + "/connect");
 
                         }
                     }
@@ -114,27 +104,14 @@ namespace AirQuality
                 {
                     Console.WriteLine("SocketException: {0}", A);
                 }
-                catch (WebException A)
+                catch (WebException)
                 {
                     ipTextBox.Text = "connection error";
                 }
                 if (answer == "connected")
                 {
                     //Send city
-                    indoorTemperatureUrl = "http://" + ipAddress + "/indoorTemperature/";
-                    indoorHumidityUrl = "http://" + ipAddress + "/indoorHumidity/";
-                    indoorCo2Url = "http://" + ipAddress + "/indoorCo2/";
-                    indoorTvocUrl = "http://" + ipAddress + "/indoorTvoc/";
-                    indoorPressureUrl = "http://" + ipAddress + "/indoorPressure/";
-                    indoorPm25Url = "http://" + ipAddress + "/indoorPm25/";
-                    indoorPm10Url = "http://" + ipAddress + "/indoorPm10/";
-                    outdoorTemperatureUrl = "http://" + ipAddress + "/outdoorTemperature/";
-                    outdoorHumidityUrl = "http://" + ipAddress + "/outdoorHumidity/";
-                    outdoorCo2Url = "http://" + ipAddress + "/outdoorCo2/";
-                    outdoorTvocUrl = "http://" + ipAddress + "/outdoorTvoc/";
-                    outdoorPressureUrl = "http://" + ipAddress + "/outdoorPressure/";
-                    outdoorPm25Url = "http://" + ipAddress + "/outdoorPm25/";
-                    outdoorPm10Url = "http://" + ipAddress + "/outdoorPm10/";
+                    jsonUrl = "http://" + ipAddress + "/json";
                     updateMetrics();
                     updateComponents();
                     dispatcherTimer.Start();
@@ -143,7 +120,6 @@ namespace AirQuality
                     homeGrid2.Visibility = Visibility.Visible;
                     searchTextBox.Visibility = Visibility.Visible;
                 }
-
             }
             else
             {
@@ -153,42 +129,64 @@ namespace AirQuality
         }
         private void updateMetrics()
         {
-
-            indoorMetrics.Temperature = Double.Parse(webClient.DownloadString(indoorTemperatureUrl).Replace('.', ','));
-            indoorMetrics.Humidity = Double.Parse(webClient.DownloadString(indoorHumidityUrl).Replace('.', ','));
-            indoorMetrics.Co2 = Double.Parse(webClient.DownloadString(indoorCo2Url).Replace('.', ','));
-            indoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(indoorTvocUrl).Replace('.', ','));
-            indoorMetrics.Pressure = Double.Parse(webClient.DownloadString(indoorPressureUrl).Replace('.', ','));
-            indoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(indoorPm25Url).Replace('.', ','));
-            indoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(indoorPm10Url).Replace('.', ','));
-
-            outdoorMetrics.Temperature = Double.Parse(webClient.DownloadString(outdoorTemperatureUrl).Replace('.', ','));
-            outdoorMetrics.Humidity = Double.Parse(webClient.DownloadString(outdoorHumidityUrl).Replace('.', ','));
-            outdoorMetrics.Co2 = Double.Parse(webClient.DownloadString(outdoorCo2Url).Replace('.', ','));
-            outdoorMetrics.Tvoc = Double.Parse(webClient.DownloadString(outdoorTvocUrl).Replace('.', ','));
-            outdoorMetrics.Pressure = Double.Parse(webClient.DownloadString(outdoorPressureUrl).Replace('.', ','));
-            outdoorMetrics.Pm25 = Double.Parse(webClient.DownloadString(outdoorPm25Url).Replace('.', ','));
-            outdoorMetrics.Pm10 = Double.Parse(webClient.DownloadString(outdoorPm10Url).Replace('.', ','));
-
+            string json;
+            try
+            {       
+                json = webClient.DownloadString(jsonUrl);
+                metrics = JsonConvert.DeserializeObject<AirMetrics>(json);
+            }
+            catch (ArgumentNullException A)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", A);
+            }
+            catch (SocketException A)
+            {
+                Console.WriteLine("SocketException: {0}", A);
+            }
+            catch (WebException)
+            {
+                ipTextBox.Text = "connection error";
+            }
         }
         private void updateComponents()
         {
-            indoorTemperatureValue.Text = indoorMetrics.Temperature.ToString().Substring(0, 2);
-            indoorHumidityValue.Text = indoorMetrics.Humidity.ToString().Substring(0, 2);
-            indoorCo2Value.Text = indoorMetrics.Co2.ToString();
-            indoorTvocValue.Text = indoorMetrics.Tvoc.ToString();
-            indoorPressureValue.Text = indoorMetrics.Pressure.ToString();
-            indoorPm25Value.Text = indoorMetrics.Pm25.ToString();
-            indoorPm10Value.Text = indoorMetrics.Pm25.ToString();
+            indoorTemperatureValue.Text = metrics.IndoorTemperature.ToString().Substring(0, 2);
+            indoorHumidityValue.Text = metrics.IndoorHumidity.ToString().Substring(0, 2);
+            indoorCo2Value.Text = metrics.IndoorCo2.ToString();
+            indoorTvocValue.Text = metrics.IndoorTvoc.ToString();
+            indoorPressureValue.Text = metrics.IndoorPressure.ToString();
+            indoorPm25Value.Text = metrics.IndoorPm25.ToString();
+            indoorPm10Value.Text = metrics.IndoorPm25.ToString();
 
-            outdoorTemperatureValue.Text = outdoorMetrics.Temperature.ToString().Substring(0, 2);
-            outdoorHumidityValue.Text = outdoorMetrics.Humidity.ToString().Substring(0, 2);
-            outdoorCo2Value.Text = outdoorMetrics.Co2.ToString();
-            outdoorTvocValue.Text = outdoorMetrics.Tvoc.ToString();
-            outdoorPressureValue.Text = outdoorMetrics.Pressure.ToString();
-            outdoorPm25Value.Text = outdoorMetrics.Pm25.ToString();
-            outdoorPm10Value.Text = outdoorMetrics.Pm10.ToString();
+            outdoorTemperatureValue.Text = metrics.OutdoorTemperature.ToString().Substring(0, 2);
+            outdoorHumidityValue.Text = metrics.OutdoorHumidity.ToString().Substring(0, 2);
+            outdoorCo2Value.Text = metrics.OutdoorCo2.ToString();
+            outdoorTvocValue.Text = metrics.OutdoorTvoc.ToString();
+            outdoorPressureValue.Text = metrics.OutdoorPressure.ToString();
+            outdoorPm25Value.Text = metrics.OutdoorPm25.ToString();
+            outdoorPm10Value.Text = metrics.OutdoorPm10.ToString();
+        }
+        private bool isConnected()
+        {
+            try
+            {
+                webClient.DownloadString("http://" + ipAddress + "/connect");
+            }
+            catch (ArgumentNullException A)
+            {
+                return false;
+            }
+            catch (SocketException A)
+            {
+                return false;
+            }
+            catch (WebException)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
+
 
