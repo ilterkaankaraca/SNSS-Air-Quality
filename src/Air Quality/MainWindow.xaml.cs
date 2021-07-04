@@ -53,7 +53,7 @@ namespace AirQuality
             string cityName = citySearchTextBox.Text;
             if (e.Key == Key.Enter)
             {
-                string answer = webClient.DownloadString("http://" + ipAddress + "/city/?name=" + cityName.Replace(" ","+"));
+                string answer = webClient.DownloadString("http://" + ipAddress + "/city/?name=" + cityName.Replace(" ", "+"));
                 airInfo.City = cityName;
             }
 
@@ -186,10 +186,8 @@ namespace AirQuality
         {
             if (!pressedEnter)
                 citySearchTextBox.Text = cityName;
-        }
+        }      
     }
-
-        
-    }
+}
 
 

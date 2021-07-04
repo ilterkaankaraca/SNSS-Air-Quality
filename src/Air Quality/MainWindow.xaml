@@ -42,7 +42,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                         Margin = "30,0,0,0" />
 
 
-            <Grid x:Name="loginGrid"  Visibility="hidden" Margin="137,36,153.6,47" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid x:Name="loginGrid"  Visibility="Hidden" Margin="137,36,153.6,47" Grid.Row="1" Grid.ColumnSpan="2">
 
                 <StackPanel VerticalAlignment="Center" Margin="42,-200,48.6,25">
                     <TextBox Text="SERVER CONNECTION" x:Name="titleLabel"
@@ -60,7 +60,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                         <TextBox x:Name="ipTextBox" FontFamily="Helvetica"
                              FontWeight="Light"
 						     Text="Please give a host name"
-                             FontSize="18" GotFocus="ipTextBox_GotFocus"
+                             FontSize="18" GotFocus="ipTextBox_GotFocus" 
                              HorizontalAlignment="Center"
                              Foreground="White" TextWrapping="Wrap"
                              Background="Transparent"
@@ -86,7 +86,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                            x:Name="button"
                             Content="Connect"
                             Margin="330,20,0,0"
-                            Click="connectButton_Click"
+                            Click="connectButton_Click" 
                            />
 
                     </StackPanel>
