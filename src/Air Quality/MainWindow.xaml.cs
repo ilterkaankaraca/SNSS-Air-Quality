@@ -15,9 +15,9 @@ namespace AirQuality
     /// </summary>
     public partial class MainWindow : Window
     {
-        AirMetrics metrics;
+        AirInformation airInfo;
         WebClient webClient;
-        string jsonUrl;
+        string jsonUrl, notificationUrl;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         string ipAddress;
 
@@ -25,7 +25,7 @@ namespace AirQuality
         {
             InitializeComponent();
             webClient = new WebClient();
-            metrics = new AirMetrics();
+            airInfo = new AirInformation();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             button.IsEnabled = false;
@@ -41,7 +41,7 @@ namespace AirQuality
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            updateMetrics();
+            getData();
             updateComponents();
         }
         private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -80,18 +80,15 @@ namespace AirQuality
                     ipAddress = ipTextBox.Text;
                     using (webClient)
                     {
-
                         //check if it is ip or hostname
                         if (int.TryParse(ipAddress[0].ToString(), out _))
                         {
-
                             answer = webClient.DownloadString("http://" + ipAddress + "/connect");
                         }
                         else
                         {
                             ipAddress = ipAddress + ".local";
                             answer = webClient.DownloadString("http://" + ipAddress + "/connect");
-
                         }
                     }
                     ipTextBox.Foreground = Brushes.Red;
@@ -112,7 +109,8 @@ namespace AirQuality
                 {
                     //Send city
                     jsonUrl = "http://" + ipAddress + "/json";
-                    updateMetrics();
+
+                    getData();
                     updateComponents();
                     dispatcherTimer.Start();
                     loginGrid.Visibility = Visibility.Hidden;
@@ -127,13 +125,14 @@ namespace AirQuality
                 ipTextBox.Text = "Please type an IP address";
             }
         }
-        private void updateMetrics()
+        //to get air metrics and notification from server
+        private void getData()
         {
             string json;
             try
             {       
                 json = webClient.DownloadString(jsonUrl);
-                metrics = JsonConvert.DeserializeObject<AirMetrics>(json);
+                airInfo = JsonConvert.DeserializeObject<AirInformation>(json);
             }
             catch (ArgumentNullException A)
             {
@@ -150,41 +149,25 @@ namespace AirQuality
         }
         private void updateComponents()
         {
-            indoorTemperatureValue.Text = metrics.IndoorTemperature.ToString().Substring(0, 2);
-            indoorHumidityValue.Text = metrics.IndoorHumidity.ToString().Substring(0, 2);
-            indoorCo2Value.Text = metrics.IndoorCo2.ToString();
-            indoorTvocValue.Text = metrics.IndoorTvoc.ToString();
-            indoorPressureValue.Text = metrics.IndoorPressure.ToString();
-            indoorPm25Value.Text = metrics.IndoorPm25.ToString();
-            indoorPm10Value.Text = metrics.IndoorPm25.ToString();
+            indoorTemperatureValue.Text = airInfo.IndoorTemperature.ToString().Substring(0, 2);
+            indoorHumidityValue.Text = airInfo.IndoorHumidity.ToString().Substring(0, 2);
+            indoorCo2Value.Text = airInfo.IndoorCo2.ToString();
+            indoorTvocValue.Text = airInfo.IndoorTvoc.ToString();
+            indoorPressureValue.Text = airInfo.IndoorPressure.ToString();
+            indoorPm25Value.Text = airInfo.IndoorPm25.ToString();
+            indoorPm10Value.Text = airInfo.IndoorPm25.ToString();
 
-            outdoorTemperatureValue.Text = metrics.OutdoorTemperature.ToString().Substring(0, 2);
-            outdoorHumidityValue.Text = metrics.OutdoorHumidity.ToString().Substring(0, 2);
-            outdoorCo2Value.Text = metrics.OutdoorCo2.ToString();
-            outdoorTvocValue.Text = metrics.OutdoorTvoc.ToString();
-            outdoorPressureValue.Text = metrics.OutdoorPressure.ToString();
-            outdoorPm25Value.Text = metrics.OutdoorPm25.ToString();
-            outdoorPm10Value.Text = metrics.OutdoorPm10.ToString();
-        }
-        private bool isConnected()
-        {
-            try
-            {
-                webClient.DownloadString("http://" + ipAddress + "/connect");
-            }
-            catch (ArgumentNullException A)
-            {
-                return false;
-            }
-            catch (SocketException A)
-            {
-                return false;
-            }
-            catch (WebException)
-            {
-                return false;
-            }
-            return true;
+            outdoorTemperatureValue.Text = airInfo.OutdoorTemperature.ToString().Substring(0, 2);
+            outdoorHumidityValue.Text = airInfo.OutdoorHumidity.ToString().Substring(0, 2);
+            outdoorCo2Value.Text = airInfo.OutdoorCo2.ToString();
+            outdoorTvocValue.Text = airInfo.OutdoorTvoc.ToString();
+            outdoorPressureValue.Text = airInfo.OutdoorPressure.ToString();
+            outdoorPm25Value.Text = airInfo.OutdoorPm25.ToString();
+            outdoorPm10Value.Text = airInfo.OutdoorPm10.ToString();
+            if (airInfo.Notification == "1")
+                notificationLabel.Content = "Ventilation is required";
+            else
+                notificationLabel.Content = "Ventilation is not required";
         }
     }
 }

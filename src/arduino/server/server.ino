@@ -18,6 +18,7 @@ String plotMetric = "statistic";
 String city = "Langen";
 String wJson, pJson;
 String json="empty";
+bool decisionV;
 unsigned long lastMillis;
 int airQualityCategories[6];
 void setup()
@@ -45,8 +46,9 @@ void loop()
     deserialize(pJson, 'P');
   }
   plot();
+  decisionV = decision();
   json = buildJson();
-  if(decision()==1){
+  if(decisionV==1){
     Serial.println("Ventilation required");
   }
   else
@@ -238,7 +240,9 @@ String buildJson(){
   json += "\",\"indoorTvoc\":\"";
   json += String(indoorTvoc_1);
   json += "\",\"outdoorTvoc\":\"";
-  json += String(0)+"\"";
+  json += String(0);
+  json += "\",\"notification\":\"";
+  json += String(decisionV)+"\"";
   json += "}";
   return json;
 }

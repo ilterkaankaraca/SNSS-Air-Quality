@@ -115,7 +115,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MWM\Model\AirMetrics.cs" />
+    <Compile Include="MWM\Model\AirInformation.cs" />
     <Compile Include="MWM\ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
