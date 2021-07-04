@@ -17,10 +17,11 @@ namespace AirQuality
     {
         AirInformation airInfo;
         WebClient webClient;
-        string jsonUrl, notificationUrl;
+        string jsonUrl;
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         string ipAddress;
-
+        string cityName;
+        bool pressedEnter;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +34,10 @@ namespace AirQuality
             loginGrid.Visibility = Visibility.Visible;
             homeGrid1.Visibility = Visibility.Hidden;
             homeGrid2.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
+            citySearchTextBox.Visibility = Visibility.Hidden;
+            notificationLabel.Visibility = Visibility.Hidden;
+            cityName = citySearchTextBox.Text;
+            pressedEnter = false;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -41,20 +45,16 @@ namespace AirQuality
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            getData();
+            getAirInformationData();
             updateComponents();
         }
         private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            string cityName = searchTextBox.Text;
-            searchTextBox.Text = String.Empty;
+            string cityName = citySearchTextBox.Text;
             if (e.Key == Key.Enter)
             {
-                string answer = webClient.DownloadString("http://" + ipAddress + "/city/?name=" + cityName);
-            }
-            else
-            {
-                searchTextBox.Text = cityName;
+                string answer = webClient.DownloadString("http://" + ipAddress + "/city/?name=" + cityName.Replace(" ","+"));
+                airInfo.City = cityName;
             }
 
         }
@@ -110,13 +110,14 @@ namespace AirQuality
                     //Send city
                     jsonUrl = "http://" + ipAddress + "/json";
 
-                    getData();
+                    getAirInformationData();
                     updateComponents();
                     dispatcherTimer.Start();
                     loginGrid.Visibility = Visibility.Hidden;
                     homeGrid1.Visibility = Visibility.Visible;
                     homeGrid2.Visibility = Visibility.Visible;
-                    searchTextBox.Visibility = Visibility.Visible;
+                    citySearchTextBox.Visibility = Visibility.Visible;
+                    notificationLabel.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -126,11 +127,11 @@ namespace AirQuality
             }
         }
         //to get air metrics and notification from server
-        private void getData()
+        private void getAirInformationData()
         {
             string json;
             try
-            {       
+            {
                 json = webClient.DownloadString(jsonUrl);
                 airInfo = JsonConvert.DeserializeObject<AirInformation>(json);
             }
@@ -147,6 +148,14 @@ namespace AirQuality
                 ipTextBox.Text = "connection error";
             }
         }
+
+        private void citySearchTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            pressedEnter = false;
+            cityName = citySearchTextBox.Text;
+            citySearchTextBox.Text = String.Empty;
+        }
+
         private void updateComponents()
         {
             indoorTemperatureValue.Text = airInfo.IndoorTemperature.ToString().Substring(0, 2);
@@ -164,12 +173,23 @@ namespace AirQuality
             outdoorPressureValue.Text = airInfo.OutdoorPressure.ToString();
             outdoorPm25Value.Text = airInfo.OutdoorPm25.ToString();
             outdoorPm10Value.Text = airInfo.OutdoorPm10.ToString();
+            if (citySearchTextBox.IsFocused == false)
+            {
+                citySearchTextBox.Text = airInfo.City;
+            }
             if (airInfo.Notification == "1")
                 notificationLabel.Content = "Ventilation is required";
             else
                 notificationLabel.Content = "Ventilation is not required";
         }
+        private void citySearchTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!pressedEnter)
+                citySearchTextBox.Text = cityName;
+        }
     }
-}
+
+        
+    }
 
 

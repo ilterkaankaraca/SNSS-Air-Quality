@@ -4,7 +4,7 @@
     {
         private double indoorTemperature, indoorHumidity, indoorCo2, indoorTvoc, indoorPressure, indoorPm25, indoorPm10;
         private double outdoorTemperature, outdoorHumidity, outdoorCo2, outdoorTvoc, outdoorPressure, outdoorPm25, outdoorPm10;
-        private string notification;
+        private string notification, city;
 
         public double IndoorTemperature { get => indoorTemperature; set => indoorTemperature = value; }
         public double IndoorHumidity { get => indoorHumidity; set => indoorHumidity = value; }
@@ -21,5 +21,6 @@
         public double OutdoorPm25 { get => outdoorPm25; set => outdoorPm25 = value; }
         public double OutdoorPm10 { get => outdoorPm10; set => outdoorPm10 = value; }
         public string Notification { get => notification; set => notification = value; }
+        public string City { get => city; set => city = value; }
     }
 }

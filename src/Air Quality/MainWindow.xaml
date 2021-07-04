@@ -410,7 +410,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 					Background="Transparent"
 					Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
 
-            <TextBox x:Name="searchTextBox" Width="250" Visibility="Visible"
+            <TextBox x:Name="citySearchTextBox" Width="250" Visibility="Visible"
 					Height="40"
 					VerticalContentAlignment="Center"
 					HorizontalAlignment="Left"
@@ -419,7 +419,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
 					Background="Transparent"
 					BorderThickness="0"
 					Text="Langen, DE"
-					Foreground="LightBlue" FontStyle="Italic" KeyDown="searchTextBox_KeyDown"/>
+					Foreground="LightBlue" FontStyle="Italic" KeyDown="searchTextBox_KeyDown" GotFocus="citySearchTextBox_GotFocus" LostFocus="citySearchTextBox_LostFocus"/>
             <Label x:Name="notificationLabel" Width="250" Visibility="Visible"
 					Height="40" Margin="186,399,614,81" Grid.Row="1" Content="Ventilation is not required" Foreground="White" Grid.ColumnSpan="2"/>
 
