@@ -45,6 +45,8 @@ void loop()
     pJson = getPollutionJson(latitude, longitude);
     deserialize(pJson, 'P');
   }
+  wJson = getWeatherJson(city);
+  Serial.println(wJson);
   plot();
   decisionV = decision();
   json = buildJson();
@@ -59,16 +61,26 @@ void loop()
 }
 void initWiFi()
 {
+  unsigned long wifiLastMillis = millis();
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-  // Serial.print ("Connecting to WiFi...");
+  Serial.print ("Connecting to WiFi...");
+  
   while (WiFi.status() != WL_CONNECTED)
   {
-    //Serial.print (".");
-    delay(1000);
+    Serial.print (".");
+    
+    if (millis() - wifiLastMillis >=  5000UL)
+    {
+      wifiLastMillis=millis();
+      Serial.println();
+      initWiFi();
+    }
+  delay(1000);
   }
-  // Serial.println ( WiFi.localIP ());
-  // Serial.println ( WiFi.macAddress ());
+  
+   Serial.println ( WiFi.localIP ());
+   Serial.println ( WiFi.macAddress ());
 }
 void initWebserver(void)
 {
@@ -242,7 +254,9 @@ String buildJson(){
   json += "\",\"outdoorTvoc\":\"";
   json += String(0);
   json += "\",\"notification\":\"";
-  json += String(decisionV)+"\"";
+  json += String(decisionV);
+  json += "\",\"city\":\"";
+  json += String(city)+"\"";
   json += "}";
   return json;
 }

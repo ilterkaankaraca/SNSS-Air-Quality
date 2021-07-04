@@ -75,6 +75,12 @@ void initWiFi()
   while (WiFi.status() != WL_CONNECTED)
   {
     Serial.print(".");
+    if (millis() - wifiLastMillis >=  5000UL)
+    {
+      wifiLastMillis=millis();
+      Serial.println();
+      initWiFi();
+    }
     delay(1000);
   }
   Serial.println(WiFi.localIP());
