@@ -323,7 +323,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                 </TextBlock>
 
                 <TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="105,-50,10,0"/>
-                <TextBlock Text="Target Range: &lt;1000ppm" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="10,-15,10,0"/>
+                <TextBlock Text="Target Range: &lt;1000 ppm" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="10,-15,10,0"/>
 
                 <!--indoorTvocValue-->
 
@@ -337,12 +337,12 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                 <!--outdoorTvocValue-->
 
                 <TextBlock  Margin="185,-50,10,0" >
-					<Run x:Name="outdoorTvocValue" Text="20"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
+					<Run x:Name="outdoorTvocValue" Text="&lt;1"  Foreground="white" FontSize="22"  FontWeight="DemiBold"/>
 					<Run Text="mg/m3" Foreground="white" FontSize="10"  FontWeight="DemiBold"/>
                 </TextBlock>
 
                 <TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="270,-50,0,0"/>
-                <TextBlock Text="Target Range: &lt;1mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="180,-15,10,0"/>
+                <TextBlock Text="Target Range: &lt;1 mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="180,-15,10,0"/>
 
                 <!--indoorPressureValue-->
 
@@ -379,7 +379,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                 </TextBlock>
 
                 <TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="595,-50,0,0"/>
-                <TextBlock Text="Target Range: &lt;10mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="505,-15,10,0"/>
+                <TextBlock Text="Target Range: &lt;10 mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="505,-15,10,0"/>
 
                 <!--indoorPm10Value-->
 
@@ -397,7 +397,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                 </TextBlock>
 
                 <TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="760,-50,0,0"/>
-                <TextBlock Text="Target Range: &lt;20mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
+                <TextBlock Text="Target Range: &lt;20 mg/m3" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="670,-15,10,0"/>
 
             </StackPanel>
             <Button Content="X"
