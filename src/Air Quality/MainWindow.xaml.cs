@@ -15,13 +15,13 @@ namespace AirQuality
     /// </summary>
     public partial class MainWindow : Window
     {
-        AirInformation airInfo;
-        WebClient webClient;
-        string jsonUrl;
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        string ipAddress;
-        string cityName;
-        bool pressedEnter;
+        private AirInformation airInfo;
+        private WebClient webClient;
+        private string jsonUrl;
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private string ipAddress;
+        private string cityName;
+        private bool pressedEnter;
         public MainWindow()
         {
             InitializeComponent();
@@ -169,7 +169,7 @@ namespace AirQuality
             outdoorTemperatureValue.Text = airInfo.OutdoorTemperature.ToString().Substring(0, 2);
             outdoorHumidityValue.Text = airInfo.OutdoorHumidity.ToString().Substring(0, 2);
             outdoorCo2Value.Text = airInfo.OutdoorCo2.ToString();
-            outdoorTvocValue.Text = airInfo.OutdoorTvoc.ToString();
+            outdoorTvocValue.Text = "<1";
             outdoorPressureValue.Text = airInfo.OutdoorPressure.ToString();
             outdoorPm25Value.Text = airInfo.OutdoorPm25.ToString();
             outdoorPm10Value.Text = airInfo.OutdoorPm10.ToString();
@@ -186,7 +186,7 @@ namespace AirQuality
         {
             if (!pressedEnter)
                 citySearchTextBox.Text = cityName;
-        }      
+        }
     }
 }
 
