@@ -2,6 +2,7 @@
 {
     class AirInformation
     {
+        //All data we get from server will be stored in instance of this class
         private double indoorTemperature, indoorHumidity, indoorCo2, indoorTvoc, indoorPressure, indoorPm25, indoorPm10;
         private double outdoorTemperature, outdoorHumidity, outdoorCo2, outdoorTvoc, outdoorPressure, outdoorPm25, outdoorPm10;
         private string notification, city;
