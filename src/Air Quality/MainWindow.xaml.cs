@@ -158,8 +158,8 @@ namespace AirQuality
 
         private void updateComponents()
         {
-            indoorTemperatureValue.Text = airInfo.IndoorTemperature.ToString().Substring(0, 2);
-            indoorHumidityValue.Text = airInfo.IndoorHumidity.ToString().Substring(0, 2);
+            indoorTemperatureValue.Text = airInfo.IndoorTemperature.ToString();
+            indoorHumidityValue.Text = airInfo.IndoorHumidity.ToString();
             indoorCo2Value.Text = airInfo.IndoorCo2.ToString();
             indoorTvocValue.Text = airInfo.IndoorTvoc.ToString();
             indoorPressureValue.Text = airInfo.IndoorPressure.ToString();

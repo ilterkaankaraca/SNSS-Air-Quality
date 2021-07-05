@@ -361,7 +361,7 @@ AllowsTransparency = "True" MouseDown="Window_MouseDown">
                 </TextBlock>
 
                 <TextBlock  Text="OUTDOOR " Foreground="white" FontSize="8" Margin="435,-50,0,0"/>
-                <TextBlock Text="Target Range:" Foreground="white" FontSize="8"  FontWeight="DemiBold" Margin="340,-15,10,0"/>
+                <TextBlock Foreground="white" FontSize="6"  FontWeight="DemiBold" Margin="340,-15,10,0"><Run Text="Target Range:"/><Run Text=" -15"/><Run Text=" "/><Run Text="hPa&lt;Outdoor-Indoor&lt;0"/><Run Text=" "/><Run Text="hPa"/></TextBlock>
 
                 <!--indoorPm25Value-->
 
