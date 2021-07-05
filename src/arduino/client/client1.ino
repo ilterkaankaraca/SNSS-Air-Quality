@@ -510,7 +510,7 @@ void transmitValues()
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://" + serverIp.toString() + "/readValue/?temperature=" + String(indoorTemperature) + "&humidity=" + String(indoorHumidity) + "&co2=" + String(indoorCo2) + "&tvoc=" + String(indoorTvoc) + "&pressure=" + String(indoorPressure) + "&pm25=" + String(indoorPm25) + "&pm10=" + String(indoorPm10));
+    http.begin("http://" + serverIp.toString() + "/readValue1/?temperature=" + String(indoorTemperature) + "&humidity=" + String(indoorHumidity) + "&co2=" + String(indoorCo2) + "&tvoc=" + String(indoorTvoc) + "&pressure=" + String(indoorPressure) + "&pm25=" + String(indoorPm25) + "&pm10=" + String(indoorPm10));
     httpCode = http.GET(); //Make the request
     if (httpCode > 0)
     { //Check for the returning code
