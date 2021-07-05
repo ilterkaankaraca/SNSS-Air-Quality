@@ -37,9 +37,10 @@ Adafruit_CCS811 ccs;
 Adafruit_BME680 bme;
 SensirionI2CScd4x scd4x;
 
-float indoorTemperature, indoorHumidity, indoorCo2, indoorAirQuality, indoorPressure, indoorPm25, indoorPm10, indoorTvoc;
+float indoorTemperature, indoorHumidity, indoorCo2, indoorPressure, indoorPm25, indoorPm10, indoorTvoc;
 int httpCode = 0;
 IPAddress serverIp;
+
 typedef enum
 {
   READ_SHT31,
@@ -129,7 +130,6 @@ void loop()
     indoorTemperature = 0;
     indoorHumidity = 0;
     indoorCo2 = 0;
-    indoorAirQuality = 0;
     indoorPressure = 0;
     indoorPm10 = 0;
     indoorPm25 = 0;
@@ -241,7 +241,7 @@ void readCCS811()
     {
       Serial.print("CO2: ");
       Serial.print(ccs.geteCO2());
-      indoorTvoc = ccs.getTVOC();
+      indoorTvoc = ccs.getTVOC() * 0.0515; // convertion from ppb to mg/m³
       Serial.print("ppm, TVOC: ");
       Serial.println(indoorTvoc);
     }
@@ -321,7 +321,7 @@ void setupSPS30()
   Serial.print("  allows reading the mass concentrations. For more\n");
   Serial.print("  information, please check\n");
   Serial.print("  https://github.com/Sensirion/arduino-sps#esp8266-partial-legacy-support\n");
-  Serial.print("\n");
+  Serial.print("\n"); 
   delay(2000);
 #endif
 
