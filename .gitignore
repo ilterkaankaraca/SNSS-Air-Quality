@@ -474,3 +474,7 @@ src/arduino/client/ArduinoSecrets.h
 src/arduino/server/ArduinoSecrets.h
 src/arduino/server/1.json
 src/arduino/decision_process_coding.c
+src/arduino/client/client2/ArduinoSecrets.h
+src/arduino/client/client1/ArduinoSecrets.h
+src/arduino/client/client1/ArduinoSecrets.h
+src/arduino/client/client1/ArduinoSecrets.h
