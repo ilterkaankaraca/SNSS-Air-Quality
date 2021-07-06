@@ -14,7 +14,7 @@ String getWeatherJson(String city)
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://pro.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + API_KEY+"&units=metric");
+    http.begin("http://pro.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + API_KEY + "&units=metric");
     httpCode = http.GET(); //Make the request
 
     if (httpCode > 0)
@@ -23,7 +23,7 @@ String getWeatherJson(String city)
     }
     else
     {
-      Serial.println("Error on HTTP request");
+      payload = "-1";
     }
     http.end(); //Free the resources
   }
@@ -38,7 +38,7 @@ String getPollutionJson(float lat, float lon)
   if ((WiFi.status() == WL_CONNECTED))
   { //Check the current connection status
     HTTPClient http;
-    http.begin("http://pro.openweathermap.org/data/2.5/air_pollution?lat="+String(lat)+"&lon="+lon+"&appid="+API_KEY);
+    http.begin("http://pro.openweathermap.org/data/2.5/air_pollution?lat=" + String(lat) + "&lon=" + lon + "&appid=" + API_KEY);
     httpCode = http.GET(); //Make the request
     if (httpCode > 0)
     { //Check for the returning code
@@ -46,7 +46,7 @@ String getPollutionJson(float lat, float lon)
     }
     else
     {
-      Serial.println("Error on HTTP request");
+      payload = "-1";
     }
     http.end(); //Free the resources
   }
@@ -63,7 +63,7 @@ String getCo2()
   if ((WiFi.status() == WL_CONNECTED))
   {
     HTTPClient http;
-  // http.begin("https://ilterkaankaraca.github.io/");
+    // http.begin("https://ilterkaankaraca.github.io/");
     httpCode = http.GET();
     if (httpCode > 0)
     {
@@ -77,24 +77,37 @@ String getCo2()
   }
   return "415";
   //return payload;
- }
+}
 
 void deserialize(String metricJson, char flag)
 {
-  if (flag == 'W')
+
+  if (flag == 'W' && metricJson != "-1")
   {
     deserializeJson(weatherMetrics, metricJson);
-
     longitude = weatherMetrics["coord"]["lon"].as<float>();
     latitude = weatherMetrics["coord"]["lat"].as<float>();
     outdoorTemperature = weatherMetrics["main"]["temp"].as<float>();
     outdoorHumidity = weatherMetrics["main"]["humidity"].as<float>();
     outdoorPressure = weatherMetrics["main"]["pressure"].as<float>();
   }
-  else if (flag == 'P')
+  else if (flag == 'P' && metricJson != "-1")
   {
     deserializeJson(pollutionMetrics, metricJson);
     outdoorPm25 = pollutionMetrics["list"][0]["components"]["pm2_5"].as<float>();
     outdoorPm10 = pollutionMetrics["list"][0]["components"]["pm10"].as<float>();
+  }
+  else if (flag == 'W' && metricJson == "-1")
+  {
+    longitude = -9999;
+    latitude = -9999;
+    outdoorTemperature = -9999;
+    outdoorHumidity = -9999;
+    outdoorPressure = -9999;
+  }
+  else if (flag == 'P' && metricJson == "-1")
+  {
+    outdoorPm25 = -9999;
+    outdoorPm10 = -9999;
   }
 }
