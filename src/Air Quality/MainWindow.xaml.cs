@@ -166,8 +166,8 @@ namespace AirQuality
             indoorPm25Value.Text = airInfo.IndoorPm25.ToString();
             indoorPm10Value.Text = airInfo.IndoorPm25.ToString();
 
-            outdoorTemperatureValue.Text = airInfo.OutdoorTemperature.ToString().Substring(0, 2);
-            outdoorHumidityValue.Text = airInfo.OutdoorHumidity.ToString().Substring(0, 2);
+            outdoorTemperatureValue.Text = airInfo.OutdoorTemperature.ToString();
+            outdoorHumidityValue.Text = airInfo.OutdoorHumidity.ToString();
             outdoorCo2Value.Text = airInfo.OutdoorCo2.ToString();
             outdoorTvocValue.Text = "<1";
             outdoorPressureValue.Text = airInfo.OutdoorPressure.ToString();
