@@ -70,6 +70,7 @@ void setup()
 }
 void initWiFi()
 {
+  unsigned long wifiLastMillis = millis();
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.print(" Connecting to WiFi ..");
