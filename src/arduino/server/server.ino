@@ -250,18 +250,18 @@ void plot()
 
     Serial.print("Indoor PM2.5: ");
     Serial.print(indoorPm25[FINAL]);
-    Serial.println(" ppm");
+    Serial.println(" μg/m³");
     Serial.print("Outdoor PM2.5: ");
     Serial.print(outdoorPm25);
-    Serial.println(" ppm");
+    Serial.println(" μg/m³");
     Serial.println(" ");
 
     Serial.print("Indoor PM10: ");
     Serial.print(indoorPm10[FINAL]);
-    Serial.println(" ppm");
+    Serial.println(" μg/m³");
     Serial.print("Outdoor PM10: ");
     Serial.print(outdoorPm10);
-    Serial.println(" ppm");
+    Serial.println(" μg/m³");
     Serial.println(" ");
 
     Serial.print("Indoor TVOC: ");
