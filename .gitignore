@@ -481,3 +481,5 @@ src/arduino/client/client1/ArduinoSecrets.h
 src/plot/log_outdoor.xlsx
 src/plot/log_indoor.xlsx
 src/plot/log.xlsx
+ArduinoOutput/
+ArduinoSecrets.h
